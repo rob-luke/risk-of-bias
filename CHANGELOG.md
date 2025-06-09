@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (2025-06-09)
+
+
+### Bug Fixes
+
+* set version ([38b5604](https://github.com/rob-luke/risk-of-bias/commit/38b560427f0588110ffda6eaecc0a7f4252b9263))
+
 ## [0.2.4](https://github.com/rob-luke/risk-of-bias/compare/v0.2.3...v0.2.4) (2025-06-09)
 
 
