@@ -1,0 +1,60 @@
+[project]
+name = "risk-of-bias"
+description = "Software and AI for Risk of Bias assessment."
+authors = [ {name = "Robert Luke", email = "code@robertluke.net"} ]
+requires-python = ">=3.12.0"
+version = "0.2.4"
+
+# Dependencies derived from Dockerfile
+dependencies = [
+    "pydantic>=2.11.4",
+    "pydantic-settings>=2.9.1",
+    "openai>=1.84.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.16.0",
+    "isort>=6.0.1",
+    "flake8>=7.2.0",
+    "pyright>=1.1.401",
+    "codespell>=2.4.1",
+    "pytest>=8.0.0",
+    "mkdocs-material>=9.6.14",
+    "mkdocstrings[python]>=0.29.1",
+    "python-semantic-release==7.33.3",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["risk_of_bias"]
+
+[tool.black]
+line-length = 88
+
+[tool.mypy]
+exclude = ["build"]
+
+[tool.isort]
+profile = "google"
+src_paths = "."
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.codespell]
+ignore-words-list = "Shepperd"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]

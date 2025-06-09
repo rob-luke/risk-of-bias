@@ -1,0 +1,23 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          package-name: risk_of_bias
+          token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+          release-type: python
+          group-pull-request-title-pattern: "chore: prerelease ${version}"
+          group-pull-request-header: ""
+          group-pull-request-footer: ""
