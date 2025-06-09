@@ -1,5 +1,5 @@
 # From https://squidfunk.github.io/mkdocs-material/publishing-your-site/#with-github-actions
-name: deploy docs
+name: docs
 
 on:
   push:

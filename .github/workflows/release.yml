@@ -1,4 +1,4 @@
-name: release-please
+name: release
 
 on:
   push:
@@ -15,9 +15,5 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@v4
         with:
-          package-name: risk_of_bias
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
           release-type: python
-          group-pull-request-title-pattern: "chore: prerelease ${version}"
-          group-pull-request-header: ""
-          group-pull-request-footer: ""
