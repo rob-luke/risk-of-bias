@@ -28,25 +28,20 @@ def export_framework_as_markdown(framework: Framework, path: Path) -> None:
             continue
 
         for question in domain.questions:
-            lines.append(f"\n### Question {question.index}")
-            lines.append(question.question)
-
-            if question.allowed_answers is not None:
-                answers = ", ".join(question.allowed_answers)
-            else:
-                answers = "Any text"
-            lines.append(f"*Allowed answers:* {answers}")
+            lines.append(f"\n### Question {question.question}\n")
 
             if question.response is None:
                 lines.append("**Response:** Not answered")
                 continue
 
-            lines.append(f"**Response:** {question.response.response}")
+            lines.append(f"Response: **{question.response.response}**\n")
             if question.response.reasoning:
-                lines.append(f"**Reasoning:** {question.response.reasoning}")
+                lines.append(f"Reasoning: {question.response.reasoning}\n")
             if question.response.evidence:
-                lines.append("**Evidence:**")
+                lines.append("Evidence:")
                 for evidence in question.response.evidence:
                     lines.append(f"- {evidence}")
+            lines.append("")
+            lines.append("")
 
     path.write_text("\n".join(lines))

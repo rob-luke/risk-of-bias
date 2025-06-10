@@ -21,6 +21,9 @@ def main(
         None, exists=True, readable=True, help="Optional guidance document"
     ),
     verbose: bool = typer.Option(True, help="Enable verbose output for debugging"),
+    force: bool = typer.Option(
+        False, help="Force reprocessing even if JSON file exists"
+    ),
 ) -> Framework:
     """
     Run risk of bias assessment on a manuscript.
@@ -28,20 +31,45 @@ def main(
     Processes a manuscript PDF file using the specified
     AI model and optional guidance document to perform risk of bias
     evaluation using the ROB2 framework.
+
+    If a JSON file with the same name as the manuscript already exists,
+    it will be loaded instead of reprocessing the PDF (unless --force is used).
     """
     manuscript_path = Path(manuscript)
     guidance_document_path = Path(guidance_document) if guidance_document else None
 
-    completed_framework = run_framework(
-        manuscript=manuscript_path,
-        framework=get_rob2_framework(),
-        model=model,
-        guidance_document=guidance_document_path,
-        verbose=verbose,
-    )
+    output_json_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
+    output_md_path = manuscript_path.with_suffix(manuscript_path.suffix + ".md")
 
-    output_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
-    completed_framework.save(output_path)
+    # Check if JSON file already exists and load it if not forcing reprocessing
+    if output_json_path.exists() and not force:
+        if verbose:
+            typer.echo(f"Found existing JSON file: {output_json_path}")
+            typer.echo("Loading saved assessment instead of reprocessing...")
+
+        try:
+            completed_framework = Framework.load(output_json_path)
+            if verbose:
+                typer.echo("Successfully loaded existing assessment.")
+        except Exception as e:
+            if verbose:
+                typer.echo(f"Error loading existing JSON file: {e}")
+                typer.echo("Proceeding with fresh assessment...")
+
+    else:
+        completed_framework = run_framework(
+            manuscript=manuscript_path,
+            framework=get_rob2_framework(),
+            model=model,
+            guidance_document=guidance_document_path,
+            verbose=verbose,
+        )
+
+        completed_framework.save(output_json_path)
+        if verbose:
+            typer.echo(f"Assessment saved to: {output_json_path}")
+
+    completed_framework.export_to_markdown(output_md_path)
 
     return completed_framework
 

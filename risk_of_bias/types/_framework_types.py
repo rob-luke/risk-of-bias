@@ -114,15 +114,59 @@ class Framework(BaseModel):
 
         return "\n".join(lines)
 
+    def export_to_markdown(self, path: Path) -> None:
+        """Export the framework as a Markdown document.
+
+        This method creates a structured Markdown representation of the framework
+        and its assessment results, suitable for documentation, reporting, or
+        sharing with stakeholders.
+
+        The generated Markdown includes:
+        - Framework name as the main heading
+        - Each domain as a section with its index and name
+        - Questions within each domain with their indices and text
+        - Allowed answer options for each question
+        - Response details for answered questions, including:
+          - The selected response
+          - The reasoning behind the assessment
+          - Supporting evidence excerpts from the manuscript
+
+        Parameters
+        ----------
+        path : Path
+            Destination file for the Markdown representation.
+
+        Examples
+        --------
+        >>> framework = Framework(name="RoB2 Framework")
+        >>> framework.export_to_markdown(Path("assessment_report.md"))
+        """
+        from risk_of_bias.export import export_framework_as_markdown
+
+        export_framework_as_markdown(self, path)
+
     def save(self, path: Path) -> None:
         """Save the framework as formatted JSON to ``path``.
+
+        This method excludes raw_data fields from the JSON output to keep
+        the saved files clean and focused on assessment results.
 
         Parameters
         ----------
         path : Path
             Location to write the JSON representation.
         """
-        path.write_text(self.model_dump_json(indent=2))
+        # Convert to JSON with indentation, excluding raw_data for cleaner files
+        import json
+
+        data = self.model_dump(
+            exclude={
+                "domains": {
+                    "__all__": {"questions": {"__all__": {"response": {"raw_data"}}}}
+                }
+            }
+        )
+        path.write_text(json.dumps(data, indent=2))
 
     @classmethod
     def load(cls, path: Path) -> "Framework":

@@ -48,5 +48,5 @@ def test_export_framework_as_markdown_with_responses(tmp_path: Path) -> None:
     export_framework_as_markdown(framework, export_path)
 
     content = export_path.read_text()
-    assert "**Response:** Yes" in content
+    assert "Response: **Yes**" in content
     assert "- text" in content
