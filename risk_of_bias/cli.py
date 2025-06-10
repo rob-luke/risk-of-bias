@@ -6,6 +6,7 @@ import typer
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import rob2_framework
 from risk_of_bias.run_framework import run_framework
+from risk_of_bias.types._framework_types import Framework
 
 app = typer.Typer(help="Run risk of bias assessment")
 
@@ -19,7 +20,8 @@ def main(
     guidance_document: Optional[str] = typer.Option(
         None, exists=True, readable=True, help="Optional guidance document"
     ),
-) -> None:
+    verbose: bool = typer.Option(True, help="Enable verbose output for debugging"),
+) -> Framework:
     """
     Main CLI command for running risk of bias assessment on a manuscript.
 
@@ -33,6 +35,7 @@ def main(
             the configured fast AI model from settings.
         guidance_document (str, optional): Path to an optional guidance document
             that must exist and be readable if provided. Defaults to None.
+        verbose (bool, optional): If True, enables verbose output for debugging.
 
     Returns:
         None: Outputs the assessment response directly to the console.
@@ -40,13 +43,15 @@ def main(
     manuscript_path = Path(manuscript)
     guidance_document_path = Path(guidance_document) if guidance_document else None
 
-    response = run_framework(
+    completed_framework = run_framework(
         manuscript=manuscript_path,
-        model=model,
         framework=rob2_framework,
+        model=model,
         guidance_document=guidance_document_path,
+        verbose=verbose,
     )
-    typer.echo(response)
+
+    return completed_framework
 
 
 if __name__ == "__main__":
