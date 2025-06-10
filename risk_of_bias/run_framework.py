@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from openai import OpenAI
 
@@ -14,12 +14,35 @@ client = OpenAI()
 
 
 def run_framework(
-    manuscript: Path, model: str, framework: Framework, guidance_document: Path
+    manuscript: Path,
+    model: str,
+    framework: Framework,
+    guidance_document: Optional[Path] = None,
 ) -> Framework:
+    """Run the selected framework on a manuscript.
+
+    Parameters
+    ----------
+    manuscript
+        Path to the manuscript file to analyse.
+    model
+        Name of the OpenAI model to use.
+    framework
+        Framework describing the risk of bias questions.
+    guidance_document
+        Optional path to a guidance document providing additional context.
+
+    Returns
+    -------
+    Framework
+        The populated framework with responses from the model.
+    """
 
     file_as_base64_string = pdf_to_base64(manuscript)
 
-    # guidance_document_as_base64_string = pdf_to_base64(guidance_document)
+    # guidance_document_as_base64_string = (
+    #     pdf_to_base64(guidance_document) if guidance_document else ""
+    # )
 
     chat_input: list[Any] = [
         create_openai_message("system", text=SYSTEM_MESSAGE),
