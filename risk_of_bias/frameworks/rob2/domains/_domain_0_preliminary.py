@@ -13,14 +13,20 @@ q0_1 = Question(
 )
 
 q0_2 = Question(
-    question="""For the purposes of this assessment, the Experimental interventions being compared is defined as?""",
+    question=(
+        "For the purposes of this assessment, the Experimental "
+        "interventions being compared is defined as?"
+    ),
     allowed_answers=None,
     index=0.2,
     is_required=True,
 )
 
 q0_3 = Question(
-    question="""For the purposes of this assessment, the Comparator interventions being compared is defined as?""",
+    question=(
+        "For the purposes of this assessment, the Comparator "
+        "interventions being compared is defined as?"
+    ),
     allowed_answers=None,
     index=0.3,
     is_required=True,

@@ -13,7 +13,8 @@ def main():
 
     filename = Path("/Users/rluke/Desktop/risk of bias materials/halmos.pdf")
     guidance = Path(
-        "/Users/rluke/Desktop/risk of bias materials/20190822_RoB_2.0_guidance_parallel_trial.pdf"
+        "/Users/rluke/Desktop/risk of bias materials/"
+        "20190822_RoB_2.0_guidance_parallel_trial.pdf"
     )
 
     response = run_framework(

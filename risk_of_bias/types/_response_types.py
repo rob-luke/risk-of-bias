@@ -37,7 +37,8 @@ def create_custom_constrained_response_class(
     Args:
         domain_index: The domain index for unique naming
         question_index: The question index for unique naming
-        allowed_answers: Optional list of allowed answers. If provided, creates an enum constraint.
+        allowed_answers: Optional list of allowed answers. If provided,
+                        creates an enum constraint.
                         If None, uses str type for the response.
 
     Returns:

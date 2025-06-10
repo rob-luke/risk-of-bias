@@ -3,7 +3,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union
 
 
-
 def pdf_to_base64(pdf_file_path: Path) -> str:
     """
     Convert a PDF file to a base64 encoded string.
@@ -17,7 +16,6 @@ def pdf_to_base64(pdf_file_path: Path) -> str:
     with open(pdf_file_path, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode("utf-8")
-
 
 
 def create_openai_message(
@@ -35,7 +33,8 @@ def create_openai_message(
         text: Text content for the message
         file_data: Base64 encoded file data (with data: prefix)
         filename: Name of the file being attached
-        content_type: Type of content ('input' for user messages, 'output' for assistant)
+        content_type: Type of content ('input' for user messages,
+                     'output' for assistant)
 
     Returns:
         Dictionary formatted for chat input

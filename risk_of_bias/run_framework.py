@@ -3,11 +3,12 @@ from typing import Any
 
 from openai import OpenAI
 
-from risk_of_bias.oai._utils import pdf_to_base64, create_openai_message
+from risk_of_bias.oai._utils import create_openai_message
+from risk_of_bias.oai._utils import pdf_to_base64
+from risk_of_bias.prompts import SYSTEM_MESSAGE
 from risk_of_bias.types._framework_types import Framework
 from risk_of_bias.types._response_types import create_custom_constrained_response_class
 from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
-from risk_of_bias.prompts import SYSTEM_MESSAGE
 
 client = OpenAI()
 
@@ -18,14 +19,16 @@ def run_framework(
 
     file_as_base64_string = pdf_to_base64(manuscript)
 
-    guidance_document_as_base64_string = pdf_to_base64(guidance_document)
+    # guidance_document_as_base64_string = pdf_to_base64(guidance_document)
 
     chat_input: list[Any] = [
         create_openai_message("system", text=SYSTEM_MESSAGE),
         # create_message(
         #     "user",
-        #     text="This document provides guidance on how to answer the risk of bias questions.",
-        #     file_data=f"data:application/pdf;base64,{guidance_document_as_base64_string}",
+        #     text="This document provides guidance on how to answer the "
+        #          "risk of bias questions.",
+        #     file_data=f"data:application/pdf;base64,"
+        #               f"{guidance_document_as_base64_string}",
         #     filename="guidance_document.pdf",
         # ),
         create_openai_message(
@@ -40,16 +43,15 @@ def run_framework(
         print(f"\n\nDomain {domain.index}: {domain.name}")
         for question in domain.questions:
             print(
-                f"  Question {question.index}: {question.question} ({question.allowed_answers})"
+                f"  Question {question.index}: {question.question} "
+                f"({question.allowed_answers})"
             )
 
             ConstrainedResponse = create_custom_constrained_response_class(
                 domain.index, question.index, question.allowed_answers
             )
 
-            chat_input.append(
-                create_openai_message("user", text=question.question)
-            )
+            chat_input.append(create_openai_message("user", text=question.question))
 
             raw_response = client.responses.parse(
                 model=model,
@@ -61,9 +63,7 @@ def run_framework(
 
             chat_input.append(
                 create_openai_message(
-                    "assistant", 
-                    text=raw_response.output_text, 
-                    content_type="output"
+                    "assistant", text=raw_response.output_text, content_type="output"
                 )
             )
 

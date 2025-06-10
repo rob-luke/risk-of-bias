@@ -16,7 +16,10 @@ q1_1 = Question(
 )
 
 q1_2 = Question(
-    question="""Was the allocation sequence concealed until participants were enrolled and assigned to interventions?""",
+    question=(
+        "Was the allocation sequence concealed until participants were "
+        "enrolled and assigned to interventions?"
+    ),
     allowed_answers=[
         "Yes",
         "Probably Yes",
@@ -30,7 +33,10 @@ q1_2 = Question(
 )
 
 q1_3 = Question(
-    question="Did baseline differences between intervention groups suggest a problem with the randomization process?",
+    question=(
+        "Did baseline differences between intervention groups suggest "
+        "a problem with the randomization process?"
+    ),
     allowed_answers=[
         "Yes",
         "Probably Yes",
@@ -51,7 +57,10 @@ q_r = Question(
 )
 
 q_o = Question(
-    question="What is the predicted direction of bias arising from the randomization process?",
+    question=(
+        "What is the predicted direction of bias arising from "
+        "the randomization process?"
+    ),
     allowed_answers=[
         "NA",
         "Favours experimental",
