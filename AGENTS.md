@@ -3,6 +3,7 @@
 ## Before you start developing
 - Ensure all tests pass before you begin development by running `make test`
 - Ensure all linting etc is correct before you begin development by running `make lint`
+- Be aware that mypy can take a few minutes to run, don't exit it before it finishes.
 
 ## Development guidelines
 - Use black style formatting.

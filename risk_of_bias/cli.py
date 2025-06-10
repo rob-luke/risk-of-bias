@@ -40,6 +40,7 @@ def main(
 
     output_json_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
     output_md_path = manuscript_path.with_suffix(manuscript_path.suffix + ".md")
+    output_html_path = manuscript_path.with_suffix(manuscript_path.suffix + ".html")
 
     # Check if JSON file already exists and load it if not forcing reprocessing
     if output_json_path.exists() and not force:
@@ -49,12 +50,29 @@ def main(
 
         try:
             completed_framework = Framework.load(output_json_path)
+            # Ensure manuscript filename is set (for backward compatibility)
+            if not completed_framework.manuscript:
+                completed_framework.manuscript = manuscript_path.name
+                # Save the updated framework with manuscript filename
+                completed_framework.save(output_json_path)
+                if verbose:
+                    typer.echo(
+                        "Updated existing assessment with manuscript"
+                        f" filename: {manuscript_path.name}"
+                    )
             if verbose:
                 typer.echo("Successfully loaded existing assessment.")
         except Exception as e:
             if verbose:
                 typer.echo(f"Error loading existing JSON file: {e}")
                 typer.echo("Proceeding with fresh assessment...")
+            completed_framework = run_framework(
+                manuscript=manuscript_path,
+                framework=get_rob2_framework(),
+                model=model,
+                guidance_document=guidance_document_path,
+                verbose=verbose,
+            )
 
     else:
         completed_framework = run_framework(
@@ -70,6 +88,7 @@ def main(
             typer.echo(f"Assessment saved to: {output_json_path}")
 
     completed_framework.export_to_markdown(output_md_path)
+    completed_framework.export_to_html(output_html_path)
 
     return completed_framework
 

@@ -20,6 +20,10 @@ def export_framework_as_markdown(framework: Framework, path: Path) -> None:
     """
     lines: list[str] = [f"# {framework.name}"]
 
+    # Add manuscript name if available
+    if framework.manuscript:
+        lines.append(f"\n**Manuscript:** {framework.manuscript}")
+
     for domain in framework.domains:
         lines.append(f"\n## Domain {domain.index}: {domain.name}")
 
@@ -68,6 +72,10 @@ def export_framework_as_html(framework: Framework, path: Path) -> None:
     from htpy import ul
 
     children = [h1[framework.name]]
+
+    # Add manuscript name if available
+    if framework.manuscript:
+        children.append(p[strong["Manuscript: "], framework.manuscript])
 
     for domain in framework.domains:
         children.append(h2[f"Domain {domain.index}: {domain.name}"])

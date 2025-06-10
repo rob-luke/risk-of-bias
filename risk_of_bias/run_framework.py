@@ -94,6 +94,9 @@ def run_framework(
     # Send system message to set context for the AI model
     chat_input: list[Any] = [create_openai_message("system", text=SYSTEM_MESSAGE)]
 
+    # Set the manuscript filename on the framework
+    framework.manuscript = manuscript.name
+
     # Send the framework guidance to the AI model
     if guidance_document is not None:
         if not guidance_document.exists() or not guidance_document.is_file():
