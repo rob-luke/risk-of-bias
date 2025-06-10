@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/rob-luke/risk-of-bias/compare/v0.4.0...v0.5.0) (2025-06-10)
+
+
+### Features
+
+* add HTML export using htpy ([#13](https://github.com/rob-luke/risk-of-bias/issues/13)) ([1b2045f](https://github.com/rob-luke/risk-of-bias/commit/1b2045f0c3a717351f78481d0a46e06b4a98465f))
+* add simple FastAPI web interface ([#15](https://github.com/rob-luke/risk-of-bias/issues/15)) ([8595972](https://github.com/rob-luke/risk-of-bias/commit/859597235c5e110993bc2c30b7e076db34c0868e))
+
 ## [0.4.0](https://github.com/rob-luke/risk-of-bias/compare/v0.3.0...v0.4.0) (2025-06-10)
 
 
