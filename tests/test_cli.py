@@ -11,7 +11,7 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
 
     called = {}
 
-    def fake_run_framework(manuscript: Path, model: str, framework, guidance_document):
+    def fake_run_framework(manuscript: str, model: str, framework, guidance_document):
         called["manuscript"] = manuscript
         called["model"] = model
         called["framework"] = framework
