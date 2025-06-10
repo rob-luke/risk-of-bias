@@ -11,11 +11,15 @@ dependencies = [
     "pydantic>=2.11.4",
     "pydantic-settings>=2.9.1",
     "openai>=1.84.0",
+    "typer>=0.12.3",
 ]
 
 [project.urls]
 Homepage = "https://github.com/rob-luke/risk-of-bias"
 Issues = "https://github.com/rob-luke/risk-of-bias/issues"
+
+[project.scripts]
+risk-of-bias = "risk_of_bias.cli:app"
 
 [project.optional-dependencies]
 dev = [
@@ -41,6 +45,9 @@ packages = ["risk_of_bias"]
 [tool.black]
 line-length = 88
 
+[tool.flake8]
+max-line-length = 88
+
 [tool.mypy]
 exclude = ["build"]
 
@@ -60,6 +67,7 @@ addopts = "-v --tb=short"
 
 [tool.codespell]
 ignore-words-list = "Shepperd"
+skip = "*.git,*.svg,*.pdf,*.pyc,__pycache__,build,dist,site,.mypy_cache,.pytest_cache,PKG-INFO"
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
