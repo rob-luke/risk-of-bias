@@ -1,6 +1,6 @@
 # Risk of Bias
 
-AI and software for assesing risk of bias.
+## AI Enabled Risk of Bias Assessment
 
 Risk of bias tools are systematic frameworks primarily used in systematic reviews to evaluate potential flaws in individual studies that could lead to a systematic deviation from the true effect of an intervention. 
 They aim to identify specific mechanisms through which bias might be introduced into study results, such as problems arising during the study design, conduct, or analysis.
@@ -17,7 +17,20 @@ You can install the program using the following pip command:
 pip install risk_of_bias[all]
 ```
 
-### Command Line Usage
+### Web Interface
+
+A simple web interface is provided to analyse a single manuscript.
+To start the web interface run:
+
+```console
+risk-of-bias web
+```
+
+Then open `http://127.0.0.1:8000` and upload your manuscript. 
+After processing you will see the report along with links to 
+download the JSON and Markdown representations.
+
+### Command Line Interface
 
 The package comes with an easy to use command line interface (CLI) tool.
 The CLI tool is installed along with the python package.
@@ -30,10 +43,10 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
-To start the web interface run:
+Or you can analyse an entire directory using:
 
 ```console
-risk-of-bias web
+risk-of-bias analyse /path/to/manuscripts/
 ```
 
 
@@ -42,6 +55,11 @@ risk-of-bias web
 The _Risk of Bias_ tool currently only supports the RoB 2 framework.
 However, it is designed to be extensible, please raise an issue if there's another framework you are interested in. 
 See [frameworks](frameworks.md) and [api/frameworks](api.md#framework) for additional details and context.
+
+
+## Statement on the Use of AI in Research
+
+AI does not replace human judgment in risk of bias assessment. Instead, these tools should be viewed as powerful assistants, complementing human expertise. The established gold standard, often involving two independent human reviewers and a third for adjudication, remains paramount for rigorous assessment. However, AI can augment this process; for instance, an AI could serve as an additional reviewer alongside human experts, providing a systematically derived perspective, with a human still making the final adjudication. Recognizing that both human reviewers and AI systems can have inherent biases, incorporating an AI perspective can offer a different lens through which to evaluate studies. Moreover, in situations where resource constraints make achieving the full gold standard difficult, AI tools can provide valuable support, helping to elevate the overall consistency and thoroughness of bias assessment as the field progresses towards universally ideal practices.
 
 
 ## References
