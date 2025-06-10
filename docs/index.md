@@ -22,7 +22,7 @@ pip install risk_of_bias
 The package comes with an easy to use command line interface (CLI) tool.
 The CLI tool is installed along with the python package.
 The CLI tool provides several handy parameters you can adjust.
-Complete [documentation](https://rob-luke.github.io/risk-of-bias/) is available in the cli section.
+Complete documentation is available in [cli](cli.md)
 
 But to get started, you can analyse a manuscript by simply passing the path to the file:
 
@@ -35,7 +35,7 @@ risk-of-bias /path/to/manuscript.pdf
 
 The _Risk of Bias_ tool currently only supports the RoB 2 framework.
 However, it is designed to be extensible, please raise an issue if there's another framework you are interested in. 
-See [documentation](https://rob-luke.github.io/risk-of-bias/) of frameworks and api/frameworks for additional details and context.
+See [frameworks](frameworks.md) and [api/frameworks](api.md#framework) for additional details and context.
 
 
 ## References
