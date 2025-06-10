@@ -148,14 +148,19 @@ def export_summary(
         )
 
         ranking = {"low": 0, "some concerns": 1, "high": 2}
-        inverse_ranking = {0: "Low", 1: "Some Concerns", 2: "High"}
+        inverse_ranking = {0: "Low", 1: "Some concerns", 2: "High"}
 
         for manuscript, domains in summary.items():
             row: list[str | None] = [manuscript]
             worst = -1
             for domain in domain_names:
                 judgement = domains.get(domain)
-                row.append(judgement)
+                # robvis requires a specific format
+                if judgement is not None:
+                    judgement_robvis = judgement.replace("Concerns", "concerns")
+                else:
+                    judgement_robvis = None
+                row.append(judgement_robvis)
                 if judgement:
                     score = ranking.get(judgement.lower(), -1)
                     if score > worst:
