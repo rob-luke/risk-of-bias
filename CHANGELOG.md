@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/rob-luke/risk-of-bias/compare/v0.1.2...v0.2.0) (2025-06-10)
+
+
+### Features
+
+* add rob2 framework and openai functionality ([#5](https://github.com/rob-luke/risk-of-bias/issues/5)) ([a061f4c](https://github.com/rob-luke/risk-of-bias/commit/a061f4c836dbdb8190f9463fe05afdb136470a0b))
+
 ## [0.1.2](https://github.com/rob-luke/risk-of-bias/compare/v0.1.1...v0.1.2) (2025-06-09)
 
 
