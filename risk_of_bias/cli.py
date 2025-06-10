@@ -40,6 +40,9 @@ def main(
         verbose=verbose,
     )
 
+    output_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
+    completed_framework.save(output_path)
+
     return completed_framework
 
 
