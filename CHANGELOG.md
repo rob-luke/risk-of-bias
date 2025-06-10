@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.0](https://github.com/rob-luke/risk-of-bias/compare/v0.5.0...v0.6.0) (2025-06-10)
+
+
+### Features
+
+* add model selection dropdown to web UI ([#20](https://github.com/rob-luke/risk-of-bias/issues/20)) ([70120fb](https://github.com/rob-luke/risk-of-bias/commit/70120fbdd51a7ab163c75778ded537c20ca57f2a))
+* add web command ([#16](https://github.com/rob-luke/risk-of-bias/issues/16)) ([97f8fb7](https://github.com/rob-luke/risk-of-bias/commit/97f8fb719c1ae27dbc531ac995ca85e769fd1db6))
+* add web command to CLI ([#21](https://github.com/rob-luke/risk-of-bias/issues/21)) ([9c70a78](https://github.com/rob-luke/risk-of-bias/commit/9c70a78563a1b6fdb56340d0fb8d17d6701705cb))
+* CLI command to analyse directory ([#22](https://github.com/rob-luke/risk-of-bias/issues/22)) ([8602248](https://github.com/rob-luke/risk-of-bias/commit/860224820f2c1df4980b6f694af9c33d84fb9b2a))
+* nicer web ui ([#17](https://github.com/rob-luke/risk-of-bias/issues/17)) ([e62bda1](https://github.com/rob-luke/risk-of-bias/commit/e62bda1612d4e9163cd0b14137b5c1ffc04e8488))
+
+
+### Documentation
+
+* tweak readme ([#23](https://github.com/rob-luke/risk-of-bias/issues/23)) ([356d9cb](https://github.com/rob-luke/risk-of-bias/commit/356d9cb5ecbdea430a9a8c3cf958f882d67c907e))
+
 ## [0.5.0](https://github.com/rob-luke/risk-of-bias/compare/v0.4.0...v0.5.0) (2025-06-10)
 
 
