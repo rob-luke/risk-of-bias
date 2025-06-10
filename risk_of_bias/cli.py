@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 import typer
 
@@ -14,7 +14,10 @@ app = typer.Typer(help="Run risk of bias assessment")
 @app.command()
 def analyse(
     manuscript: str = typer.Argument(
-        ..., exists=True, readable=True, help="Path to the manuscript PDF"
+        ...,
+        exists=True,
+        readable=True,
+        help="Path to the manuscript PDF or directory containing PDFs",
     ),
     model: str = typer.Option(settings.fast_ai_model, help="OpenAI model name"),
     guidance_document: Optional[str] = typer.Option(
@@ -24,11 +27,11 @@ def analyse(
     force: bool = typer.Option(
         False, help="Force reprocessing even if JSON file exists"
     ),
-) -> Framework:
+) -> Optional[Framework]:
     """
-    Run risk of bias assessment on a manuscript.
+    Run risk of bias assessment on a manuscript or directory of manuscripts.
 
-    Processes a manuscript PDF file using the specified
+    Processes a manuscript PDF file or all PDF files in a directory using the specified
     AI model and optional guidance document to perform risk of bias
     evaluation using the ROB2 framework.
 
@@ -36,6 +39,45 @@ def analyse(
     it will be loaded instead of reprocessing the PDF (unless --force is used).
     """
     manuscript_path = Path(manuscript)
+
+    # If input is a directory, process all PDFs in it
+    if manuscript_path.is_dir():
+        if verbose:
+            typer.echo(f"Processing directory: {manuscript_path}")
+
+        results: List[Framework] = []
+        pdf_files = sorted(
+            [
+                p
+                for p in manuscript_path.iterdir()
+                if p.is_file() and p.suffix.lower() == ".pdf"
+            ]
+        )
+
+        if not pdf_files:
+            typer.echo(f"No PDF files found in directory: {manuscript_path}")
+            return None
+
+        for pdf_path in pdf_files:
+            if verbose:
+                typer.echo(f"Analysing {pdf_path.name}")
+            framework = analyse(
+                manuscript=str(pdf_path),
+                model=model,
+                guidance_document=guidance_document,
+                verbose=verbose,
+                force=force,
+            )
+            if framework is not None:
+                results.append(framework)
+
+        if verbose:
+            typer.echo(f"Processed {len(results)} PDF files from directory")
+
+        # Return the last framework for consistency with single file processing
+        return results[-1] if results else None
+
+    # Single file processing (existing logic)
     guidance_document_path = Path(guidance_document) if guidance_document else None
 
     output_json_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
