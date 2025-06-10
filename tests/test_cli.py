@@ -183,3 +183,43 @@ def test_cli_web_command(monkeypatch):
     assert calls["host"] == "0.0.0.0"
     assert calls["port"] == 1234
     assert calls["reload"] is True
+
+
+def test_cli_analyse_directory_processes_all_pdfs(tmp_path, monkeypatch):
+    """The directory command should analyse each PDF in the given folder."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+
+    processed = []
+
+    def fake_run_framework(
+        manuscript, model: str, framework, guidance_document, verbose: bool = False
+    ):
+        processed.append(manuscript)
+        from risk_of_bias.types._framework_types import Framework
+
+        result = Framework(name="dummy")
+        result.manuscript = Path(manuscript).name
+        return result
+
+    monkeypatch.setattr(cli, "run_framework", fake_run_framework)
+
+    pdf1 = tmp_path / "file1.pdf"
+    pdf2 = tmp_path / "file2.pdf"
+    pdf1.write_bytes(b"dummy")
+    pdf2.write_bytes(b"dummy")
+
+    sub = tmp_path / "sub"
+    sub.mkdir()
+    (sub / "ignored.pdf").write_bytes(b"dummy")
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["analyse-directory", str(tmp_path)])
+
+    assert result.exit_code == 0
+    assert set(processed) == {pdf1, pdf2}
+
+    for pdf in [pdf1, pdf2]:
+        assert (pdf.with_suffix(pdf.suffix + ".json")).exists()
+        assert (pdf.with_suffix(pdf.suffix + ".md")).exists()
+        assert (pdf.with_suffix(pdf.suffix + ".html")).exists()

@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 import typer
 
@@ -91,6 +91,75 @@ def analyse(
     completed_framework.export_to_html(output_html_path)
 
     return completed_framework
+
+
+@app.command()
+def analyse_directory(
+    directory: str = typer.Argument(
+        ...,
+        exists=True,
+        file_okay=False,
+        dir_okay=True,
+        readable=True,
+        help="Directory containing manuscript PDFs",
+    ),
+    model: str = typer.Option(settings.fast_ai_model, help="OpenAI model name"),
+    guidance_document: Optional[str] = typer.Option(
+        None,
+        exists=True,
+        readable=True,
+        help="Optional guidance document",
+    ),
+    verbose: bool = typer.Option(True, help="Enable verbose output for debugging"),
+    force: bool = typer.Option(
+        False,
+        help="Force reprocessing even if JSON file exists",
+    ),
+) -> List[Framework]:
+    """Analyse every PDF found directly in a directory.
+
+    Parameters
+    ----------
+    directory : str
+        Path to the directory containing PDF manuscripts.
+    model : str
+        OpenAI model to use for all analyses.
+    guidance_document : Optional[str]
+        Optional guidance document passed to each analysis.
+    verbose : bool
+        Enable verbose output from the ``analyse`` command.
+    force : bool
+        Force reprocessing even if JSON files already exist.
+
+    Returns
+    -------
+    list[Framework]
+        List of completed frameworks, one per processed manuscript.
+    """
+
+    directory_path = Path(directory)
+    guidance_document_path = Path(guidance_document) if guidance_document else None
+
+    results: list[Framework] = []
+    for pdf_path in sorted(
+        p
+        for p in directory_path.iterdir()
+        if p.is_file() and p.suffix.lower() == ".pdf"
+    ):
+        if verbose:
+            typer.echo(f"Analysing {pdf_path.name}")
+        framework = analyse(
+            manuscript=str(pdf_path),
+            model=model,
+            guidance_document=(
+                str(guidance_document_path) if guidance_document_path else None
+            ),
+            verbose=verbose,
+            force=force,
+        )
+        results.append(framework)
+
+    return results
 
 
 @app.command()
