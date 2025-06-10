@@ -39,8 +39,8 @@ def test_analyze_and_download(tmp_path, monkeypatch):
         )
 
     assert response.status_code == 200
-    assert "Download JSON" in response.text
-    assert "Download Markdown" in response.text
+    assert "Download Results" in response.text
+    assert "JSON" in response.text
 
     match = re.search(r"/download/(\w+)/result.json", response.text)
     assert match
