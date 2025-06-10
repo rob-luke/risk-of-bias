@@ -17,6 +17,9 @@ dependencies = [
 Homepage = "https://github.com/rob-luke/risk-of-bias"
 Issues = "https://github.com/rob-luke/risk-of-bias/issues"
 
+[project.scripts]
+yourtool = "risk_of_bias.cli:main"
+
 [project.optional-dependencies]
 dev = [
     "black>=25.1.0",
@@ -40,6 +43,9 @@ packages = ["risk_of_bias"]
 
 [tool.black]
 line-length = 88
+
+[tool.flake8]
+max-line-length = 88
 
 [tool.mypy]
 exclude = ["build"]
