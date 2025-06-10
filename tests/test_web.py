@@ -12,7 +12,9 @@ from risk_of_bias import web
 from risk_of_bias.types._framework_types import Framework
 
 
-def fake_run_framework(manuscript: Path, framework, verbose: bool = False) -> Framework:
+def fake_run_framework(
+    manuscript: Path, framework, model: str, verbose: bool = False
+) -> Framework:
     result = Framework(name="Test Framework")
     result.manuscript = Path(manuscript).name
     return result
@@ -23,6 +25,7 @@ def test_index_returns_form():
     response = client.get("/")
     assert response.status_code == 200
     assert "<form" in response.text
+    assert '<select id="model"' in response.text
 
 
 def test_analyze_and_download(tmp_path, monkeypatch):
@@ -35,7 +38,9 @@ def test_analyze_and_download(tmp_path, monkeypatch):
 
     with pdf.open("rb") as f:
         response = client.post(
-            "/analyze", files={"file": ("manuscript.pdf", f, "application/pdf")}
+            "/analyze",
+            data={"model": "dummy-model"},
+            files={"file": ("manuscript.pdf", f, "application/pdf")},
         )
 
     assert response.status_code == 200
