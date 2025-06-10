@@ -6,11 +6,13 @@ import uuid
 
 from fastapi import FastAPI
 from fastapi import File
+from fastapi import Form
 from fastapi import HTTPException
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
 
+from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
 from risk_of_bias.run_framework import run_framework
 from risk_of_bias.types._framework_types import Framework
@@ -24,7 +26,7 @@ app = FastAPI()
 @app.get("/", response_class=HTMLResponse)
 def index() -> str:
     """Return a simple upload form."""
-    return """
+    html = """
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -60,6 +62,15 @@ def index() -> str:
                             <p class="text-xs text-gray-500">PDF up to 10MB</p>
                         </div>
                     </div>
+                </div>
+
+                <div>
+                    <label for="model" class="block text-sm font-medium text-gray-700 mb-2">
+                        Select AI Model
+                    </label>
+                    <select id="model" name="model" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        {{MODEL_OPTIONS}}
+                    </select>
                 </div>
                 
                 <div>
@@ -147,10 +158,20 @@ def index() -> str:
     </html>
     """
 
+    options = (
+        f'<option value="{settings.fast_ai_model}">{settings.fast_ai_model}</option>'
+        f'<option value="{settings.good_ai_model}">{settings.good_ai_model}</option>'
+        f'<option value="{settings.best_ai_model}">{settings.best_ai_model}</option>'
+    )
+
+    return html.replace("{{MODEL_OPTIONS}}", options)
+
 
 @app.post("/analyze", response_class=HTMLResponse)
-def analyze(file: UploadFile = File(...)) -> str:
-    """Process a PDF and return the assessment HTML."""
+def analyze(
+    file: UploadFile = File(...), model: str = Form(settings.fast_ai_model)
+) -> str:
+    """Process a PDF with the selected model and return the assessment HTML."""
     file_id = uuid.uuid4().hex
     work_dir = APP_TEMP_DIR / file_id
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -163,6 +184,7 @@ def analyze(file: UploadFile = File(...)) -> str:
     framework: Framework = run_framework(
         manuscript=pdf_path,
         framework=get_rob2_framework(),
+        model=model,
         verbose=True,
     )
 
