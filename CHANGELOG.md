@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/rob-luke/risk-of-bias/compare/v0.3.0...v0.4.0) (2025-06-10)
+
+
+### Features
+
+* add markdown framework export ([#11](https://github.com/rob-luke/risk-of-bias/issues/11)) ([8510d5f](https://github.com/rob-luke/risk-of-bias/commit/8510d5f84853d8ead441504ada563e4e87d99d63))
+
 ## [0.3.0](https://github.com/rob-luke/risk-of-bias/compare/v0.2.0...v0.3.0) (2025-06-10)
 
 
