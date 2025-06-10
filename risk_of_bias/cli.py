@@ -12,7 +12,7 @@ app = typer.Typer(help="Run risk of bias assessment")
 
 
 @app.command()
-def main(
+def analyse(
     manuscript: str = typer.Argument(
         ..., exists=True, readable=True, help="Path to the manuscript PDF"
     ),
@@ -91,6 +91,25 @@ def main(
     completed_framework.export_to_html(output_html_path)
 
     return completed_framework
+
+
+@app.command()
+def web(
+    host: str = typer.Option("127.0.0.1", help="Host address"),
+    port: int = typer.Option(8000, help="Port number"),
+    reload: bool = typer.Option(
+        True, "--reload/--no-reload", help="Enable auto-reload during development"
+    ),
+) -> None:
+    """Launch the web interface using uvicorn."""
+    import uvicorn
+
+    uvicorn.run(
+        "risk_of_bias.web:app",
+        host=host,
+        port=port,
+        reload=reload,
+    )
 
 
 if __name__ == "__main__":
