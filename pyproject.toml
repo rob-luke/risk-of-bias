@@ -40,6 +40,9 @@ web = [
     "uvicorn>=0.29.0",
     "python-multipart>=0.0.9",
 ]
+all = [
+    "risk-of-bias[dev,web]",
+]
 
 [build-system]
 requires = ["setuptools>=61.0"]
