@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pydantic import BaseModel
 
 from risk_of_bias.types._domain_types import Domain
@@ -111,3 +113,29 @@ class Framework(BaseModel):
                 lines.append("")
 
         return "\n".join(lines)
+
+    def save(self, path: Path) -> None:
+        """Save the framework as formatted JSON to ``path``.
+
+        Parameters
+        ----------
+        path : Path
+            Location to write the JSON representation.
+        """
+        path.write_text(self.model_dump_json(indent=2))
+
+    @classmethod
+    def load(cls, path: Path) -> "Framework":
+        """Load a framework from a JSON file at ``path``.
+
+        Parameters
+        ----------
+        path : Path
+            The file to read from.
+
+        Returns
+        -------
+        Framework
+            An instance populated with the data from the file.
+        """
+        return cls.model_validate_json(path.read_text())

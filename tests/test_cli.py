@@ -19,7 +19,10 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
         called["framework"] = framework
         called["guidance"] = guidance_document
         called["verbose"] = verbose
-        return "result"
+        # return a minimal Framework instance so cli can call .save()
+        from risk_of_bias.types._framework_types import Framework
+
+        return Framework(name="dummy")
 
     monkeypatch.setattr(cli, "run_framework", fake_run_framework)
 
@@ -33,3 +36,5 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
     assert called["manuscript"] == pdf
     assert called["model"] == settings.fast_ai_model
     assert called["guidance"] is None
+    # the framework should be saved next to the manuscript
+    assert (pdf.with_suffix(pdf.suffix + ".json")).exists()
