@@ -27,7 +27,13 @@ Complete documentation is available in [cli](cli.md)
 But to get started, you can analyse a manuscript by simply passing the path to the file:
 
 ```console
-risk-of-bias /path/to/manuscript.pdf
+risk-of-bias analyse /path/to/manuscript.pdf
+```
+
+To start the web interface run:
+
+```console
+risk-of-bias web
 ```
 
 
