@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -28,10 +29,13 @@ class Framework(BaseModel):
     name : str
         A descriptive name for the framework (e.g., "RoB2 Framework for
         Randomized Trials").
+    manuscript : str, optional
+        The filename (without path) of the manuscript being assessed.
     """
 
     domains: list[Domain] = []
     name: str = ""
+    manuscript: Optional[str] = None
 
     def __str__(self) -> str:
         """
@@ -88,6 +92,8 @@ class Framework(BaseModel):
             return "Framework: No domains defined"
 
         lines = [f"Framework: {self.name}"]
+        if self.manuscript:
+            lines.append(f"Manuscript: {self.manuscript}")
         for domain in self.domains:
             lines.append(f"\nDomain {domain.index}: {domain.name}")
 
@@ -144,6 +150,18 @@ class Framework(BaseModel):
         from risk_of_bias.export import export_framework_as_markdown
 
         export_framework_as_markdown(self, path)
+
+    def export_to_html(self, path: Path) -> None:
+        """Export the framework as an HTML document.
+
+        Parameters
+        ----------
+        path : Path
+            Destination file for the HTML representation.
+        """
+        from risk_of_bias.export import export_framework_as_html
+
+        export_framework_as_html(self, path)
 
     def save(self, path: Path) -> None:
         """Save the framework as formatted JSON to ``path``.
