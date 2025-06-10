@@ -6,7 +6,7 @@ browser.
 
 ## Running the server
 
-Install the optional dependencies and start the server with `uvicorn`:
+Install the optional dependencies and start the server with `uvicorn`, or simply use `make web`:
 
 ```console
 pip install "risk_of_bias[web]"

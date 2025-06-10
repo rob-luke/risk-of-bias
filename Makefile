@@ -1,7 +1,7 @@
-.PHONY:help lint test 
+.PHONY:help lint test web
 
 help:
-	@echo "Available commands are: \n*lint and test"
+	@echo "Available commands are: \n*lint test and web"
 
 lint:
 	black .
@@ -19,3 +19,6 @@ lint-check:
 
 test:
 	pytest .
+
+web:
+	uvicorn risk_of_bias.web:app --reload
