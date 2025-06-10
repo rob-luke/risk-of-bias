@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from openai.types.responses.parsed_response import ParsedResponse
 from pydantic import BaseModel
@@ -93,7 +94,7 @@ class ReasonedResponseWithEvidenceAndRawData(BaseModel):
     evidence: list[str]
     reasoning: str
     response: str
-    raw_data: ParsedResponse
+    raw_data: Optional[ParsedResponse] = None
 
 
 def create_custom_constrained_response_class(
