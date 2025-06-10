@@ -14,7 +14,7 @@ This package provides AI and software tools to assist researchers in conducting 
 You can install the program using the following pip command:
 
 ```console
-pip install risk_of_bias
+pip install risk_of_bias[all]
 ```
 
 ### Command Line Usage
