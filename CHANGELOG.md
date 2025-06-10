@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/rob-luke/risk-of-bias/compare/v0.2.0...v0.3.0) (2025-06-10)
+
+
+### Features
+
+* add framework IO utilities ([#9](https://github.com/rob-luke/risk-of-bias/issues/9)) ([73f432a](https://github.com/rob-luke/risk-of-bias/commit/73f432ad957a23454f966fd59789bc5e3ed71a7a))
+
 ## [0.2.0](https://github.com/rob-luke/risk-of-bias/compare/v0.1.2...v0.2.0) (2025-06-10)
 
 
