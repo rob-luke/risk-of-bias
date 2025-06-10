@@ -49,7 +49,7 @@ def analyze(file: UploadFile = File(...)) -> str:
     framework: Framework = run_framework(
         manuscript=pdf_path,
         framework=get_rob2_framework(),
-        verbose=False,
+        verbose=True,
     )
 
     json_path = work_dir / "result.json"
@@ -63,7 +63,8 @@ def analyze(file: UploadFile = File(...)) -> str:
     html_content = html_path.read_text()
     download_links = (
         f"<p><a href='/download/{file_id}/result.json'>Download JSON</a> | "
-        f"<a href='/download/{file_id}/result.md'>Download Markdown</a></p>"
+        f"<a href='/download/{file_id}/result.md'>Download Markdown</a> | "
+        f"<a href='/download/{file_id}/result.html'>Download HTML</a></p>"
     )
 
     return html_content.replace("<body>", f"<body>{download_links}", 1)
