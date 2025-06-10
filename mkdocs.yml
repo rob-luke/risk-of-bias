@@ -10,6 +10,7 @@ nav:
     - Frameworks: frameworks.md
     - Command Line Interface: cli.md
     - API: api.md
+    - Web: web.md
     - Contributing: contributing.md
 
 
