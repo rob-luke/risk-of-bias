@@ -4,7 +4,7 @@ from typing import Optional
 import typer
 
 from risk_of_bias.config import settings
-from risk_of_bias.frameworks.rob2._rob2 import rob2_framework
+from risk_of_bias.frameworks.rob2 import rob2_framework
 from risk_of_bias.run_framework import run_framework
 
 app = typer.Typer(help="Run risk of bias assessment")
@@ -20,8 +20,23 @@ def main(
         None, exists=True, readable=True, help="Optional guidance document"
     ),
 ) -> None:
-    """Execute the risk of bias analysis."""
+    """
+    Main CLI command for running risk of bias assessment on a manuscript.
 
+    This command processes a manuscript PDF file using the specified
+    AI model and optional guidance document to perform risk of bias
+    evaluation using the ROB2 framework.
+
+    Args:
+        manuscript (str): Path to the manuscript PDF.
+        model (str, optional): OpenAI model name to use for assessment. Defaults to
+            the configured fast AI model from settings.
+        guidance_document (str, optional): Path to an optional guidance document
+            that must exist and be readable if provided. Defaults to None.
+
+    Returns:
+        None: Outputs the assessment response directly to the console.
+    """
     manuscript_path = Path(manuscript)
     guidance_document_path = Path(guidance_document) if guidance_document else None
 
@@ -34,5 +49,5 @@ def main(
     typer.echo(response)
 
 
-if __name__ == "__main__":  # pragma: no cover - entry point behaviour
+if __name__ == "__main__":
     app()

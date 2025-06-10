@@ -2,7 +2,7 @@ from risk_of_bias.types._domain_types import Domain
 from risk_of_bias.types._question_types import Question
 
 q1_1 = Question(
-    question="Was the allocation sequence random?",
+    question="Question 1.1: Was the allocation sequence random?",
     allowed_answers=[
         "Yes",
         "Probably Yes",
@@ -17,7 +17,7 @@ q1_1 = Question(
 
 q1_2 = Question(
     question=(
-        "Was the allocation sequence concealed until participants were "
+        "Question 1.2: Was the allocation sequence concealed until participants were "
         "enrolled and assigned to interventions?"
     ),
     allowed_answers=[
@@ -34,7 +34,7 @@ q1_2 = Question(
 
 q1_3 = Question(
     question=(
-        "Did baseline differences between intervention groups suggest "
+        "Question 1.3: Did baseline differences between intervention groups suggest "
         "a problem with the randomization process?"
     ),
     allowed_answers=[
@@ -58,7 +58,7 @@ q_r = Question(
 
 q_o = Question(
     question=(
-        "What is the predicted direction of bias arising from "
+        "Optional Question: What is the predicted direction of bias arising from "
         "the randomization process?"
     ),
     allowed_answers=[
@@ -75,6 +75,6 @@ q_o = Question(
 
 domain_1_randomization = Domain(
     questions=[q1_1, q1_2, q1_3, q_r, q_o],
-    name="Randomization",
+    name="Bias arising from the randomization process.",
     index=1,
 )
