@@ -67,6 +67,7 @@ addopts = "-v --tb=short"
 
 [tool.codespell]
 ignore-words-list = "Shepperd"
+skip = "*.git,*.svg,*.pdf,*.pyc,__pycache__,build,dist,site,.mypy_cache,.pytest_cache,PKG-INFO"
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]

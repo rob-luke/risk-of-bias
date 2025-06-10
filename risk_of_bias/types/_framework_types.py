@@ -65,10 +65,13 @@ class Framework(BaseModel):
         >>> print(framework)
         Framework: RoB2 Framework
         Domain 1: Randomization Process
-          Question 1.1: Was the allocation sequence random? (['Yes', 'Probably Yes', ...])
+          Question 1.1: Was the allocation sequence random? (['Yes', 'Probably Yes',
+          ...])
             Response: Yes
-              Reasoning: The study clearly describes using computer-generated randomization
-                Evidence: "Participants were randomized using a computer-generated sequence"
+              Reasoning: The study clearly describes using computer-generated
+              randomization
+                Evidence: "Participants were randomized using a computer-generated
+                sequence"
 
         Notes
         -----

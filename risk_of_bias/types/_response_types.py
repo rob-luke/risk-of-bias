@@ -16,30 +16,30 @@ class ReasonedResponse(BaseModel):
 class ReasonedResponseWithEvidence(BaseModel):
     """
     A structured response container that captures comprehensive AI assessment data.
-    
+
     This class represents the core output of the AI bias assessment process,
     combining three essential components that make automated assessment both
     reliable and transparent: the actual response, the reasoning behind it,
     and the supporting evidence from the manuscript.
-    
+
     The Transparency Imperative
     ---------------------------
     Traditional bias assessment often involves subjective expert judgment that
     can be difficult to audit or reproduce. This structured response format
     addresses these limitations by making the assessment process transparent:
-    
+
     - **Explicit Reasoning**: Every assessment includes detailed explanation
       of the logic and criteria used to reach the conclusion
     - **Evidence-Based**: All conclusions are anchored to specific text
       from the manuscript, enabling verification and quality control
     - **Reproducible**: The structured format allows for consistent review,
       comparison, and potential re-evaluation of assessments
-    
+
     Multi-Modal Assessment Support
     ------------------------------
     The evidence component is designed to work with various types of
     supporting information:
-    
+
     - **Direct Quotes**: Exact text excerpts from methodology sections
     - **Paraphrased Content**: Summarized information when direct quotes
       would be too lengthy or fragmented
@@ -47,7 +47,7 @@ class ReasonedResponseWithEvidence(BaseModel):
       manuscript that collectively support the assessment
     - **Contextual Information**: Background details that inform the
       interpretation of methodological choices
-    
+
     Attributes
     ----------
     evidence : list[str]
@@ -55,34 +55,35 @@ class ReasonedResponseWithEvidence(BaseModel):
         the assessment conclusion. Each item should be a meaningful
         piece of evidence that directly relates to the question being
         assessed. Evidence items are typically:
-        
+
         - Direct quotations from relevant manuscript sections
         - Specific methodological details described by the authors
         - Quantitative information (sample sizes, response rates, etc.)
         - Procedural descriptions that inform bias assessment
-        
+
         Multiple evidence items allow for comprehensive support of
         complex assessments that may depend on information scattered
         throughout the manuscript.
-        
+
     reasoning : str
         A detailed explanation of the assessment logic connecting the
         evidence to the conclusion. This should include:
-        
+
         - Interpretation of the evidence in methodological context
         - Application of relevant bias assessment criteria
         - Consideration of alternative interpretations
         - Explanation of how the evidence leads to the specific response
-        
+
         High-quality reasoning demonstrates methodological sophistication
         and provides the rationale needed for assessment validation.
-        
+
     response : str
         The actual assessment answer, either selected from predefined
         options (for structured questions) or provided as free-form text
         (for open-ended questions). This represents the final conclusion
         of the assessment process based on the evidence and reasoning.
     """
+
     evidence: list[str]
     reasoning: str
     response: str

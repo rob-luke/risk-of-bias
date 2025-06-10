@@ -26,9 +26,10 @@ def run_framework(
     Perform systematic risk-of-bias assessment on a research manuscript using AI.
 
     This function automates the process of evaluating potential sources of bias in
-    research studies by systematically working through a structured assessment framework.
-    It combines established methodological frameworks (like RoB2) with AI capabilities
-    to provide evidence-based bias assessments.
+    research studies by systematically working through a structured assessment
+    framework.
+    It combines established methodological frameworks (like RoB2) with AI
+    capabilities to provide evidence-based bias assessments.
 
     The Assessment Process
     ----------------------
@@ -38,9 +39,10 @@ def run_framework(
        organized domains and signaling questions
     2. **Context Establishment**: Sends system instructions to guide the AI model's
        assessment approach
-    3. **Document Processing**: Converts the manuscript PDF to a format the AI can analyze
-    4. **Systematic Questioning**: Works through each question in the framework sequentially,
-       maintaining conversation context for coherent assessment
+    3. **Document Processing**: Converts the manuscript PDF to a format the AI can
+       analyze
+    4. **Systematic Questioning**: Works through each question in the framework
+       sequentially, maintaining conversation context for coherent assessment
     5. **Evidence-Based Responses**: For each question, the AI provides:
        - A structured response from predefined options
        - Detailed reasoning explaining the assessment
@@ -76,8 +78,8 @@ def run_framework(
     -------
     Framework
         The original framework structure populated with AI-generated responses.
-        Each question in the framework will contain a ReasonedResponseWithEvidenceAndRawData
-        object with:
+        Each question in the framework will contain a
+        ReasonedResponseWithEvidenceAndRawData object with:
 
         - **response**: The selected answer from the allowed options
         - **reasoning**: Detailed explanation of the assessment logic

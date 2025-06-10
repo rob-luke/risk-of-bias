@@ -11,11 +11,14 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
 
     called = {}
 
-    def fake_run_framework(manuscript: str, model: str, framework, guidance_document):
+    def fake_run_framework(
+        manuscript, model: str, framework, guidance_document, verbose: bool = False
+    ):
         called["manuscript"] = manuscript
         called["model"] = model
         called["framework"] = framework
         called["guidance"] = guidance_document
+        called["verbose"] = verbose
         return "result"
 
     monkeypatch.setattr(cli, "run_framework", fake_run_framework)

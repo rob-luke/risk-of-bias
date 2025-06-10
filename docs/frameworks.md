@@ -2,7 +2,7 @@
 ## Frameworks
 
 The _Risk of Bias_ tool currently only supports the RoB 2 framework.
-However, it is designed to be extensible, please raise an issue if theres another framework you are interested in. 
+However, it is designed to be extensible, please raise an issue if there's another framework you are interested in. 
 
 ### Randomised Trials
 
