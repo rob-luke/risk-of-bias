@@ -6,11 +6,11 @@ browser.
 
 ## Running the server
 
-Install the optional dependencies and start the server with `uvicorn`, or simply use `make web`:
+Install the optional dependencies and start the server with `risk-of-bias web` (equivalent to `make web`):
 
 ```console
 pip install "risk_of_bias[web]"
-uvicorn risk_of_bias.web:app --reload
+risk-of-bias web
 ```
 
 Open `http://127.0.0.1:8000` and upload your manuscript. After processing you

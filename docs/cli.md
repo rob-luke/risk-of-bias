@@ -9,28 +9,30 @@ The CLI tool provides several handy parameters you can adjust, these can be foun
 ```console
 > risk-of-bias --help
 
- Usage: risk-of-bias [OPTIONS] MANUSCRIPT
+ Usage: risk-of-bias [OPTIONS] COMMAND [ARGS]...
 
- Run risk of bias assessment on a manuscript.
+ Run risk of bias assessment
 
- Processes a manuscript PDF file using the specified AI model and optional guidance document to perform risk of bias evaluation
- using the ROB2 framework.
-
-╭─ Arguments ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ *    manuscript      TEXT  Path to the manuscript PDF [default: None] [required]                                                │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ --model                                 TEXT  OpenAI model name [default: gpt-4.1-nano]                                         │
-│ --guidance-document                     TEXT  Optional guidance document [default: None]                                        │
-│ --verbose               --no-verbose          Enable verbose output for debugging [default: verbose]                            │
-│ --install-completion                          Install completion for the current shell.                                         │
-│ --show-completion                             Show completion for the current shell, to copy it or customize the installation.  │
-│ --help                                        Show this message and exit.                                                       │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.        │
+│ --show-completion             Show completion for the current shell, to copy   │
+│                               it or customise the installation.                │
+│ --help                        Show this message and exit.                       │
+╰────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────╮
+│ analyse   Run risk of bias assessment on a manuscript.                         │
+│ web       Launch the web interface using uvicorn.                               │
+╰────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 And you can analyse a manuscript by simply passing the path to the file:
 
 ```console
-risk-of-bias /path/to/manuscript.pdf
+risk-of-bias analyse /path/to/manuscript.pdf
+```
+
+To start the web interface run:
+
+```console
+risk-of-bias web
 ```

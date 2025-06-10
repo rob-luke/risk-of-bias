@@ -1,4 +1,6 @@
 from pathlib import Path
+import sys
+import types
 
 from typer.testing import CliRunner
 
@@ -30,7 +32,7 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
     pdf.write_bytes(b"dummy")
 
     runner = CliRunner()
-    result = runner.invoke(cli.app, [str(pdf)])
+    result = runner.invoke(cli.app, ["analyse", str(pdf)])
 
     assert result.exit_code == 0
     assert called["manuscript"] == pdf
@@ -65,7 +67,7 @@ def test_cli_sets_manuscript_filename(tmp_path, monkeypatch):
     pdf.write_bytes(b"dummy")
 
     runner = CliRunner()
-    result = runner.invoke(cli.app, [str(pdf)])
+    result = runner.invoke(cli.app, ["analyse", str(pdf)])
 
     assert result.exit_code == 0
     assert stored_framework is not None
@@ -112,7 +114,7 @@ def test_cli_backward_compatibility_manuscript_filename(tmp_path, monkeypatch):
     monkeypatch.setattr(cli, "run_framework", fake_run_framework)
 
     runner = CliRunner()
-    result = runner.invoke(cli.app, [str(pdf)])
+    result = runner.invoke(cli.app, ["analyse", str(pdf)])
 
     assert result.exit_code == 0
     assert not run_framework_called  # Should use existing JSON
@@ -141,7 +143,7 @@ def test_cli_exports_include_manuscript_name(tmp_path, monkeypatch):
     pdf.write_bytes(b"dummy")
 
     runner = CliRunner()
-    result = runner.invoke(cli.app, [str(pdf)])
+    result = runner.invoke(cli.app, ["analyse", str(pdf)])
 
     assert result.exit_code == 0
 
@@ -157,3 +159,27 @@ def test_cli_exports_include_manuscript_name(tmp_path, monkeypatch):
 
     assert "**Manuscript:** integration_test.pdf" in md_content
     assert "<strong>Manuscript: </strong>integration_test.pdf" in html_content
+
+
+def test_cli_web_command(monkeypatch):
+    calls = {}
+    monkeypatch.setitem(
+        sys.modules,
+        "uvicorn",
+        types.SimpleNamespace(
+            run=lambda *args, **kwargs: calls.update({"args": args, **kwargs})
+        ),
+    )
+
+    from risk_of_bias import cli
+
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.app, ["web", "--reload", "--host", "0.0.0.0", "--port", "1234"]
+    )
+
+    assert result.exit_code == 0
+    assert calls["args"][0] == "risk_of_bias.web:app"
+    assert calls["host"] == "0.0.0.0"
+    assert calls["port"] == 1234
+    assert calls["reload"] is True
