@@ -1,3 +1,3 @@
-from .rob2 import rob2_framework
+from .rob2 import get_rob2_framework
 
-__all__ = ["rob2_framework"]
+__all__ = ["get_rob2_framework"]

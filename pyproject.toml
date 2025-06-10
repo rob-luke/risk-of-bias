@@ -19,7 +19,7 @@ Homepage = "https://github.com/rob-luke/risk-of-bias"
 Issues = "https://github.com/rob-luke/risk-of-bias/issues"
 
 [project.scripts]
-yourtool = "risk_of_bias.cli:main"
+risk-of-bias = "risk_of_bias.cli:app"
 
 [project.optional-dependencies]
 dev = [
