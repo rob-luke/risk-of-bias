@@ -145,6 +145,18 @@ class Framework(BaseModel):
 
         export_framework_as_markdown(self, path)
 
+    def export_to_html(self, path: Path) -> None:
+        """Export the framework as an HTML document.
+
+        Parameters
+        ----------
+        path : Path
+            Destination file for the HTML representation.
+        """
+        from risk_of_bias.export import export_framework_as_html
+
+        export_framework_as_html(self, path)
+
     def save(self, path: Path) -> None:
         """Save the framework as formatted JSON to ``path``.
 
