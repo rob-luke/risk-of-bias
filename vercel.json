@@ -1,9 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "risk_of_bias/web.py", "use": "@vercel/python" }
+    {
+      "src": "risk_of_bias/web.py",
+      "use": "@vercel/python"
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "risk_of_bias/web.py" }
+    {
+      "src": "/(.*)",
+      "dest": "risk_of_bias/web.py"
+    }
   ]
 }
