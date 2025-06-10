@@ -214,7 +214,7 @@ def test_cli_analyse_directory_processes_all_pdfs(tmp_path, monkeypatch):
     (sub / "ignored.pdf").write_bytes(b"dummy")
 
     runner = CliRunner()
-    result = runner.invoke(cli.app, ["analyse-directory", str(tmp_path)])
+    result = runner.invoke(cli.app, ["analyse", str(tmp_path)])
 
     assert result.exit_code == 0
     assert set(processed) == {pdf1, pdf2}
