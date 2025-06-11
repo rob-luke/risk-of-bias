@@ -3,6 +3,7 @@ import risk_of_bias.frameworks.rob2.domains._domain_2_deviations as d2
 import risk_of_bias.frameworks.rob2.domains._domain_3_missing as d3
 import risk_of_bias.frameworks.rob2.domains._domain_4_measurement as d4
 import risk_of_bias.frameworks.rob2.domains._domain_5_selection as d5
+import risk_of_bias.frameworks.rob2.domains._domain_6_overall as d6
 from risk_of_bias.types._framework_types import Framework
 
 
@@ -17,12 +18,14 @@ def get_rob2_framework() -> Framework:
     The RoB2 framework is the gold standard for assessing risk of bias in
     randomized trials and is widely used in systematic reviews and meta-analyses.
     It provides a structured approach to evaluate five key domains where bias
-    commonly occurs in clinical research.
+    commonly occurs in clinical research and includes an additional domain for
+    the overall risk of bias judgement.
 
     Framework Structure
     -------------------
-    The framework contains five assessment domains, each with specific signaling
-    questions designed to systematically evaluate potential sources of bias:
+    The framework contains five primary assessment domains, each with specific
+    signaling questions designed to systematically evaluate potential sources of
+    bias. A sixth domain captures the overall risk-of-bias judgement:
 
     **Domain 1: Bias arising from the randomization process**
         Evaluates the adequacy of the randomization sequence generation and
@@ -44,11 +47,16 @@ def get_rob2_framework() -> Framework:
         Assesses whether the reported result was selected from multiple
         measurements or analyses of the data.
 
+    **Domain 6: Overall risk of bias**
+        Provides the overall judgement for the outcome, including the predicted
+        direction of bias.
+
     Returns
     -------
     Framework
-        A configured Framework instance containing all five RoB2 domains
-        with their respective signaling questions and answer options.
+        A configured Framework instance containing the five RoB2 bias domains
+        plus the overall judgement domain, with their respective signaling
+        questions and answer options.
         The framework is ready for immediate use with `run_framework()`.
 
     Examples
@@ -89,6 +97,7 @@ def get_rob2_framework() -> Framework:
             d3.domain_3_missing,
             d4.domain_4_measurement,
             d5.domain_5_selection,
+            d6.overall_domain,
         ],
         name="RoB2 Framework for Randomized Trials",
     )

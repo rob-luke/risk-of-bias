@@ -191,8 +191,9 @@ def export_summary(
     The CSV structure includes:
     - A ``Study`` column containing manuscript/study identifiers
     - Domain columns (``D1``, ``D2``, ..., ``Dn``) for each risk-of-bias domain
-    - An ``Overall`` column representing the highest (worst) risk rating across all
-      domains
+    - An ``Overall`` column. If a domain named ``Overall`` exists in the
+      summary it will be used directly; otherwise the column represents the
+      highest (worst) risk rating across all domains
 
     Risk judgements are formatted according to RobVis conventions:
     - "Low" for low risk of bias
@@ -220,12 +221,19 @@ def export_summary(
         return
 
     domain_names = list(next(iter(summary.values())).keys())
+    has_overall = "Overall" in domain_names
+    if has_overall:
+        domain_names_no_overall = [d for d in domain_names if d != "Overall"]
+    else:
+        domain_names_no_overall = domain_names
     path = Path(path)
 
     with path.open("w", newline="") as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(
-            ["Study"] + [f"D{i}" for i in range(1, len(domain_names) + 1)] + ["Overall"]
+            ["Study"]
+            + [f"D{i}" for i in range(1, len(domain_names_no_overall) + 1)]
+            + ["Overall"]
         )
 
         ranking = {"low": 0, "some concerns": 1, "high": 2}
@@ -234,7 +242,7 @@ def export_summary(
         for manuscript, domains in summary.items():
             row: list[str | None] = [manuscript]
             worst = -1
-            for domain in domain_names:
+            for domain in domain_names_no_overall:
                 judgement = domains.get(domain)
                 # robvis requires a specific format
                 if judgement is not None:
@@ -247,6 +255,13 @@ def export_summary(
                     if score > worst:
                         worst = score
 
-            overall = inverse_ranking.get(worst, "")
+            if has_overall:
+                overall_raw = domains.get("Overall")
+                if overall_raw is not None:
+                    overall = overall_raw.replace("Concerns", "concerns")
+                else:
+                    overall = ""
+            else:
+                overall = inverse_ranking.get(worst, "")
             row.append(overall)
             writer.writerow(row)
