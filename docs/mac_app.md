@@ -25,3 +25,6 @@ It should launch the web app after a few seconds when run.
 Each time a release is created on GitHub, an automated workflow runs
 `make mac` on a macOS runner and attaches the resulting application to
 the release. The pre-built download can be found in the release assets.
+The application bundles the web interface and processes a single PDF at a time.
+You can always download the most recent version from the
+[latest release](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias).

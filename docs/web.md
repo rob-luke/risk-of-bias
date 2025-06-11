@@ -22,3 +22,7 @@ representations.
 If the `OPENAI_API_KEY` environment variable is not set when the server
 starts, the upload form will include a field to provide it. When supplied,
 the key is used for that analysis session.
+
+A standalone macOS application based on this interface is generated for each
+release. It only processes one PDF at a time and can be downloaded from the
+[latest release](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias).
