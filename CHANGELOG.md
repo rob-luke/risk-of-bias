@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/rob-luke/risk-of-bias/compare/v0.8.0...v0.9.0) (2025-06-11)
+
+
+### Features
+
+* add temperature option ([#30](https://github.com/rob-luke/risk-of-bias/issues/30)) ([5093762](https://github.com/rob-luke/risk-of-bias/commit/5093762554508ee100ca1cf8cd020a4d34d2f5d4))
+
 ## [0.8.0](https://github.com/rob-luke/risk-of-bias/compare/v0.7.0...v0.8.0) (2025-06-11)
 
 
