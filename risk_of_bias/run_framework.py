@@ -40,17 +40,19 @@ def run_framework(
        organized domains and signaling questions
     2. **Context Establishment**: Sends system instructions to guide the AI model's
        assessment approach
-    3. **Document Processing**: Converts the manuscript PDF to a format the AI can
+    3. **Guidance Integration**: If provided, incorporates domain-specific guidance
+       document to calibrate AI responses and provide specialized assessment criteria
+    4. **Document Processing**: Converts the manuscript PDF to a format the AI can
        analyze
-    4. **Systematic Questioning**: Sends all questions within a domain in a
+    5. **Systematic Questioning**: Sends all questions within a domain in a
        single request, reducing the number of API calls while maintaining
        conversation context
-    5. **Evidence-Based Responses**: For each domain the AI returns a list of
+    6. **Evidence-Based Responses**: For each domain the AI returns a list of
        structured answers corresponding to each question. Each item includes:
        - The chosen response from predefined options
        - Detailed reasoning explaining the assessment
        - Specific evidence excerpts from the manuscript
-    6. **Result Integration**: Stores all parsed responses back into the framework
+    7. **Result Integration**: Stores all parsed responses back into the framework
        structure for easy access and analysis
 
     Parameters
@@ -67,10 +69,22 @@ def run_framework(
         provide varying levels of analysis depth and accuracy. The default is
         optimized for speed while maintaining quality.
     guidance_document : Optional[Path], default=None
-        Optional path to a PDF guidance document that provides additional context
-        or instructions for the assessment. This could include journal-specific
-        criteria, detailed methodology explanations, or domain-specific guidance.
-        If provided, the AI will consider this context when making assessments.
+        Optional path to a PDF guidance document that provides domain-specific
+        assessment criteria and AI calibration instructions. This feature enables:
+
+        - **Domain-specific expertise**: Specialized interpretation criteria for
+          fields like pediatric studies, surgical interventions, or rare diseases
+        - **AI bias correction**: Systematic adjustments when the AI consistently
+          misinterprets methodological aspects or shows patterns of being overly
+          lenient or conservative in specific assessment domains
+        - **Standardization**: Consistent application of journal-specific guidelines
+          or institutional assessment standards across multiple manuscripts
+        - **Contextual clarification**: Detailed explanations for ambiguous scenarios
+          that frequently arise in specialized research contexts
+
+        The guidance document is presented to the AI before manuscript analysis,
+        ensuring that your specified criteria and calibrations are consistently
+        applied throughout the entire assessment process.
     verbose : bool, default=False
         Whether to print detailed progress information during assessment. When True,
         displays each question, response, reasoning, and evidence in real-time.

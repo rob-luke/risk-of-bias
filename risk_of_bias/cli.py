@@ -27,7 +27,11 @@ def analyse(
         settings.temperature, help="Temperature for the OpenAI model"
     ),
     guidance_document: Optional[str] = typer.Option(
-        None, exists=True, readable=True, help="Optional guidance document"
+        None,
+        exists=True,
+        readable=True,
+        help="PDF guidance document with domain-specific"
+        " assessment criteria and AI calibration instructions",
     ),
     verbose: bool = typer.Option(True, help="Enable verbose output for debugging"),
     force: bool = typer.Option(
@@ -40,6 +44,11 @@ def analyse(
     Processes a manuscript PDF file or all PDF files in a directory using the specified
     AI model and optional guidance document to perform risk of bias
     evaluation using the ROB2 framework.
+
+    The guidance document feature allows you to provide domain-specific assessment
+    criteria, correct systematic AI interpretation issues, or apply specialized
+    evaluation standards. This is particularly useful for specialized research
+    domains or when consistent AI calibration is needed across multiple assessments.
 
     If a JSON file with the same name as the manuscript already exists,
     it will be loaded instead of reprocessing the PDF (unless --force is used).

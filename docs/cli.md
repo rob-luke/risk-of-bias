@@ -35,6 +35,34 @@ And you can analyse a manuscript by simply passing the path to the file:
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
+## Guidance Documents
+
+The CLI supports an optional `--guidance-document` parameter that allows you to provide domain-specific instructions or corrections to the AI assessment process. This feature is particularly valuable when:
+
+- **Domain-specific expertise is required**: For specialized fields like pediatric studies, surgical interventions, or rare diseases where standard risk-of-bias criteria may need contextual interpretation
+- **Correcting systematic AI biases**: When the AI consistently misinterprets certain methodological aspects or shows patterns of being overly lenient or conservative in specific domains
+- **Journal-specific requirements**: When conducting assessments according to particular journal guidelines or institutional standards
+- **Training consistency**: When multiple reviewers need to apply consistent interpretation criteria across a large systematic review
+
+### Usage
+
+```console
+risk-of-bias analyse manuscript.pdf --guidance-document domain_guidance.pdf
+```
+
+### Creating Effective Guidance Documents
+
+A guidance document should be a PDF containing:
+
+1. **Specific interpretation criteria** for ambiguous scenarios
+2. **Domain-specific examples** of how to classify common situations
+3. **Clarifications on borderline cases** that frequently arise in your field
+4. **Calibration instructions** if the AI is systematically too strict or lenient
+
+For example, a guidance document for surgical studies might specify how to interpret blinding when complete blinding is impossible, or provide criteria for assessing outcome measurement bias in subjective surgical outcomes.
+
+The guidance document is provided to the AI before manuscript analysis, ensuring consistent application of your specified criteria throughout the assessment process.
+
 ## Batch Analysis
 
 You can analyse an entire directory of manuscripts for systematic reviews and meta-analyses:
