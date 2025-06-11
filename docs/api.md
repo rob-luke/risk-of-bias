@@ -81,5 +81,47 @@ The package provides ready-to-use frameworks that implement established risk-of-
       show_root_full_path: true
       heading_level: 4
 
+## Summary and Analysis Functions
+
+After completing individual risk-of-bias assessments using frameworks, researchers typically need to analyze results across multiple studies for systematic reviews, meta-analyses, or research synthesis. The summary functions provide essential tools for aggregating, visualizing, and exporting assessment results in formats compatible with established research workflows.
+
+These functions address three critical needs in evidence synthesis:
+
+1. **Batch Processing**: Loading and processing multiple completed assessments from saved framework files
+2. **Data Aggregation**: Extracting domain-level judgements across studies for comparative analysis  
+3. **Standardized Export**: Creating outputs compatible with specialized visualization tools like RobVis
+
+This workflow supports the transition from individual study assessment to systematic evidence synthesis, enabling researchers to identify patterns of bias across study collections and generate publication-ready visualizations for systematic reviews.
+
+### Loading Multiple Assessments
+
+::: risk_of_bias.summary.load_frameworks_from_directory
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
+### Creating Assessment Summaries
+
+::: risk_of_bias.summary.summarise_frameworks
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
+### Exporting for Visualization
+
+::: risk_of_bias.summary.export_summary
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
 
 

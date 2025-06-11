@@ -4,12 +4,14 @@
 - Ensure all tests pass before you begin development by running `make test`
 - Ensure all linting etc is correct before you begin development by running `make lint`
 - Be aware that mypy can take a few minutes to run, don't exit it before it finishes.
+- Read the README.md and docs directory before you start development.
 
 ## Development guidelines
 - Use black style formatting.
 - Ensure every function has complete documentation using numpy style docstrings.
 - Strictly use type hinting.
 - Use perfect spelling and grammar for all documentation etc. Use Australian english.
+- Update relevant section in the docs after you complete your code changes.
 
 ## Testing Instructions
 - Find the CI plan in the .github/workflows folder.

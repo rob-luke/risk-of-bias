@@ -40,6 +40,10 @@ def analyse(
 
     If a JSON file with the same name as the manuscript already exists,
     it will be loaded instead of reprocessing the PDF (unless --force is used).
+
+    If a directory is provided, all PDF files within that directory will be processed,
+    and a summary CSV file will be generated containing the risk of bias assessments
+    for each manuscript that is compatible with tools such as robvis.
     """
     manuscript_path = Path(manuscript)
 
