@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.1](https://github.com/rob-luke/risk-of-bias/compare/v0.10.0...v0.10.1) (2025-06-11)
+
+
+### Documentation
+
+* enhance index cross links ([#36](https://github.com/rob-luke/risk-of-bias/issues/36)) ([ae53696](https://github.com/rob-luke/risk-of-bias/commit/ae536968ef3c872def444d6d1c4fb852939985f2))
+
 ## [0.10.0](https://github.com/rob-luke/risk-of-bias/compare/v0.9.1...v0.10.0) (2025-06-11)
 
 
