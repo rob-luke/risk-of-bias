@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/rob-luke/risk-of-bias/compare/v0.9.1...v0.10.0) (2025-06-11)
+
+
+### Features
+
+* add Overall risk-of-bias domain ([#31](https://github.com/rob-luke/risk-of-bias/issues/31)) ([21610e4](https://github.com/rob-luke/risk-of-bias/commit/21610e45d7164b6694df7be3b089fe0ff0f3613c))
+
 ## [0.9.1](https://github.com/rob-luke/risk-of-bias/compare/v0.9.0...v0.9.1) (2025-06-11)
 
 
