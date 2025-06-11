@@ -35,7 +35,8 @@ def analyse(
     ),
     verbose: bool = typer.Option(True, help="Enable verbose output for debugging"),
     force: bool = typer.Option(
-        False, help="Force reprocessing even if JSON file exists"
+        False,
+        help="Force reprocessing even if JSON file exists (ignore cached results)",
     ),
 ) -> Optional[Framework]:
     """
@@ -50,8 +51,12 @@ def analyse(
     evaluation standards. This is particularly useful for specialized research
     domains or when consistent AI calibration is needed across multiple assessments.
 
-    If a JSON file with the same name as the manuscript already exists,
-    it will be loaded instead of reprocessing the PDF (unless --force is used).
+    Results are automatically saved in JSON format containing complete assessment
+    data including raw AI responses, evidence excerpts, and reasoning. If a JSON
+    file with the same name as the manuscript already exists, it will be loaded
+    instead of reprocessing the PDF (unless --force is used). This caching system
+    enables efficient batch processing, data sharing, and reproducible research
+    workflows.
 
     If a directory is provided, all PDF files within that directory will be processed,
     and a summary CSV file will be generated containing the risk of bias assessments
