@@ -31,6 +31,12 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
+For domain-specific assessments or to correct systematic AI biases, you can provide a guidance document:
+
+```console
+risk-of-bias analyse /path/to/manuscript.pdf --guidance-document /path/to/guidance.pdf
+```
+
 The results will be saved next to the pdf as a json, html, and markdown file.
 The output will look something like:
 
