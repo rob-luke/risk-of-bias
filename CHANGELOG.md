@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/rob-luke/risk-of-bias/compare/v0.9.0...v0.9.1) (2025-06-11)
+
+
+### Documentation
+
+* add visualisation page ([#33](https://github.com/rob-luke/risk-of-bias/issues/33)) ([54fa05a](https://github.com/rob-luke/risk-of-bias/commit/54fa05a701707943d5fd9d467b08c5d1d3302a02))
+
 ## [0.9.0](https://github.com/rob-luke/risk-of-bias/compare/v0.8.0...v0.9.0) (2025-06-11)
 
 
