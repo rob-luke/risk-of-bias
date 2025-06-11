@@ -61,6 +61,6 @@ While RoB 2 for randomized trials is implemented end-to-end (with both CLI and w
 
 # Acknowledgements
 
-We acknowledge the foundational work of the _robvis_ package [@mcguinness2021robvis], the authors of RoB 2 [@sterne2019rob2], and the wider open-source and evidence synthesis community whose contributions inform both the methodology and the software ecosystem.
+We acknowledge the foundational work of the _robvis_ package [@mcguinness2021risk], the authors of RoB 2 [@sterne2019rob], and the wider open-source and evidence synthesis community whose contributions inform both the methodology and the software ecosystem.
 
 # References
