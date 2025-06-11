@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.2](https://github.com/rob-luke/risk-of-bias/compare/v0.12.1...v0.12.2) (2025-06-11)
+
+
+### Documentation
+
+* add mac release link ([#57](https://github.com/rob-luke/risk-of-bias/issues/57)) ([f594ac4](https://github.com/rob-luke/risk-of-bias/commit/f594ac4842afb2c7dd2952b768e3a1114406291e))
+
 ## [0.12.1](https://github.com/rob-luke/risk-of-bias/compare/v0.12.0...v0.12.1) (2025-06-11)
 
 
