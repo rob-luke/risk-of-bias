@@ -21,7 +21,7 @@ bibliography: paper.bib
 
 # Summary
 
-Assessing risk of bias (RoB) is a fundamental component of evidence synthesis, directly affecting the credibility and interpretability of systematic reviews and meta-analyses. RoB assessment clarifies to what extent findings from primary studies can be trusted, guiding both research conclusions and downstream policy or clinical recommendations [@higgins2019assessing]; [@@whiting2016robis]. Despite its importance, RoB assessment remains time-intensive and demands specialized expertise. The _risk-of-bias_ Python package provides a general, framework-agnostic software assistant for risk-of-bias assessment, combining explainable AI with open, programmable infrastructure. The tool is designed to support any domain-based risk-of-bias instrument, with the widely adopted Cochrane RoB 2 tool for randomized trials [@sterne2019rob] implemented as the first example. By storing explicit evidence and reasoning for every answer, and providing both CLI and web interfaces, _risk-of-bias_ enables explainable, auditable, and efficient assessment, supporting both “living” reviews and reproducible research workflows.
+Assessing risk of bias (RoB) is a fundamental component of evidence synthesis, directly affecting the credibility and interpretability of systematic reviews and meta-analyses. RoB assessment clarifies to what extent findings from primary studies can be trusted, guiding both research conclusions and downstream policy or clinical recommendations [@higgins2019assessing]; [@whiting2016robis]. Despite its importance, RoB assessment remains time-intensive and demands specialized expertise. The _risk-of-bias_ Python package provides a general, framework-agnostic software assistant for risk-of-bias assessment, combining explainable AI with open, programmable infrastructure. The tool is designed to support any domain-based risk-of-bias instrument, with the widely adopted Cochrane RoB 2 tool for randomized trials [@sterne2019rob] implemented as the first example. By storing explicit evidence and reasoning for every answer, and providing both CLI and web interfaces, _risk-of-bias_ enables explainable, auditable, and efficient assessment, supporting both “living” reviews and reproducible research workflows.
 
 # Statement of Need
 
@@ -31,9 +31,10 @@ Manual risk-of-bias assessment is a critical bottleneck in evidence synthesis, w
 
 _Risk-of-bias_ is built around a generic, hierarchical assessment structure:
 
-**Framework → Domain → Question → Response**
+> **Framework → Domain → Question → Response**
 
 This mirrors all major RoB instruments, enabling use beyond the Cochrane RoB 2 tool. The package offers:
+
 - A modular core, where any framework is defined as a JSON schema capturing its domains, questions, and allowed responses.
 - Data classes (via Pydantic) that explicitly store, for each answer: the response, supporting evidence (verbatim text from the manuscript), and a natural language reasoning/explanation.
 - Multiple user interfaces: a command-line interface (CLI) for batch assessment and workflow integration, and a web interface for interactive analysis and report download. This enables both technical and non-technical users to use the tool effectively.
