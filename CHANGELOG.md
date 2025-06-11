@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/rob-luke/risk-of-bias/compare/v0.11.1...v0.12.0) (2025-06-11)
+
+
+### Features
+
+* prompt for API key in web interface ([#52](https://github.com/rob-luke/risk-of-bias/issues/52)) ([230a0ed](https://github.com/rob-luke/risk-of-bias/commit/230a0ed484d5668ab3a10d45edc0a75840e64712))
+
 ## [0.11.1](https://github.com/rob-luke/risk-of-bias/compare/v0.11.0...v0.11.1) (2025-06-11)
 
 

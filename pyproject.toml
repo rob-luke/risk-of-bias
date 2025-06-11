@@ -3,7 +3,7 @@ name = "risk-of-bias"
 description = "Software and AI for Risk of Bias assessment."
 authors = [ {name = "Robert Luke", email = "code@robertluke.net"} ]
 requires-python = ">=3.12.0"
-version = "0.11.1"
+version = "0.12.0"
 readme = "docs/index.md"
 
 # Dependencies derived from Dockerfile
