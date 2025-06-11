@@ -21,9 +21,9 @@ test:
 	pytest .
 
 web:
-	uvicorn risk_of_bias.web:app --reload
+	python -m risk_of_bias.web
 
-mac-app:
+mac:
 	bash scripts/build_mac_app.sh
 
 clean:

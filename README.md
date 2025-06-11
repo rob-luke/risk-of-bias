@@ -87,18 +87,6 @@ Then open `http://127.0.0.1:8000` and upload your manuscript.
 After processing you will see the report along with links to
 download the JSON and Markdown representations.
 
-### macOS Application
-
-A script is provided to bundle the web interface into a standalone macOS
-application using PyInstaller. Install the development dependencies and run:
-
-```console
-make mac-app
-```
-
-The resulting application is placed in the `dist` directory and launches without
-opening a terminal window.
-
 
 ## Frameworks
 

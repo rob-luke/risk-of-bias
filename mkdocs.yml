@@ -11,7 +11,7 @@ nav:
     - Details & API: api.md
     - Command Line Interface: cli.md
     - Web Interface: web.md
-    - macOS Application: mac_app.md
+    - macOS Application: mac.md
     - Visualisation: visualisation.md
     - Contributing: contributing.md
 
