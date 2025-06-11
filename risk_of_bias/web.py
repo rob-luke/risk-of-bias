@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import tempfile
 import uuid
+import webbrowser
 
 from fastapi import FastAPI
 from fastapi import File
@@ -242,4 +243,5 @@ def download(file_id: str, filename: str) -> FileResponse:
 if __name__ == "__main__":
     import uvicorn
 
+    webbrowser.open("http://127.0.0.1:8000")
     uvicorn.run(app, host="0.0.0.0", port=8000)

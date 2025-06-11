@@ -84,7 +84,7 @@ risk-of-bias web
 ```
 
 Then open `http://127.0.0.1:8000` and upload your manuscript. 
-After processing you will see the report along with links to 
+After processing you will see the report along with links to
 download the JSON and Markdown representations.
 
 

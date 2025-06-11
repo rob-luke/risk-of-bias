@@ -21,7 +21,10 @@ test:
 	pytest .
 
 web:
-	uvicorn risk_of_bias.web:app --reload
+	python -m risk_of_bias.web
+
+mac:
+	bash scripts/build_mac_app.sh
 
 clean:
 	rm -rf __pycache__/
