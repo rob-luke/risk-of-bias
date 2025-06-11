@@ -27,19 +27,6 @@ You can install the program using the following pip command:
 pip install risk_of_bias[all]
 ```
 
-### Web Interface
-
-A simple web interface is provided to analyse a single manuscript.
-To start the web interface run:
-
-```console
-risk-of-bias web
-```
-
-Then open `http://127.0.0.1:8000` and upload your manuscript. 
-After processing you will see the report along with links to 
-download the JSON and Markdown representations.
-
 ### Command Line Interface
 
 The package comes with an easy to use command line interface (CLI) tool.
@@ -53,11 +40,53 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
+
+
+The results will be saved next to the pdf and the output will look something like:
+```text
+Domain 1: Bias arising from the randomization process.
+
+  Question 1.1: Question 1.1: Was the allocation sequence random? (['Yes', 'Probably Yes', 'Probably No', 'No', 'No Information', 'Not Applicable'])
+    Response: AllowedResponses.Yes
+      Reasoning: The methods section describes the study as a 'randomized crossover study' and states that 'Pairs were then randomized to receive the almond or no-almond (control) interventions.' This indicates that a random allocation sequence was used to assign participants to the initial intervention group. However, the specific method of random sequence generation (e.g., computer-generated random numbers, random number tables) is not described in the provided text.
+        Evidence: A 14-week, randomized crossover study was conducted from January 2014 to May 2014. ... Pairs were then randomized to receive the almond or no-almond (control) interventions and asked to complete daily and weekly questionnaires as well as 3 nonconsecutive, unannounced 24-hour dietary recalls throughout the 3-week intervention.
+
+
+
+  Question 1.2: Question 1.2: Was the allocation sequence concealed until participants were enrolled and assigned to interventions? (['Yes', 'Probably Yes', 'Probably No', 'No', 'No Information', 'Not Applicable'])
+    Response: AllowedResponses.No_Information
+      Reasoning: There is no explicit information in the provided text about how the allocation sequence was concealed from those enrolling participants. The methods do not mention any procedures such as sealed envelopes, central randomization, or other mechanisms to ensure allocation concealment.
+        Evidence: No information is provided in the methods section regarding allocation concealment procedures.
+
+
+
+  Question 1.3: Question 1.3: Did baseline differences between intervention groups suggest a problem with the randomization process? (['Yes', 'Probably Yes', 'Probably No', 'No', 'No Information', 'Not Applicable'])
+    Response: AllowedResponses.No
+      Reasoning: The baseline characteristics table (Table 1) shows demographic and anthropometric data for both parents and children, but since this is a crossover study, each participant serves as their own control, and baseline differences between groups are less relevant. There is no mention of significant baseline imbalances or problems with randomization in the text.
+        Evidence: Table 1 – Characteristics of 29 child and parent pairs participating in a study examining the effects of almond consumption on dietary quality, gastrointestinal function, inflammation, and immunity ... Most of the parents were non-Hispanic white women, and most children attended a school or daycare outside the home (Table 1).
+
+...
+```
+
+
 For systematic reviews, you can analyse entire directories and automatically generate RobVis-compatible CSV summaries:
 
 ```console
 risk-of-bias analyse /path/to/manuscripts/
 ```
+
+### Web Interface
+
+A simple web interface is provided to analyse a single manuscript.
+To start the web interface run:
+
+```console
+risk-of-bias web
+```
+
+Then open `http://127.0.0.1:8000` and upload your manuscript. 
+After processing you will see the report along with links to 
+download the JSON and Markdown representations.
 
 
 ## Frameworks

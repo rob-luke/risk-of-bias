@@ -8,9 +8,9 @@ theme:
 nav:
     - Home: index.md
     - Frameworks: frameworks.md
+    - Details & API: api.md
     - Command Line Interface: cli.md
-    - API: api.md
-    - Web: web.md
+    - Web Interface: web.md
     - Contributing: contributing.md
 
 
