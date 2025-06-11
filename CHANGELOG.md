@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/rob-luke/risk-of-bias/compare/v0.11.0...v0.11.1) (2025-06-11)
+
+
+### Bug Fixes
+
+* ci token issues ([#53](https://github.com/rob-luke/risk-of-bias/issues/53)) ([6a29236](https://github.com/rob-luke/risk-of-bias/commit/6a29236ffda3f1a08505dedcfc9d5e50e6c82ee1))
+
 ## [0.11.0](https://github.com/rob-luke/risk-of-bias/compare/v0.10.4...v0.11.0) (2025-06-11)
 
 
