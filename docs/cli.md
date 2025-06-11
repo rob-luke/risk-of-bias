@@ -84,4 +84,53 @@ risk-of-bias analyse /path/to/manuscripts/
 
 When processing multiple manuscripts, the tool automatically generates a RobVis-compatible CSV summary file containing domain-level risk-of-bias judgements across all studies. This CSV can be directly imported into the RobVis visualization tool or used with statistical software for further analysis.
 
+## JSON Data Storage and Caching
+
+The tool automatically saves complete assessment results in JSON format alongside each analyzed manuscript. This JSON storage system provides several key benefits:
+
+### Automatic Caching and Reuse
+
+```console
+# First run - analyzes manuscript.pdf and saves manuscript.json
+risk-of-bias analyse manuscript.pdf
+
+# Second run - automatically loads from manuscript.json (no AI call needed)
+risk-of-bias analyse manuscript.pdf
+```
+
+When re-running analysis on files or directories, the tool automatically detects existing JSON files and loads previous results instead of re-processing. This is particularly valuable for:
+
+- **Large systematic reviews**: Process hundreds of papers across multiple sessions without redundant analysis
+- **Iterative workflows**: Make adjustments to post-processing or visualization without re-running expensive AI analysis
+- **Cost optimization**: Avoid unnecessary OpenAI API calls when refining batch processing workflows
+
+### Forcing Reanalysis
+
+To re-analyze previously processed files (e.g., after model updates or methodology changes):
+
+```console
+# Delete JSON files manually
+rm *.json
+
+# Or use the --force flag
+risk-of-bias analyse manuscript.pdf --force
+```
+
+### Data Sharing and Reproducibility
+
+JSON files contain the complete assessment data structure including:
+
+- All question responses with confidence levels
+- Detailed reasoning for each assessment decision  
+- Specific evidence excerpts from the manuscript text
+- Raw AI model responses for verification
+- Metadata including model version and assessment parameters
+
+This comprehensive data format enables:
+
+- **Research collaboration**: Share complete assessment datasets with team members
+- **Methodology verification**: Independent review of AI reasoning and evidence selection
+- **Standards compliance**: Meet journal requirements for transparent bias assessment documentation
+- **Meta-analysis integration**: Programmatic access to assessment data for statistical analysis
+
 For complete details on the summary functions, data formats, and programmatic access to batch analysis features, see the [API documentation](api.md#summary-and-analysis-functions).

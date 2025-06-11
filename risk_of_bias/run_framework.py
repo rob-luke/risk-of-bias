@@ -110,7 +110,8 @@ def run_framework(
 
         The populated framework maintains the hierarchical structure
         (Framework → Domains → Questions → Responses) for easy navigation
-        and analysis of results.
+        and analysis of results. This complete data structure can be serialized
+        to JSON format for persistence, caching, and data sharing workflows.
     """
 
     client = OpenAI(api_key=api_key)
