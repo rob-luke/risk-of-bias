@@ -40,9 +40,9 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
+The results will be saved next to the pdf as a json, html, and markdown file.
+The output will look something like:
 
-
-The results will be saved next to the pdf and the output will look something like:
 ```text
 Domain 1: Bias arising from the randomization process.
 
