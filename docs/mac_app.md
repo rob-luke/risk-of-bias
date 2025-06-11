@@ -17,5 +17,5 @@ Then run the build script:
 make mac
 ```
 
-This command runs PyInstaller with the `--windowed` option to avoid opening a terminal window. The resulting application can be found in the `dist` directory.
-
+The resulting application can be found in the `dist` directory.
+It should launch the web app after a few seconds when run.
