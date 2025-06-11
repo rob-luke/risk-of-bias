@@ -10,6 +10,10 @@ authors:
     orcid: 0000-0002-4930-8351
     equal-contrib: false
     affiliation: "1"
+  - name: Jessica Biesiekierski
+    orcid: [0000-0002-4930-8351](https://orcid.org/0000-0002-6175-6325)
+    equal-contrib: false
+    affiliation: "2"
 affiliations:
  - name: Macquarie University, Macquarie University Hearing & Department of Linguistics, Australian Hearing Hub, Sydney, New South Wales, Australia
    index: 1
