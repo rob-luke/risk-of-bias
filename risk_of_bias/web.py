@@ -186,6 +186,7 @@ def analyze(
         framework=get_rob2_framework(),
         model=model,
         verbose=True,
+        temperature=settings.temperature,
     )
 
     json_path = work_dir / "result.json"

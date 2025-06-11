@@ -21,6 +21,7 @@ def run_framework(
     model: str = settings.fast_ai_model,
     guidance_document: Optional[Path] = None,
     verbose: bool = False,
+    temperature: float = settings.temperature,
 ) -> Framework:
     """
     Perform systematic risk-of-bias assessment on a research manuscript using AI.
@@ -75,6 +76,9 @@ def run_framework(
         displays each question, response, reasoning, and evidence in real-time.
         Useful for debugging, monitoring progress, or understanding the assessment
         process in detail.
+    temperature : float, default=settings.temperature
+        Sampling temperature passed to the OpenAI model. Higher values yield more
+        diverse answers while lower values make outputs more deterministic.
 
     Returns
     -------
@@ -154,7 +158,7 @@ def run_framework(
             model=model,
             input=chat_input,
             text_format=domain_response_class,
-            temperature=0.1,
+            temperature=temperature,
         )
         parsed_response = raw_response.output_parsed
 

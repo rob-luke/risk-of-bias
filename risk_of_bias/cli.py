@@ -23,6 +23,9 @@ def analyse(
         help="Path to the manuscript PDF or directory containing PDFs",
     ),
     model: str = typer.Option(settings.fast_ai_model, help="OpenAI model name"),
+    temperature: float = typer.Option(
+        settings.temperature, help="Temperature for the OpenAI model"
+    ),
     guidance_document: Optional[str] = typer.Option(
         None, exists=True, readable=True, help="Optional guidance document"
     ),
@@ -78,15 +81,15 @@ def analyse(
             if framework is not None:
                 results.append(framework)
 
+            frameworks_summary = summarise_frameworks(results)
+            print_summary(frameworks_summary)
+            export_summary(
+                frameworks_summary,
+                path=manuscript_path / "risk_of_bias_summary.csv",
+            )
+
         if verbose:
             typer.echo(f"Processed {len(results)} PDF files from directory")
-
-        frameworks_summary = summarise_frameworks(results)
-        print_summary(frameworks_summary)
-        export_summary(
-            frameworks_summary,
-            path=manuscript_path / "risk_of_bias_summary.csv",
-        )
 
         # Return the last framework for consistency with single file processing
         return results[-1] if results else None
@@ -128,6 +131,7 @@ def analyse(
                 model=model,
                 guidance_document=guidance_document_path,
                 verbose=verbose,
+                temperature=temperature,
             )
 
     else:
@@ -137,6 +141,7 @@ def analyse(
             model=model,
             guidance_document=guidance_document_path,
             verbose=verbose,
+            temperature=temperature,
         )
 
         completed_framework.save(output_json_path)
