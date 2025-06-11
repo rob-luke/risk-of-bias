@@ -83,3 +83,28 @@ def test_export_summary_creates_csv(tmp_path: Path) -> None:
     content = export_path.read_text().splitlines()
     assert content[0].startswith("Study,D1")
     assert "studyA.pdf" in content[1]
+
+
+def test_export_summary_uses_overall_domain(tmp_path: Path) -> None:
+    framework = get_rob2_framework()
+    framework.manuscript = "studyB.pdf"
+    for domain in framework.domains:
+        for question in domain.questions:
+            if question.question == "Risk-of-bias judgement":
+                if domain.name == "Overall":
+                    response = "High"
+                else:
+                    response = "Low"
+                question.response = ReasonedResponseWithEvidenceAndRawData(
+                    evidence=[], reasoning="", response=response
+                )
+
+    summary = summarise_frameworks([framework])
+    export_path = tmp_path / "summary.csv"
+    export_summary(summary, export_path)
+
+    rows = [line.split(",") for line in export_path.read_text().splitlines()]
+    header = rows[0]
+    data = rows[1]
+    assert header[-1] == "Overall"
+    assert data[-1] == "High"
