@@ -1,5 +1,6 @@
+import functools
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, cast, Optional
 
 from openai import OpenAI
 
@@ -11,6 +12,12 @@ from risk_of_bias.prompts import SYSTEM_MESSAGE
 from risk_of_bias.types._framework_types import Framework
 from risk_of_bias.types._response_types import create_custom_constrained_response_class
 from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
+
+
+def _union_types(a: type, b: type) -> object:
+    """Return the union of two types."""
+    return a | b
+
 
 client = OpenAI()
 
@@ -41,14 +48,16 @@ def run_framework(
        assessment approach
     3. **Document Processing**: Converts the manuscript PDF to a format the AI can
        analyze
-    4. **Systematic Questioning**: Works through each question in the framework
-       sequentially, maintaining conversation context for coherent assessment
-    5. **Evidence-Based Responses**: For each question, the AI provides:
-       - A structured response from predefined options
+    4. **Systematic Questioning**: Sends all questions within a domain in a
+       single request, reducing the number of API calls while maintaining
+       conversation context
+    5. **Evidence-Based Responses**: For each domain the AI returns a list of
+       structured answers corresponding to each question. Each item includes:
+       - The chosen response from predefined options
        - Detailed reasoning explaining the assessment
        - Specific evidence excerpts from the manuscript
-    6. **Result Integration**: Stores all responses back into the framework structure
-       for easy access and analysis
+    6. **Result Integration**: Stores all parsed responses back into the framework
+       structure for easy access and analysis
 
     Parameters
     ----------
@@ -136,54 +145,60 @@ def run_framework(
         )
     )
 
-    # Ask the AI model each question in turn, parsing the responses.
+    # Ask the AI model each domain's questions in a single request.
     for domain in framework.domains:
         if verbose:
             print(f"\n\nDomain {domain.index}: {domain.name}")
 
+        response_classes = []
         for question in domain.questions:
-
-            ConstrainedResponse = create_custom_constrained_response_class(
-                domain.index, question.index, question.allowed_answers
-            )
-
-            chat_input.append(create_openai_message("user", text=question.question))
-
-            raw_response = client.responses.parse(
-                model=model,
-                input=chat_input,
-                text_format=ConstrainedResponse,
-                temperature=0.1,
-            )
-            parsed_response = raw_response.output_parsed
-
-            chat_input.append(
-                create_openai_message(
-                    "assistant", text=raw_response.output_text, content_type="output"
+            response_classes.append(
+                create_custom_constrained_response_class(
+                    domain.index, question.index, question.allowed_answers
                 )
             )
 
-            # Print the question and response for debugging
+        # Create a Union type for parsing a list of heterogeneous responses
+        ResponseUnion = cast(
+            type,
+            functools.reduce(_union_types, response_classes),  # type: ignore[arg-type]
+        )
+        text_format = list[ResponseUnion]  # type: ignore[valid-type]
+
+        questions_text = "\n".join(q.question for q in domain.questions)
+
+        chat_input.append(create_openai_message("user", text=questions_text))
+
+        raw_response = client.responses.parse(
+            model=model,
+            input=chat_input,
+            text_format=text_format,
+            temperature=0.1,
+        )
+        parsed_responses = raw_response.output_parsed or []
+
+        chat_input.append(
+            create_openai_message(
+                "assistant", text=raw_response.output_text, content_type="output"
+            )
+        )
+
+        for q, parsed in zip(domain.questions, parsed_responses):  # type: ignore[misc]
             if verbose:
+                print(f"  Question {q.index}: {q.question} ({q.allowed_answers})")
+                print(f"    Response: {parsed.response}")  # type: ignore[attr-defined]
                 print(
-                    f"  Question {question.index}: {question.question} "
-                    f"({question.allowed_answers})"
+                    f"      Reasoning: {parsed.reasoning}"  # type: ignore[attr-defined]
                 )
-                if parsed_response is None:
-                    print("    No response received.")
-                else:
-                    print(f"    Response: {parsed_response.response}")
-                    print(f"      Reasoning: {parsed_response.reasoning}")
-                    for evidence in parsed_response.evidence:
-                        print(f"        Evidence: {evidence}")
-                    print("\n\n")
+                for evidence in parsed.evidence:  # type: ignore[attr-defined]
+                    print(f"        Evidence: {evidence}")
+                print("\n\n")
 
-            # Store the response in the question object
-            question.response = ReasonedResponseWithEvidenceAndRawData(
-                response=parsed_response.response if parsed_response else "",
-                reasoning=parsed_response.reasoning if parsed_response else "",
-                evidence=parsed_response.evidence if parsed_response else [],
+            q.response = ReasonedResponseWithEvidenceAndRawData(
+                response=parsed.response,  # type: ignore[attr-defined]
+                reasoning=parsed.reasoning,  # type: ignore[attr-defined]
+                evidence=parsed.evidence,  # type: ignore[attr-defined]
                 raw_data=raw_response,
-            )
+            )  # type: ignore[arg-type]
 
     return framework
