@@ -18,3 +18,7 @@ risk-of-bias web
 Open `http://127.0.0.1:8000` and upload your manuscript. After processing you
 will see the report along with links to download the JSON and Markdown
 representations.
+
+If the `OPENAI_API_KEY` environment variable is not set when the server
+starts, the upload form will include a field to provide it. When supplied,
+the key is used for that analysis session.

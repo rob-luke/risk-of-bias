@@ -18,6 +18,7 @@ def fake_run_framework(
     model: str,
     verbose: bool = False,
     temperature: float = 0.2,
+    api_key: str | None = None,
 ) -> Framework:
     result = Framework(name="Test Framework")
     result.manuscript = Path(manuscript).name

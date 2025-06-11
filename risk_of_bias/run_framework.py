@@ -12,8 +12,6 @@ from risk_of_bias.types._framework_types import Framework
 from risk_of_bias.types._response_types import create_domain_response_class
 from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
 
-client = OpenAI()
-
 
 def run_framework(
     manuscript: Path,
@@ -22,6 +20,7 @@ def run_framework(
     guidance_document: Optional[Path] = None,
     verbose: bool = False,
     temperature: float = settings.temperature,
+    api_key: Optional[str] = None,
 ) -> Framework:
     """
     Perform systematic risk-of-bias assessment on a research manuscript using AI.
@@ -93,6 +92,9 @@ def run_framework(
     temperature : float, default=settings.temperature
         Sampling temperature passed to the OpenAI model. Higher values yield more
         diverse answers while lower values make outputs more deterministic.
+    api_key : Optional[str], default=None
+        API key to use for OpenAI calls. If ``None``, ``OPENAI_API_KEY`` from the
+        environment will be used.
 
     Returns
     -------
@@ -110,6 +112,8 @@ def run_framework(
         (Framework → Domains → Questions → Responses) for easy navigation
         and analysis of results.
     """
+
+    client = OpenAI(api_key=api_key)
 
     # Send system message to set context for the AI model
     chat_input: list[Any] = [create_openai_message("system", text=SYSTEM_MESSAGE)]
