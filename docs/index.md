@@ -6,6 +6,16 @@ Risk of bias tools are systematic frameworks primarily used in systematic review
 They aim to identify specific mechanisms through which bias might be introduced into study results, such as problems arising during the study design, conduct, or analysis.
 This package provides AI and software tools to assist researchers in conducting risk of bias analyses.
 
+### Key Features
+
+- **Advanced AI** provides robust and independent risk of bias analysis
+- **Standard Frameworks** such as RoB2 are provided out of the box
+- **Batch processing** for systematic reviews and meta-analyses
+- **Web interface** for single manuscript analysis with download options
+- **Command line interface** for integration into research workflows
+- **Latest AI models** for evidence extraction and bias assessment
+- **RobVis-compatible exports** for publication-ready visualizations
+
 
 ## Getting Started
 
@@ -43,7 +53,7 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
-Or you can analyse an entire directory using:
+For systematic reviews, you can analyse entire directories and automatically generate RobVis-compatible CSV summaries:
 
 ```console
 risk-of-bias analyse /path/to/manuscripts/

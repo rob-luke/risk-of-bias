@@ -6,6 +6,9 @@ import typer
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
 from risk_of_bias.run_framework import run_framework
+from risk_of_bias.summary import export_summary
+from risk_of_bias.summary import print_summary
+from risk_of_bias.summary import summarise_frameworks
 from risk_of_bias.types._framework_types import Framework
 
 app = typer.Typer(help="Run risk of bias assessment")
@@ -37,6 +40,10 @@ def analyse(
 
     If a JSON file with the same name as the manuscript already exists,
     it will be loaded instead of reprocessing the PDF (unless --force is used).
+
+    If a directory is provided, all PDF files within that directory will be processed,
+    and a summary CSV file will be generated containing the risk of bias assessments
+    for each manuscript that is compatible with tools such as robvis.
     """
     manuscript_path = Path(manuscript)
 
@@ -73,6 +80,13 @@ def analyse(
 
         if verbose:
             typer.echo(f"Processed {len(results)} PDF files from directory")
+
+        frameworks_summary = summarise_frameworks(results)
+        print_summary(frameworks_summary)
+        export_summary(
+            frameworks_summary,
+            path=manuscript_path / "risk_of_bias_summary.csv",
+        )
 
         # Return the last framework for consistency with single file processing
         return results[-1] if results else None
