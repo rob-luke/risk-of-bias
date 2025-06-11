@@ -1,3 +1,5 @@
+import copy
+
 import risk_of_bias.frameworks.rob2.domains._domain_1_randomization as d1
 import risk_of_bias.frameworks.rob2.domains._domain_2_deviations as d2
 import risk_of_bias.frameworks.rob2.domains._domain_3_missing as d3
@@ -92,12 +94,12 @@ def get_rob2_framework() -> Framework:
     """
     return Framework(
         domains=[
-            d1.domain_1_randomization,
-            d2.domain_2_deviations,
-            d3.domain_3_missing,
-            d4.domain_4_measurement,
-            d5.domain_5_selection,
-            d6.overall_domain,
+            copy.deepcopy(d1.domain_1_randomization),
+            copy.deepcopy(d2.domain_2_deviations),
+            copy.deepcopy(d3.domain_3_missing),
+            copy.deepcopy(d4.domain_4_measurement),
+            copy.deepcopy(d5.domain_5_selection),
+            copy.deepcopy(d6.overall_domain),
         ],
         name="RoB2 Framework for Randomized Trials",
     )

@@ -108,3 +108,53 @@ def test_export_summary_uses_overall_domain(tmp_path: Path) -> None:
     data = rows[1]
     assert header[-1] == "Overall"
     assert data[-1] == "High"
+
+
+def test_summarise_multiple_frameworks_independent_results(tmp_path: Path) -> None:
+    """Test that multiple frameworks maintain independent results."""
+    # Create first framework with specific judgements
+    framework1 = get_rob2_framework()
+    framework1.manuscript = "study1.pdf"
+    judgements1 = ["Low", "High", "Some Concerns", "Low", "High", "Low"]
+
+    for i, domain in enumerate(framework1.domains):
+        for question in domain.questions:
+            if question.question == "Risk-of-bias judgement":
+                question.response = ReasonedResponseWithEvidenceAndRawData(
+                    evidence=[],
+                    reasoning=f"Reasoning for study1 domain {i+1}",
+                    response=judgements1[i],
+                )
+                break
+
+    # Create second framework with different judgements
+    framework2 = get_rob2_framework()
+    framework2.manuscript = "study2.pdf"
+    judgements2 = ["High", "Low", "Low", "Some Concerns", "Low", "High"]
+
+    for i, domain in enumerate(framework2.domains):
+        for question in domain.questions:
+            if question.question == "Risk-of-bias judgement":
+                question.response = ReasonedResponseWithEvidenceAndRawData(
+                    evidence=[],
+                    reasoning=f"Reasoning for study2 domain {i+1}",
+                    response=judgements2[i],
+                )
+                break
+
+    # Summarise both frameworks
+    summary = summarise_frameworks([framework1, framework2])
+
+    # Verify both studies are in summary
+    assert "study1.pdf" in summary
+    assert "study2.pdf" in summary
+
+    # Verify each study has correct results
+    study1_results = list(summary["study1.pdf"].values())
+    study2_results = list(summary["study2.pdf"].values())
+
+    assert study1_results == judgements1
+    assert study2_results == judgements2
+
+    # Ensure they are different (regression test for the bug)
+    assert study1_results != study2_results
