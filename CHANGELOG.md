@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.3](https://github.com/rob-luke/risk-of-bias/compare/v0.10.2...v0.10.3) (2025-06-11)
+
+
+### Bug Fixes
+
+* summary items bug ([#41](https://github.com/rob-luke/risk-of-bias/issues/41)) ([1d88397](https://github.com/rob-luke/risk-of-bias/commit/1d8839717c0b21f6b397f13326ca37dc602008a1))
+
 ## [0.10.2](https://github.com/rob-luke/risk-of-bias/compare/v0.10.1...v0.10.2) (2025-06-11)
 
 
