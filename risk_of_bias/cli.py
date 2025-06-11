@@ -11,7 +11,7 @@ from risk_of_bias.summary import print_summary
 from risk_of_bias.summary import summarise_frameworks
 from risk_of_bias.types._framework_types import Framework
 
-app = typer.Typer(help="Run risk of bias assessment")
+app = typer.Typer(help="Run risk of bias assessment", pretty_exceptions_enable=False)
 
 
 @app.command()
@@ -74,6 +74,7 @@ def analyse(
             framework = analyse(
                 manuscript=str(pdf_path),
                 model=model,
+                temperature=temperature,
                 guidance_document=guidance_document,
                 verbose=verbose,
                 force=force,
