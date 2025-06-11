@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.4](https://github.com/rob-luke/risk-of-bias/compare/v0.10.3...v0.10.4) (2025-06-11)
+
+
+### Documentation
+
+* more details on guidance documents ([#46](https://github.com/rob-luke/risk-of-bias/issues/46)) ([8ebda49](https://github.com/rob-luke/risk-of-bias/commit/8ebda49abc49ccbdf03553309bf18b9c8ad1bf68))
+* note protocol review capability ([#48](https://github.com/rob-luke/risk-of-bias/issues/48)) ([5a07f4e](https://github.com/rob-luke/risk-of-bias/commit/5a07f4e1d02b256136eae08a0e18d1652ed7370c))
+
 ## [0.10.3](https://github.com/rob-luke/risk-of-bias/compare/v0.10.2...v0.10.3) (2025-06-11)
 
 
