@@ -5,6 +5,7 @@
 Risk of bias tools are systematic frameworks primarily used in systematic reviews to evaluate potential flaws in individual studies that could lead to a systematic deviation from the true effect of an intervention. 
 They aim to identify specific mechanisms through which bias might be introduced into study results, such as problems arising during the study design, conduct, or analysis.
 This package provides AI and software tools to assist researchers in conducting risk of bias analyses.
+It can also evaluate draft research protocols before a project commences, helping ensure adherence to best practice and revealing unexpected issues early.
 
 
 ## Getting Started
