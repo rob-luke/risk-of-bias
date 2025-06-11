@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/rob-luke/risk-of-bias/compare/v0.12.0...v0.12.1) (2025-06-11)
+
+
+### Documentation
+
+* json file saving ([#56](https://github.com/rob-luke/risk-of-bias/issues/56)) ([48bf159](https://github.com/rob-luke/risk-of-bias/commit/48bf159d0942e645bb055fbb33748cc899629818))
+
 ## [0.12.0](https://github.com/rob-luke/risk-of-bias/compare/v0.11.1...v0.12.0) (2025-06-11)
 
 
