@@ -4,6 +4,8 @@ A simple web front end is provided using [FastAPI](https://fastapi.tiangolo.com/
 It lets you upload a PDF and view the standard RoB2 HTML report directly in your
 browser.
 
+![Web Interface](web.jpeg)
+
 ## Running the server
 
 Install the optional dependencies and start the server with `risk-of-bias web` (equivalent to `make web`):
