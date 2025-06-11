@@ -19,3 +19,9 @@ make mac
 
 The resulting application can be found in the `dist` directory.
 It should launch the web app after a few seconds when run.
+
+## GitHub Release Builds
+
+Each time a release is created on GitHub, an automated workflow runs
+`make mac` on a macOS runner and attaches the resulting application to
+the release. The pre-built download can be found in the release assets.

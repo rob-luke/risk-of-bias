@@ -1,0 +1,22 @@
+name: mac-app
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -e .[all]
+      - name: Build macOS app
+        run: make mac
+      - name: Upload artefact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/RiskOfBias
