@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/rob-luke/risk-of-bias/compare/v0.7.0...v0.8.0) (2025-06-11)
+
+
+### Features
+
+* batch domain questions ([#28](https://github.com/rob-luke/risk-of-bias/issues/28)) ([1690bc9](https://github.com/rob-luke/risk-of-bias/commit/1690bc93928cfadef5a7e015b304b1d3c6c76985))
+
 ## [0.7.0](https://github.com/rob-luke/risk-of-bias/compare/v0.6.0...v0.7.0) (2025-06-11)
 
 
