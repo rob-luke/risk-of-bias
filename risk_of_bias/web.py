@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 import tempfile
 import uuid
@@ -73,7 +74,9 @@ def index() -> str:
                         {{MODEL_OPTIONS}}
                     </select>
                 </div>
-                
+
+                {{API_KEY_FIELD}}
+
                 <div>
                     <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
                         Analyze Risk of Bias
@@ -165,12 +168,29 @@ def index() -> str:
         f'<option value="{settings.best_ai_model}">{settings.best_ai_model}</option>'
     )
 
+    key_field = (
+        "<div>"
+        '<label for="api_key" class="block text-sm font-medium text-gray-700 mb-2">'
+        "OpenAI API Key"
+        "</label>"
+        '<input type="text" id="api_key" name="api_key" '
+        'class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>'
+        "</div>"
+    )
+
+    if os.getenv("OPENAI_API_KEY"):
+        html = html.replace("{{API_KEY_FIELD}}", "")
+    else:
+        html = html.replace("{{API_KEY_FIELD}}", key_field)
+
     return html.replace("{{MODEL_OPTIONS}}", options)
 
 
 @app.post("/analyze", response_class=HTMLResponse)
 def analyze(
-    file: UploadFile = File(...), model: str = Form(settings.fast_ai_model)
+    file: UploadFile = File(...),
+    model: str = Form(settings.fast_ai_model),
+    api_key: str | None = Form(None),
 ) -> str:
     """Process a PDF with the selected model and return the assessment HTML."""
     file_id = uuid.uuid4().hex
@@ -188,6 +208,7 @@ def analyze(
         model=model,
         verbose=True,
         temperature=settings.temperature,
+        api_key=api_key,
     )
 
     json_path = work_dir / "result.json"
