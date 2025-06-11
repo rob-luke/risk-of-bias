@@ -20,3 +20,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/RiskOfBias
+          token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
