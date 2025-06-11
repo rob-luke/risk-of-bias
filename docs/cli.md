@@ -35,6 +35,17 @@ And you can analyse a manuscript by simply passing the path to the file:
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
+### Evaluating Research Protocols
+
+You can run the same command on a draft protocol prior to starting a study:
+
+```console
+risk-of-bias analyse /path/to/protocol.pdf
+```
+
+Assessing protocols in advance helps verify compliance with best-practice
+guidelines and reveals potential methodological problems before commencement.
+
 ## Guidance Documents
 
 The CLI supports an optional `--guidance-document` parameter that allows you to provide domain-specific instructions or corrections to the AI assessment process. This feature is particularly valuable when:
