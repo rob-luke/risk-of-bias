@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/rob-luke/risk-of-bias/compare/v0.6.0...v0.7.0) (2025-06-11)
+
+
+### Features
+
+* framework summary utilities ([#24](https://github.com/rob-luke/risk-of-bias/issues/24)) ([b291e93](https://github.com/rob-luke/risk-of-bias/commit/b291e93c5bd43e6b660b8b16f98401d149a3e168))
+
 ## [0.6.0](https://github.com/rob-luke/risk-of-bias/compare/v0.5.0...v0.6.0) (2025-06-10)
 
 
