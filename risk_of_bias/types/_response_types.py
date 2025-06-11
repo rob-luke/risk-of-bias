@@ -137,3 +137,67 @@ def create_custom_constrained_response_class(
             (ReasonedResponseWithEvidence,),
             {"__annotations__": {"response": str}},
         )
+
+
+def create_domain_response_class(domain) -> type:
+    """
+    Create a response class for all questions in a domain.
+
+    Args:
+        domain: The domain object containing questions
+
+    Returns:
+        A dynamically created class that can handle responses for all questions
+        in the domain
+    """
+
+    class_name = f"DomainResponse_D{int(domain.index)}"
+
+    # Create fields for each question in the domain
+    annotations: dict[str, type] = {}
+
+    for question in domain.questions:
+        field_name = (
+            f"question_{int(question.index * 10)}"  # Convert 1.1 to 11, 1.2 to 12
+        )
+
+        if question.allowed_answers:
+            # Create enum for allowed answers
+            enum_members = [
+                (answer.replace(" ", "_").replace("-", "_"), answer)
+                for answer in question.allowed_answers
+            ]
+            AllowedResponses = Enum(  # type: ignore[misc]
+                "AllowedResponses", enum_members
+            )
+
+            # Create a field class that includes reasoning and evidence
+            field_class = type(
+                f"Question_{field_name}",
+                (BaseModel,),
+                {
+                    "__annotations__": {
+                        "reasoning": str,
+                        "evidence": str,
+                        "response": AllowedResponses,
+                    }
+                },
+            )
+        else:
+            # For questions without constrained answers
+            field_class = type(
+                f"Question_{field_name}",
+                (BaseModel,),
+                {
+                    "__annotations__": {
+                        "reasoning": str,
+                        "evidence": str,
+                        "response": str,
+                    }
+                },
+            )
+
+        annotations[field_name] = field_class
+
+    # Create the domain response class
+    return type(class_name, (BaseModel,), {"__annotations__": annotations})

@@ -1,6 +1,5 @@
-import functools
 from pathlib import Path
-from typing import Any, cast, Optional
+from typing import Any, Optional
 
 from openai import OpenAI
 
@@ -10,14 +9,8 @@ from risk_of_bias.oai._utils import create_openai_message
 from risk_of_bias.oai._utils import pdf_to_base64
 from risk_of_bias.prompts import SYSTEM_MESSAGE
 from risk_of_bias.types._framework_types import Framework
-from risk_of_bias.types._response_types import create_custom_constrained_response_class
+from risk_of_bias.types._response_types import create_domain_response_class
 from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
-
-
-def _union_types(a: type, b: type) -> object:
-    """Return the union of two types."""
-    return a | b
-
 
 client = OpenAI()
 
@@ -150,20 +143,8 @@ def run_framework(
         if verbose:
             print(f"\n\nDomain {domain.index}: {domain.name}")
 
-        response_classes = []
-        for question in domain.questions:
-            response_classes.append(
-                create_custom_constrained_response_class(
-                    domain.index, question.index, question.allowed_answers
-                )
-            )
-
-        # Create a Union type for parsing a list of heterogeneous responses
-        ResponseUnion = cast(
-            type,
-            functools.reduce(_union_types, response_classes),  # type: ignore[arg-type]
-        )
-        text_format = list[ResponseUnion]  # type: ignore[valid-type]
+        # Create a single response class for all questions in the domain
+        domain_response_class = create_domain_response_class(domain)
 
         questions_text = "\n".join(q.question for q in domain.questions)
 
@@ -172,10 +153,10 @@ def run_framework(
         raw_response = client.responses.parse(
             model=model,
             input=chat_input,
-            text_format=text_format,
+            text_format=domain_response_class,
             temperature=0.1,
         )
-        parsed_responses = raw_response.output_parsed or []
+        parsed_response = raw_response.output_parsed
 
         chat_input.append(
             create_openai_message(
@@ -183,22 +164,31 @@ def run_framework(
             )
         )
 
-        for q, parsed in zip(domain.questions, parsed_responses):  # type: ignore[misc]
-            if verbose:
-                print(f"  Question {q.index}: {q.question} ({q.allowed_answers})")
-                print(f"    Response: {parsed.response}")  # type: ignore[attr-defined]
-                print(
-                    f"      Reasoning: {parsed.reasoning}"  # type: ignore[attr-defined]
+        # Process each question response from the domain response
+        if parsed_response:
+            for question in domain.questions:
+                field_name = (
+                    f"question_{int(question.index * 10)}"  # 1.1 -> 11, 1.2 -> 12
                 )
-                for evidence in parsed.evidence:  # type: ignore[attr-defined]
-                    print(f"        Evidence: {evidence}")
-                print("\n\n")
 
-            q.response = ReasonedResponseWithEvidenceAndRawData(
-                response=parsed.response,  # type: ignore[attr-defined]
-                reasoning=parsed.reasoning,  # type: ignore[attr-defined]
-                evidence=parsed.evidence,  # type: ignore[attr-defined]
-                raw_data=raw_response,
-            )  # type: ignore[arg-type]
+                if hasattr(parsed_response, field_name):
+                    parsed = getattr(parsed_response, field_name)
+
+                    if verbose:
+                        print(
+                            f"  Question {question.index}: {question.question} "
+                            f"({question.allowed_answers})"
+                        )
+                        print(f"    Response: {parsed.response}")
+                        print(f"      Reasoning: {parsed.reasoning}")
+                        print(f"        Evidence: {parsed.evidence}")
+                        print("\n\n")
+
+                    question.response = ReasonedResponseWithEvidenceAndRawData(
+                        response=parsed.response,
+                        reasoning=parsed.reasoning,
+                        evidence=[parsed.evidence],  # Convert string to list
+                        raw_data=raw_response,
+                    )
 
     return framework
