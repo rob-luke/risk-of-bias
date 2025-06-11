@@ -87,9 +87,13 @@ Then open `http://127.0.0.1:8000` and upload your manuscript.
 After processing you will see the report along with links to
 download the JSON and Markdown representations.
 
+
+### Standalone MacOS App
+
 If you prefer a standalone application, a compiled macOS version of the web
 interface is attached to every release. It processes one PDF at a time. You can
 [download the latest build here](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias).
+The app is not signed, so you may need to go to Settings - Security - Allow Application.
 
 
 ## Frameworks
