@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/rob-luke/risk-of-bias/compare/v0.10.4...v0.11.0) (2025-06-11)
+
+
+### Features
+
+* add macOS PyInstaller build ([#49](https://github.com/rob-luke/risk-of-bias/issues/49)) ([f2942ee](https://github.com/rob-luke/risk-of-bias/commit/f2942ee01e3ece299891e9618deeb13d7ec8335b))
+
+
+### Documentation
+
+* note mac release build ([#51](https://github.com/rob-luke/risk-of-bias/issues/51)) ([21327ad](https://github.com/rob-luke/risk-of-bias/commit/21327ad640a00a2337dfaad713b34be077f26a8b))
+
 ## [0.10.4](https://github.com/rob-luke/risk-of-bias/compare/v0.10.3...v0.10.4) (2025-06-11)
 
 
