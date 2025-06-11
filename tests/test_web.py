@@ -13,7 +13,11 @@ from risk_of_bias.types._framework_types import Framework
 
 
 def fake_run_framework(
-    manuscript: Path, framework, model: str, verbose: bool = False
+    manuscript: Path,
+    framework,
+    model: str,
+    verbose: bool = False,
+    temperature: float = 0.2,
 ) -> Framework:
     result = Framework(name="Test Framework")
     result.manuscript = Path(manuscript).name

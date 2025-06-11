@@ -25,6 +25,10 @@ The CLI tool provides several handy parameters you can adjust, these can be foun
 ╰────────────────────────────────────────────────────────────────────────────────╯
 ```
 
+The `analyse` command accepts options for model selection and the sampling
+temperature. Temperature defaults to `0.2` and controls the randomness of
+the OpenAI model's responses.
+
 And you can analyse a manuscript by simply passing the path to the file:
 
 ```console

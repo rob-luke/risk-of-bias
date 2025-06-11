@@ -14,13 +14,19 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
     called = {}
 
     def fake_run_framework(
-        manuscript, model: str, framework, guidance_document, verbose: bool = False
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
     ):
         called["manuscript"] = manuscript
         called["model"] = model
         called["framework"] = framework
         called["guidance"] = guidance_document
         called["verbose"] = verbose
+        called["temperature"] = temperature
         # return a minimal Framework instance so cli can call .save()
         from risk_of_bias.types._framework_types import Framework
 
@@ -38,8 +44,40 @@ def test_cli_runs_with_defaults(tmp_path, monkeypatch):
     assert called["manuscript"] == pdf
     assert called["model"] == settings.fast_ai_model
     assert called["guidance"] is None
+    assert called["temperature"] == settings.temperature
     # the framework should be saved next to the manuscript
     assert (pdf.with_suffix(pdf.suffix + ".json")).exists()
+
+
+def test_cli_override_temperature(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+
+    called = {}
+
+    def fake_run_framework(
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
+    ):
+        called["temperature"] = temperature
+        from risk_of_bias.types._framework_types import Framework
+
+        return Framework(name="dummy")
+
+    monkeypatch.setattr(cli, "run_framework", fake_run_framework)
+
+    pdf = tmp_path / "paper.pdf"
+    pdf.write_bytes(b"dummy")
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["analyse", str(pdf), "--temperature", "0.7"])
+
+    assert result.exit_code == 0
+    assert called["temperature"] == 0.7
 
 
 def test_cli_sets_manuscript_filename(tmp_path, monkeypatch):
@@ -50,7 +88,12 @@ def test_cli_sets_manuscript_filename(tmp_path, monkeypatch):
     stored_framework = None
 
     def fake_run_framework(
-        manuscript, model: str, framework, guidance_document, verbose: bool = False
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
     ):
         # Return a framework with manuscript name set (simulating run_framework behavior)
         from risk_of_bias.types._framework_types import Framework
@@ -131,7 +174,12 @@ def test_cli_exports_include_manuscript_name(tmp_path, monkeypatch):
     from risk_of_bias.types._framework_types import Framework
 
     def fake_run_framework(
-        manuscript, model: str, framework, guidance_document, verbose: bool = False
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
     ):
         result_framework = Framework(name="Test Framework")
         result_framework.manuscript = manuscript.name
@@ -193,7 +241,12 @@ def test_cli_analyse_directory_processes_all_pdfs(tmp_path, monkeypatch):
     processed = []
 
     def fake_run_framework(
-        manuscript, model: str, framework, guidance_document, verbose: bool = False
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
     ):
         processed.append(manuscript)
         from risk_of_bias.types._framework_types import Framework
