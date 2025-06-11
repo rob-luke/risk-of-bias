@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.2](https://github.com/rob-luke/risk-of-bias/compare/v0.10.1...v0.10.2) (2025-06-11)
+
+
+### Bug Fixes
+
+* update prompt to follow openai guidelines ([#39](https://github.com/rob-luke/risk-of-bias/issues/39)) ([e1819e9](https://github.com/rob-luke/risk-of-bias/commit/e1819e999a006e99fa6369218ad757e26a3f531e))
+
 ## [0.10.1](https://github.com/rob-luke/risk-of-bias/compare/v0.10.0...v0.10.1) (2025-06-11)
 
 
