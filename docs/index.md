@@ -9,12 +9,12 @@ This package provides AI and software tools to assist researchers in conducting 
 ### Key Features
 
 - **Advanced AI** provides robust and independent risk of bias analysis
-- **Standard Frameworks** such as RoB2 are provided out of the box
-- **Batch processing** for systematic reviews and meta-analyses
-- **Web interface** for single manuscript analysis with download options
+- **Standard Frameworks** such as [RoB2](frameworks.md) are provided out of the box
+- **Batch processing** for systematic reviews and meta-analyses ([CLI batch analysis](cli.md#batch-analysis))
+- **Web interface** for single manuscript analysis with download options ([web docs](web.md))
 - **Command line interface** for integration into research workflows
 - **Latest AI models** for evidence extraction and bias assessment
-- **RobVis-compatible exports** for publication-ready visualizations
+- **RobVis-compatible exports** for publication-ready visualisations ([visualisation guide](visualisation.md))
 
 
 ## Getting Started
@@ -74,6 +74,8 @@ For systematic reviews, you can analyse entire directories and automatically gen
 ```console
 risk-of-bias analyse /path/to/manuscripts/
 ```
+
+Further details on summarising results are found in the [API docs](api.md#summary-and-analysis-functions).
 
 ### Web Interface
 
