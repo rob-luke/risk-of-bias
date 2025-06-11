@@ -23,6 +23,9 @@ test:
 web:
 	uvicorn risk_of_bias.web:app --reload
 
+mac-app:
+	bash scripts/build_mac_app.sh
+
 clean:
 	rm -rf __pycache__/
 	rm -rf .pytest_cache/

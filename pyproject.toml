@@ -34,6 +34,7 @@ dev = [
     "mkdocs-material>=9.6.14",
     "mkdocstrings[python]>=0.29.1",
     "python-semantic-release==7.33.3",
+    "pyinstaller>=6.14.1",
 ]
 web = [
     "fastapi>=0.111.0",
