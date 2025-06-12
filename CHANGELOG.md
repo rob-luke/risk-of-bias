@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.14.0](https://github.com/rob-luke/risk-of-bias/compare/v0.13.1...v0.14.0) (2025-06-12)
+
+
+### Features
+
+* add human entry mode ([#76](https://github.com/rob-luke/risk-of-bias/issues/76)) ([1f625a7](https://github.com/rob-luke/risk-of-bias/commit/1f625a717ff29d2f68386f04fe27ac59c0a7bcb6))
+
+
+### Documentation
+
+* fix broken mac link ([#73](https://github.com/rob-luke/risk-of-bias/issues/73)) ([1587d4c](https://github.com/rob-luke/risk-of-bias/commit/1587d4c795d8e78052c4b1508adea5fba123fa74))
+
 ## [0.13.1](https://github.com/rob-luke/risk-of-bias/compare/v0.13.0...v0.13.1) (2025-06-12)
 
 
