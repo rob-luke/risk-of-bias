@@ -80,6 +80,37 @@ def test_cli_override_temperature(tmp_path, monkeypatch):
     assert called["temperature"] == 0.7
 
 
+def test_cli_none_temperature(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+
+    called = {}
+
+    def fake_run_framework(
+        manuscript,
+        model: str,
+        framework,
+        guidance_document,
+        verbose: bool = False,
+        temperature: float = settings.temperature,
+    ):
+        called["temperature"] = temperature
+        from risk_of_bias.types._framework_types import Framework
+
+        return Framework(name="dummy")
+
+    monkeypatch.setattr(cli, "run_framework", fake_run_framework)
+
+    pdf = tmp_path / "paper.pdf"
+    pdf.write_bytes(b"dummy")
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["analyse", str(pdf), "--temperature", "none"])
+
+    assert result.exit_code == 0
+    assert called["temperature"] is None
+
+
 def test_cli_sets_manuscript_filename(tmp_path, monkeypatch):
     """Test that the CLI properly sets the manuscript filename in the framework."""
     monkeypatch.setenv("OPENAI_API_KEY", "test")

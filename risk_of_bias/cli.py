@@ -23,8 +23,9 @@ def analyse(
         help="Path to the manuscript PDF or directory containing PDFs",
     ),
     model: str = typer.Option(settings.fast_ai_model, help="OpenAI model name"),
-    temperature: float = typer.Option(
-        settings.temperature, help="Temperature for the OpenAI model"
+    temperature: Optional[str] = typer.Option(
+        None,
+        help="Temperature for the OpenAI model. Use 'none' to omit the parameter",
     ),
     guidance_document: Optional[str] = typer.Option(
         None,
@@ -63,6 +64,13 @@ def analyse(
     for each manuscript that is compatible with tools such as robvis.
     """
     manuscript_path = Path(manuscript)
+
+    if temperature is None:
+        temperature_value: Optional[float] = settings.temperature
+    elif temperature.lower() == "none":
+        temperature_value = None
+    else:
+        temperature_value = float(temperature)
 
     # If input is a directory, process all PDFs in it
     if manuscript_path.is_dir():
@@ -146,7 +154,7 @@ def analyse(
                 model=model,
                 guidance_document=guidance_document_path,
                 verbose=verbose,
-                temperature=temperature,
+                temperature=temperature_value,
             )
 
     else:
@@ -156,7 +164,7 @@ def analyse(
             model=model,
             guidance_document=guidance_document_path,
             verbose=verbose,
-            temperature=temperature,
+            temperature=temperature_value,
         )
 
         completed_framework.save(output_json_path)

@@ -19,7 +19,7 @@ def run_framework(
     model: str = settings.fast_ai_model,
     guidance_document: Optional[Path] = None,
     verbose: bool = False,
-    temperature: float = settings.temperature,
+    temperature: Optional[float] = settings.temperature,
     api_key: Optional[str] = None,
 ) -> Framework:
     """
@@ -173,12 +173,19 @@ def run_framework(
 
         chat_input.append(create_openai_message("user", text=questions_text))
 
-        raw_response = client.responses.parse(
-            model=model,
-            input=chat_input,
-            text_format=domain_response_class,
-            temperature=temperature,
-        )
+        if temperature is None:
+            raw_response = client.responses.parse(
+                model=model,
+                input=chat_input,
+                text_format=domain_response_class,
+            )
+        else:
+            raw_response = client.responses.parse(
+                model=model,
+                input=chat_input,
+                text_format=domain_response_class,
+                temperature=temperature,
+            )
         parsed_response = raw_response.output_parsed
 
         chat_input.append(
