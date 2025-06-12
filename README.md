@@ -1,5 +1,12 @@
 # Risk of Bias
 
+
+[![tests](https://github.com/rob-luke/risk-of-bias/actions/workflows/test.yml/badge.svg)](https://github.com/rob-luke/risk-of-bias/actions/workflows/test.yml)
+[![linting](https://github.com/rob-luke/risk-of-bias/actions/workflows/lint.yml/badge.svg)](https://github.com/rob-luke/risk-of-bias/actions/workflows/lint.yml)
+![PyPI - Version](https://img.shields.io/pypi/v/risk-of-bias?color=green)
+[![docs](https://github.com/rob-luke/risk-of-bias/actions/workflows/docs-deploy.yml/badge.svg)](https://rob-luke.github.io/risk-of-bias/)
+
+
 ## AI Enabled Risk of Bias Assessment
 
 Risk of bias tools are systematic frameworks primarily used in systematic reviews to evaluate potential flaws in individual studies that could lead to a systematic deviation from the true effect of an intervention. 
@@ -122,7 +129,7 @@ download the JSON and Markdown representations.
 
 If you prefer a standalone application, a compiled macOS version of the web
 interface is attached to every release. It processes one PDF at a time. You can
-[download the latest build here](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias).
+[download the latest build here](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias.zip).
 The app is not signed, so you may need to go to Settings - Security - Allow Application.
 
 
