@@ -103,11 +103,16 @@ Results are automatically saved in JSON format containing the complete assessmen
 To force re-analysis of previously processed files, delete the corresponding JSON files or use the `--force` flag.
 
 
-
 Or you can analyse an entire directory using:
 
 ```console
 risk-of-bias analyse /path/to/manuscripts/
+```
+
+For manual entry of human assessments, you can use the `human` command to record your own risk of bias evaluations in a standardized format, enabling direct comparison with AI assessments and ensuring reproducible data storage:
+
+```console
+risk-of-bias human /path/to/manuscript.pdf
 ```
 
 
@@ -146,7 +151,6 @@ AI does not replace human judgment in risk of bias assessment. Instead, these to
 
 
 ## References
-
 
 ```
 Sterne JAC, Savović J, Page MJ, Elbers RG, Blencowe NS, Boutron I, Cates CJ,

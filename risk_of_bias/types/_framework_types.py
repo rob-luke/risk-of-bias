@@ -31,11 +31,16 @@ class Framework(BaseModel):
         Randomized Trials").
     manuscript : str, optional
         The filename (without path) of the manuscript being assessed.
+    assessor : str | None
+        The name or identifier of the person or system performing the assessment.
+        This can be useful for tracking who completed the assessment, especially
+        in collaborative environments.
     """
 
     domains: list[Domain] = []
     name: str = ""
     manuscript: Optional[str] = None
+    assessor: Optional[str] = None
 
     def __str__(self) -> str:
         """

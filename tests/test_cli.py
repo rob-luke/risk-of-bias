@@ -307,3 +307,29 @@ def test_cli_analyse_directory_processes_all_pdfs(tmp_path, monkeypatch):
         assert (pdf.with_suffix(pdf.suffix + ".json")).exists()
         assert (pdf.with_suffix(pdf.suffix + ".md")).exists()
         assert (pdf.with_suffix(pdf.suffix + ".html")).exists()
+
+
+def test_cli_human_command(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.types._framework_types import Framework
+
+    called = {}
+
+    def fake_run_human_framework(manuscript, framework):
+        called["manuscript"] = manuscript
+        result = Framework(name="dummy")
+        result.manuscript = manuscript.name
+        return result
+
+    monkeypatch.setattr(cli, "run_human_framework", fake_run_human_framework)
+
+    pdf = tmp_path / "paper.pdf"
+    pdf.write_bytes(b"dummy")
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["human", str(pdf)])
+
+    assert result.exit_code == 0
+    assert called["manuscript"] == pdf
+    assert (pdf.with_suffix(pdf.suffix + ".json")).exists()

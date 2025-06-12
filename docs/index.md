@@ -109,6 +109,12 @@ For systematic reviews, you can analyse entire directories and automatically gen
 risk-of-bias analyse /path/to/manuscripts/
 ```
 
+For manual entry of human assessments, you can use the `human` command to record your own risk of bias evaluations in a standardized format, enabling direct comparison with AI assessments and ensuring reproducible data storage:
+
+```console
+risk-of-bias human /path/to/manuscript.pdf
+```
+
 Further details on summarising results are found in the [API docs](api.md#summary-and-analysis-functions).
 
 ### Web Interface
@@ -147,7 +153,6 @@ AI does not replace human judgment in risk of bias assessment. Instead, these to
 
 
 ## References
-
 
 ```
 Sterne JAC, Savović J, Page MJ, Elbers RG, Blencowe NS, Boutron I, Cates CJ,

@@ -5,6 +5,7 @@ import typer
 
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
+from risk_of_bias.human import run_human_framework
 from risk_of_bias.run_framework import run_framework
 from risk_of_bias.summary import export_summary
 from risk_of_bias.summary import print_summary
@@ -167,6 +168,35 @@ def analyse(
     completed_framework.export_to_html(output_html_path)
 
     return completed_framework
+
+
+@app.command()
+def human(
+    manuscript: str = typer.Argument(
+        ..., exists=True, readable=True, help="Path to the manuscript PDF"
+    ),
+    force: bool = typer.Option(False, help="Force re-entry even if JSON file exists"),
+) -> Framework:
+    """Enter risk-of-bias results manually using the terminal."""
+
+    manuscript_path = Path(manuscript)
+
+    output_json_path = manuscript_path.with_suffix(manuscript_path.suffix + ".json")
+    output_md_path = manuscript_path.with_suffix(manuscript_path.suffix + ".md")
+    output_html_path = manuscript_path.with_suffix(manuscript_path.suffix + ".html")
+
+    if output_json_path.exists() and not force:
+        typer.echo(f"Found existing JSON file: {output_json_path}")
+        framework = Framework.load(output_json_path)
+    else:
+        framework = run_human_framework(manuscript_path, get_rob2_framework())
+        framework.save(output_json_path)
+        typer.echo(f"Assessment saved to: {output_json_path}")
+
+    framework.export_to_markdown(output_md_path)
+    framework.export_to_html(output_html_path)
+
+    return framework
 
 
 @app.command()
