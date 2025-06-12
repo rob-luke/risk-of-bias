@@ -16,6 +16,8 @@ jobs:
         run: pip install -e .[all]
       - name: Build macOS app
         run: make mac
+      - name: Make executable
+        run: chmod +x dist/RiskOfBias
       - name: Upload artefact
         uses: softprops/action-gh-release@v2
         with:
