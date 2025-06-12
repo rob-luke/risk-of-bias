@@ -17,7 +17,7 @@ authors:
 affiliations:
  - name: Macquarie University, Macquarie University Hearing & Department of Linguistics, Australian Hearing Hub, Sydney, New South Wales, Australia
    index: 1
- - name: The University of Melbourne, Human Nutrition Group, School of Agriculture, Food and Ecosystem Sciences, Victoria, Australia
+ - name: The University of Melbourne, School of Agriculture, Food and Ecosystem Sciences, Human Nutrition Group, Victoria, Australia
    index: 2
 date: 11 June 2025
 bibliography: paper.bib
