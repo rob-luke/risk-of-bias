@@ -255,11 +255,6 @@ def download(file_id: str, filename: str) -> FileResponse:
     return FileResponse(file_path, filename=filename)
 
 
-# Export the app for Vercel
-# The FastAPI app is already ASGI compatible, so we just need to export it
-# Vercel will automatically detect and use the 'app' variable
-
-
 # For local development
 if __name__ == "__main__":
     import uvicorn
