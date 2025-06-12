@@ -116,6 +116,7 @@ risk-of-bias human /path/to/manuscript.pdf
 ```
 
 Further details on summarising results are found in the [API docs](api.md#summary-and-analysis-functions).
+Instructions for comparing two assessors are detailed in the [API docs](api.md#comparing-assessors).
 
 ### Web Interface
 
