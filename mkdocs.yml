@@ -13,6 +13,7 @@ nav:
     - Web Interface: web.md
     - macOS Application: mac_app.md
     - Visualisation: visualisation.md
+    - Reporting & Reproducibility: reporting_and_reproducibility.md
     - Contributing: contributing.md
 
 
