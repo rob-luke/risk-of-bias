@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/rob-luke/risk-of-bias/compare/v0.12.3...v0.13.0) (2025-06-12)
+
+
+### Features
+
+* provide mechanism to not send temperature values ([#68](https://github.com/rob-luke/risk-of-bias/issues/68)) ([df94c52](https://github.com/rob-luke/risk-of-bias/commit/df94c52e82ab64877a79a14ee48347662dad7d66))
+
 ## [0.12.3](https://github.com/rob-luke/risk-of-bias/compare/v0.12.2...v0.12.3) (2025-06-12)
 
 
