@@ -38,15 +38,7 @@ And you can analyse a manuscript by simply passing the path to the file:
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
-### Manual Entry
-
-If you prefer to record answers yourself, use the `human` command:
-
-```console
-risk-of-bias human /path/to/manuscript.pdf
-```
-
-### Evaluating Research Protocols
+### Risk of Bias Analysis on Manuscript PDF
 
 You can run the same command on a draft protocol prior to starting a study:
 
@@ -94,6 +86,20 @@ risk-of-bias analyse /path/to/manuscripts/
 ```
 
 When processing multiple manuscripts, the tool automatically generates a RobVis-compatible CSV summary file containing domain-level risk-of-bias judgements across all studies. This CSV can be directly imported into the RobVis visualization tool or used with statistical software for further analysis.
+
+
+## Manual/Human Entry
+
+This tool can also be used to enter and store human risk of bias assessments in a standard
+reproducible file format. This is useful for sharing and storage of results, but also for
+enabling automatic comparison to the AI risk of bias assessment.
+
+If you prefer to record answers yourself, use the `human` command:
+
+```console
+risk-of-bias human /path/to/manuscript.pdf
+```
+
 
 ## JSON Data Storage and Caching
 
