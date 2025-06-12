@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/rob-luke/risk-of-bias/compare/v0.13.0...v0.13.1) (2025-06-12)
+
+
+### Documentation
+
+* add badges and more cli commands ([#71](https://github.com/rob-luke/risk-of-bias/issues/71)) ([9b131a3](https://github.com/rob-luke/risk-of-bias/commit/9b131a374e1bcdc90101f1ae8ca019b8838d5ef2))
+
 ## [0.13.0](https://github.com/rob-luke/risk-of-bias/compare/v0.12.3...v0.13.0) (2025-06-12)
 
 
