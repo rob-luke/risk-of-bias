@@ -129,7 +129,7 @@ download the JSON and Markdown representations.
 
 If you prefer a standalone application, a compiled macOS version of the web
 interface is attached to every release. It processes one PDF at a time. You can
-[download the latest build here](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias).
+[download the latest build here](https://github.com/rob-luke/risk-of-bias/releases/latest/download/RiskOfBias.zip).
 The app is not signed, so you may need to go to Settings - Security - Allow Application.
 
 
