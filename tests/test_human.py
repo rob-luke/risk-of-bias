@@ -18,12 +18,13 @@ def test_run_human_framework_records_responses(monkeypatch):
     )
     framework = Framework(name="Test", domains=[domain])
 
-    inputs = iter(["1", "Because", "Evidence"])
+    inputs = iter(["TestAssessor", "1", "Because", "Evidence"])
     console = Console()
     monkeypatch.setattr(console, "input", lambda *args, **kwargs: next(inputs))
 
     run_human_framework(Path("manuscript.pdf"), framework, console=console)
 
+    assert framework.assessor == "TestAssessor"
     response = framework.domains[0].questions[0].response
     assert response is not None
     assert response.response == "Yes"
@@ -46,10 +47,11 @@ def test_run_human_framework_skips_optional(monkeypatch):
     )
     framework = Framework(name="Test", domains=[domain])
 
-    inputs = iter([""])
+    inputs = iter(["TestAssessor", ""])
     console = Console()
     monkeypatch.setattr(console, "input", lambda *args, **kwargs: next(inputs))
 
     run_human_framework(Path("manuscript.pdf"), framework, console=console)
 
+    assert framework.assessor == "TestAssessor"
     assert framework.domains[0].questions[0].response is None

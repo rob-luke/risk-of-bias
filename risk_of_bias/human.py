@@ -43,6 +43,10 @@ def run_human_framework(
 
     framework.manuscript = manuscript.name
 
+    # Ask for assessor name
+    assessor_name = console.input("Enter assessor name (human): ")
+    framework.assessor = assessor_name if assessor_name.strip() else "human"
+
     for domain in framework.domains:
         console.rule(f"Domain {domain.index}: {domain.name}")
         for question in domain.questions:
@@ -52,11 +56,18 @@ def run_human_framework(
             response_text: Optional[str] = None
             while response_text is None:
                 if question.allowed_answers:
+                    # Multiple choice question - user must select from options
                     table = Table(show_header=False)
                     for i, option in enumerate(question.allowed_answers, start=1):
                         table.add_row(str(i), option)
                     console.print(table)
-                    user_input = console.input("Select option (number or text): ")
+
+                    question_text = "Select option (number) "
+                    if not question.is_required:
+                        question_text += "[optional, press enter to skip]"
+                    question_text += ": "
+
+                    user_input = console.input(question_text)
                     if user_input == "" and not question.is_required:
                         break
                     if user_input.isdigit() and 1 <= int(user_input) <= len(
@@ -66,12 +77,18 @@ def run_human_framework(
                     elif user_input in question.allowed_answers:
                         response_text = user_input
                     else:
-                        console.print("Invalid response. Please try again.")
+                        console.print("Invalid response. Please select a valid option.")
                 else:
-                    user_input = console.input("Response: ")
+                    # Free text question - user can enter any string
+                    question_text = "Response "
+                    if not question.is_required:
+                        question_text += "[optional, press enter to skip]"
+                    question_text += ": "
+
+                    user_input = console.input(question_text)
                     if user_input == "" and not question.is_required:
                         break
-                    if user_input == "":
+                    elif user_input == "" and question.is_required:
                         console.print("Response required.")
                     else:
                         response_text = user_input
