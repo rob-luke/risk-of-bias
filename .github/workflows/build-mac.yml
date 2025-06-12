@@ -18,8 +18,10 @@ jobs:
         run: make mac
       - name: Make executable
         run: chmod +x dist/RiskOfBias
+      - name: Zip executable
+        run: zip -j dist/RiskOfBias.zip dist/RiskOfBias
       - name: Upload artefact
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/RiskOfBias
+          files: dist/RiskOfBias.zip
           token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
