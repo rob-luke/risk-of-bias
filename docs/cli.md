@@ -21,6 +21,8 @@ The CLI tool provides several handy parameters you can adjust, these can be foun
 ╰────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ─────────────────────────────────────────────────────────────────────╮
 │ analyse   Run risk of bias assessment on a manuscript or directory             │
+│ human     Enter risk of bias results manually
+ │
 │ web       Launch the web interface using uvicorn.                              │
 ╰────────────────────────────────────────────────────────────────────────────────╯
 ```
@@ -34,6 +36,14 @@ And you can analyse a manuscript by simply passing the path to the file:
 
 ```console
 risk-of-bias analyse /path/to/manuscript.pdf
+```
+
+### Manual Entry
+
+If you prefer to record answers yourself, use the `human` command:
+
+```console
+risk-of-bias human /path/to/manuscript.pdf
 ```
 
 ### Evaluating Research Protocols

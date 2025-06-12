@@ -51,6 +51,16 @@ The package provides ready-to-use frameworks that implement established risk-of-
       show_root_full_path: true
       heading_level: 4
 
+### Manual Entry
+
+::: risk_of_bias.human.run_human_framework
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
 ### Domain
 
 ::: risk_of_bias.types.Domain
