@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.3](https://github.com/rob-luke/risk-of-bias/compare/v0.12.2...v0.12.3) (2025-06-12)
+
+
+### Bug Fixes
+
+* make mac download executable ([#62](https://github.com/rob-luke/risk-of-bias/issues/62)) ([6894183](https://github.com/rob-luke/risk-of-bias/commit/68941832d3555ce74f5f32e99e71811f753a4286))
+
 ## [0.12.2](https://github.com/rob-luke/risk-of-bias/compare/v0.12.1...v0.12.2) (2025-06-11)
 
 
