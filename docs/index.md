@@ -41,7 +41,23 @@ But to get started, you can analyse a manuscript by simply passing the path to t
 risk-of-bias analyse /path/to/manuscript.pdf
 ```
 
-For domain-specific assessments or to address systematic AI interpretation issues, you can provide a guidance document:
+You can set the model and parameters. For example, to use a fast and cheap model for testing:
+
+```console
+risk-of-bias analyse --model gpt-4.1-nano /path/to/manuscript.pdf
+
+```
+
+And when you are ready to run a state of the art model, you can switch to a reasoning model.
+Reasoning models do not use the temperature parameter, so we set it to a negative number to disable it.
+
+```console
+risk-of-bias analyse --model o3 --temperature -1 /path/to/manuscript.pdf
+```
+
+For domain-specific assessments or to correct systematic AI biases, you can provide a guidance document.
+For example, if you are using the RoB2 framework you can include the 72 page additional guidance material.
+This is achieved using the `guidance-document` parameter:
 
 ```console
 risk-of-bias analyse /path/to/manuscript.pdf --guidance-document /path/to/guidance.pdf
@@ -49,16 +65,6 @@ risk-of-bias analyse /path/to/manuscript.pdf --guidance-document /path/to/guidan
 
 The results will be saved next to the pdf as a json, html, and markdown file.
 
-### JSON Data Storage and Reuse
-
-Results are automatically saved in JSON format containing the complete assessment data, including raw AI responses, evidence excerpts, and reasoning. This JSON storage serves multiple purposes:
-
-- **Efficiency**: When re-running analysis on directories, previously analyzed files are automatically detected and loaded from JSON, avoiding redundant AI calls
-- **Data sharing**: JSON files provide a standardized format for sharing complete assessment results with colleagues or across research teams  
-- **Reproducibility**: Raw response data is preserved, enabling verification and reanalysis of assessments
-- **Batch processing**: Essential for systematic reviews where hundreds of papers need processing across multiple sessions
-
-To force re-analysis of previously processed files, delete the corresponding JSON files or use the `--force` flag.
 The output will look something like:
 
 ```text
@@ -86,6 +92,16 @@ Domain 1: Bias arising from the randomization process.
 ...
 ```
 
+### JSON Data Storage and Reuse
+
+Results are automatically saved in JSON format containing the complete assessment data, including raw AI responses, evidence excerpts, and reasoning. This JSON storage serves multiple purposes:
+
+- **Efficiency**: When re-running analysis on directories, previously analyzed files are automatically detected and loaded from JSON, avoiding redundant AI calls
+- **Data sharing**: JSON files provide a standardized format for sharing complete assessment results with colleagues or across research teams  
+- **Reproducibility**: Raw response data is preserved, enabling verification and reanalysis of assessments
+- **Batch processing**: Essential for systematic reviews where hundreds of papers need processing across multiple sessions
+
+To force re-analysis of previously processed files, delete the corresponding JSON files or use the `--force` flag.
 
 For systematic reviews, you can analyse entire directories and automatically generate RobVis-compatible CSV summaries:
 
