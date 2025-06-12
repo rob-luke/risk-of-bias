@@ -91,7 +91,9 @@ def run_framework(
         process in detail.
     temperature : float, default=settings.temperature
         Sampling temperature passed to the OpenAI model. Higher values yield more
-        diverse answers while lower values make outputs more deterministic.
+        diverse answers while lower values make outputs more deterministic. If a
+        negative value is provided, the temperature parameter is omitted and the
+        server default is used.
     api_key : Optional[str], default=None
         API key to use for OpenAI calls. If ``None``, ``OPENAI_API_KEY`` from the
         environment will be used.
@@ -173,12 +175,15 @@ def run_framework(
 
         chat_input.append(create_openai_message("user", text=questions_text))
 
-        raw_response = client.responses.parse(
-            model=model,
-            input=chat_input,
-            text_format=domain_response_class,
-            temperature=temperature,
-        )
+        parse_kwargs: dict[str, Any] = {
+            "model": model,
+            "input": chat_input,
+            "text_format": domain_response_class,
+        }
+        if temperature >= 0:
+            parse_kwargs["temperature"] = temperature
+
+        raw_response = client.responses.parse(**parse_kwargs)
         parsed_response = raw_response.output_parsed
 
         chat_input.append(
