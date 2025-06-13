@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import textwrap
 
-from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib.figure import Figure
 
 
 def plot_assessor_agreement(df: pd.DataFrame) -> Figure:

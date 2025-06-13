@@ -1,10 +1,12 @@
 """Risk of Bias Assessment utilities."""
 
 from .compare import compare_frameworks
-from .summary import export_summary
-from .summary import load_frameworks_from_directory
-from .summary import print_summary
-from .summary import summarise_frameworks
+from .summary import (
+    export_summary,
+    load_frameworks_from_directory,
+    print_summary,
+    summarise_frameworks,
+)
 from .visualisation import plot_assessor_agreement
 
 __all__ = [

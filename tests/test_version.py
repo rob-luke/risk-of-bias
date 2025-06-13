@@ -1,7 +1,7 @@
 """Test version consistency between package and pyproject.toml."""
 
-from pathlib import Path
 import tomllib
+from pathlib import Path
 
 import risk_of_bias
 

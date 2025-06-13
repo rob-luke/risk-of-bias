@@ -1,18 +1,13 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import tempfile
 import uuid
 import webbrowser
+from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi import File
-from fastapi import Form
-from fastapi import HTTPException
-from fastapi import UploadFile
-from fastapi.responses import FileResponse
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.responses import FileResponse, HTMLResponse
 
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework

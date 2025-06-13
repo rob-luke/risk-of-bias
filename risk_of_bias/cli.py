@@ -8,9 +8,7 @@ from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
 from risk_of_bias.human import run_human_framework
 from risk_of_bias.run_framework import run_framework
-from risk_of_bias.summary import export_summary
-from risk_of_bias.summary import print_summary
-from risk_of_bias.summary import summarise_frameworks
+from risk_of_bias.summary import export_summary, print_summary, summarise_frameworks
 from risk_of_bias.types._framework_types import Framework
 from risk_of_bias.visualisation import plot_assessor_agreement
 

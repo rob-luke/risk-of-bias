@@ -61,15 +61,7 @@ def export_framework_as_html(framework: Framework, path: Path) -> None:
     path : Path
         Destination file for the HTML representation.
     """
-    from htpy import body
-    from htpy import h1
-    from htpy import h2
-    from htpy import h3
-    from htpy import html
-    from htpy import li
-    from htpy import p
-    from htpy import strong
-    from htpy import ul
+    from htpy import body, h1, h2, h3, html, li, p, strong, ul
 
     children = [h1[framework.name]]
 

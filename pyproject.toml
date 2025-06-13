@@ -65,7 +65,7 @@ max-line-length = 88
 exclude = ["build"]
 
 [tool.isort]
-profile = "google"
+profile = "black"
 src_paths = "."
 line_length = 88
 multi_line_output = 3

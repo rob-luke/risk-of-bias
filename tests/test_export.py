@@ -2,8 +2,7 @@ from pathlib import Path
 
 from openai.types.responses.parsed_response import ParsedResponse
 
-from risk_of_bias.export import export_framework_as_html
-from risk_of_bias.export import export_framework_as_markdown
+from risk_of_bias.export import export_framework_as_html, export_framework_as_markdown
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
 from risk_of_bias.types._domain_types import Domain
 from risk_of_bias.types._framework_types import Framework
