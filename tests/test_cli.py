@@ -340,9 +340,8 @@ def test_cli_compare_success(tmp_path, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     from risk_of_bias import cli
     from risk_of_bias.frameworks.rob2 import get_rob2_framework
-    from risk_of_bias.types._response_types import (
-        ReasonedResponseWithEvidenceAndRawData,
-    )
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
 
     # Create two test framework files
     fw1 = get_rob2_framework()
@@ -392,9 +391,8 @@ def test_cli_compare_default_output(monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     from risk_of_bias import cli
     from risk_of_bias.frameworks.rob2 import get_rob2_framework
-    from risk_of_bias.types._response_types import (
-        ReasonedResponseWithEvidenceAndRawData,
-    )
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
 
     # Create two test framework files
     fw1 = get_rob2_framework()
@@ -433,9 +431,8 @@ def test_cli_compare_custom_output(tmp_path, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     from risk_of_bias import cli
     from risk_of_bias.frameworks.rob2 import get_rob2_framework
-    from risk_of_bias.types._response_types import (
-        ReasonedResponseWithEvidenceAndRawData,
-    )
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
 
     # Create two test framework files
     fw1 = get_rob2_framework()
@@ -485,9 +482,8 @@ def test_cli_compare_verbose_output(tmp_path, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     from risk_of_bias import cli
     from risk_of_bias.frameworks.rob2 import get_rob2_framework
-    from risk_of_bias.types._response_types import (
-        ReasonedResponseWithEvidenceAndRawData,
-    )
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
 
     # Create two test framework files
     fw1 = get_rob2_framework()
@@ -524,9 +520,8 @@ def test_cli_compare_no_verbose(tmp_path, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test")
     from risk_of_bias import cli
     from risk_of_bias.frameworks.rob2 import get_rob2_framework
-    from risk_of_bias.types._response_types import (
-        ReasonedResponseWithEvidenceAndRawData,
-    )
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
 
     # Create two test framework files
     fw1 = get_rob2_framework()
