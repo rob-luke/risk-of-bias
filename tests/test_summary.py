@@ -3,10 +3,12 @@ from pathlib import Path
 from rich.console import Console
 
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
-from risk_of_bias.summary import export_summary
-from risk_of_bias.summary import load_frameworks_from_directory
-from risk_of_bias.summary import print_summary
-from risk_of_bias.summary import summarise_frameworks
+from risk_of_bias.summary import (
+    export_summary,
+    load_frameworks_from_directory,
+    print_summary,
+    summarise_frameworks,
+)
 from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
 
 

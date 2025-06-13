@@ -5,12 +5,13 @@ from openai import OpenAI
 
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks import get_rob2_framework
-from risk_of_bias.oai._utils import create_openai_message
-from risk_of_bias.oai._utils import pdf_to_base64
+from risk_of_bias.oai._utils import create_openai_message, pdf_to_base64
 from risk_of_bias.prompts import SYSTEM_MESSAGE
 from risk_of_bias.types._framework_types import Framework
-from risk_of_bias.types._response_types import create_domain_response_class
-from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRawData
+from risk_of_bias.types._response_types import (
+    ReasonedResponseWithEvidenceAndRawData,
+    create_domain_response_class,
+)
 
 
 def run_framework(

@@ -143,5 +143,15 @@ This workflow supports the transition from individual study assessment to system
       show_root_full_path: true
       heading_level: 4
 
+### Assessor Agreement Plot
+
+::: risk_of_bias.visualisation.plot_assessor_agreement
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
 
 
