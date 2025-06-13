@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.16.0](https://github.com/rob-luke/risk-of-bias/compare/v0.15.0...v0.16.0) (2025-06-13)
+
+
+### Features
+
+* add agreement column when comparing frameworks ([#84](https://github.com/rob-luke/risk-of-bias/issues/84)) ([2b53178](https://github.com/rob-luke/risk-of-bias/commit/2b5317896f6ce1649b8e3ce374803999646c1438))
+* add visualisation for assessor agreement ([#86](https://github.com/rob-luke/risk-of-bias/issues/86)) ([f2ffc76](https://github.com/rob-luke/risk-of-bias/commit/f2ffc76e192840644e0c2b0846fe1c7c1ef72c2f))
+
 ## [0.15.0](https://github.com/rob-luke/risk-of-bias/compare/v0.14.0...v0.15.0) (2025-06-13)
 
 
