@@ -30,8 +30,6 @@ def test_compare_frameworks() -> None:
 
     df = compare_frameworks(fw1, fw2)
 
-    print(df)
-
     assert list(df.columns[:4]) == [
         "domain_short",
         "question_short",
@@ -65,5 +63,3 @@ def test_compare_frameworks() -> None:
     assert third_row["Reviewer 1"] == "No"
     assert third_row["Reviewer 2"] == "No"
     assert len(df) == sum(len(d.questions) for d in fw1.domains)
-
-test_compare_frameworks()
