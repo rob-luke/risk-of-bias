@@ -38,12 +38,14 @@ def test_compare_frameworks() -> None:
     ]
     assert "Reviewer 1" in df.columns
     assert "Reviewer 2" in df.columns
+    assert "agreement" in df.columns
 
     first_row = df.iloc[0]
     assert first_row["domain_short"] == "D1"
     assert first_row["question_short"] == "Q1.1"
     assert first_row["Reviewer 1"] == "Yes"
     assert first_row["Reviewer 2"] == "No"
+    assert not first_row["agreement"]
 
     second_row = df[
         (df["domain"] == fw1.domains[0].name)
@@ -53,6 +55,7 @@ def test_compare_frameworks() -> None:
     assert second_row["question_short"] == "Q1.2"
     assert second_row["Reviewer 1"] == "Yes"
     assert second_row["Reviewer 2"] == "Yes"
+    assert second_row["agreement"]
 
     third_row = df[
         (df["domain"] == fw1.domains[1].name)
@@ -62,4 +65,5 @@ def test_compare_frameworks() -> None:
     assert third_row["question_short"] == "Q2.1"
     assert third_row["Reviewer 1"] == "No"
     assert third_row["Reviewer 2"] == "No"
+    assert third_row["agreement"]
     assert len(df) == sum(len(d.questions) for d in fw1.domains)
