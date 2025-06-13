@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.15.0](https://github.com/rob-luke/risk-of-bias/compare/v0.14.0...v0.15.0) (2025-06-13)
+
+
+### Features
+
+* add framework comparison utility ([#77](https://github.com/rob-luke/risk-of-bias/issues/77)) ([40add6d](https://github.com/rob-luke/risk-of-bias/commit/40add6dedbd5ea54202e1e86d2a6a7e2a1d7f9e5))
+
+
+### Documentation
+
+* add reporting and reproducibility guide ([#78](https://github.com/rob-luke/risk-of-bias/issues/78)) ([3eafbfa](https://github.com/rob-luke/risk-of-bias/commit/3eafbfa00cd9f53f8d16d69c12e676f88aab518c))
+
 ## [0.14.0](https://github.com/rob-luke/risk-of-bias/compare/v0.13.1...v0.14.0) (2025-06-12)
 
 
