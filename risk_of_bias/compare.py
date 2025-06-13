@@ -19,9 +19,9 @@ def compare_frameworks(fw1: Framework, fw2: Framework) -> pd.DataFrame:
     Returns
     -------
     pandas.DataFrame
-        Long-form table with ``domain``, ``question`` and one column per
-        assessor containing their responses. If a question was unanswered,
-        the value will be ``None``.
+        Long-form table with ``domain_short``, ``question_short``, ``domain``,
+        ``question`` and one column per assessor containing their responses.
+        If a question was unanswered, the value will be ``None``.
     """
 
     assessor1 = fw1.assessor or "assessor_1"
@@ -46,6 +46,8 @@ def compare_frameworks(fw1: Framework, fw2: Framework) -> pd.DataFrame:
             a2 = q2.response.response if q2.response else None
             rows.append(
                 {
+                    "domain_short": f"D{int(d1.index)}",
+                    "question_short": f"Q{q1.index}",
                     "domain": d1.name,
                     "question": q1.question,
                     assessor1: a1,
