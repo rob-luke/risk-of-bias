@@ -21,13 +21,15 @@ def compare_frameworks(fw1: Framework, fw2: Framework) -> pd.DataFrame:
     pandas.DataFrame
         Long-form table with ``domain_short``, ``question_short``, ``domain``,
         ``question`` and one column per assessor containing their responses.
-        If a question was unanswered, the value will be ``None``.
+        If a question was unanswered, the value will be ``None``. The final
+        column ``agreement`` indicates if the assessors provided the same
+        response.
     """
 
     assessor1 = fw1.assessor or "assessor_1"
     assessor2 = fw2.assessor or "assessor_2"
 
-    rows: list[dict[str, str | None]] = []
+    rows: list[dict[str, str | bool | None]] = []
     if len(fw1.domains) != len(fw2.domains):
         raise ValueError("Frameworks have different numbers of domains")
 
@@ -52,6 +54,7 @@ def compare_frameworks(fw1: Framework, fw2: Framework) -> pd.DataFrame:
                     "question": q1.question,
                     assessor1: a1,
                     assessor2: a2,
+                    "agreement": a1 == a2,
                 }
             )
 
