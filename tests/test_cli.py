@@ -333,3 +333,222 @@ def test_cli_human_command(tmp_path, monkeypatch):
     assert result.exit_code == 0
     assert called["manuscript"] == pdf
     assert (pdf.with_suffix(pdf.suffix + ".json")).exists()
+
+
+def test_cli_compare_success(tmp_path, monkeypatch):
+    """Test the compare command with valid JSON files."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.frameworks.rob2 import get_rob2_framework
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
+
+    # Create two test framework files
+    fw1 = get_rob2_framework()
+    fw1.assessor = "Reviewer 1"
+    fw1.manuscript = "paper1.pdf"
+    fw1.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+    fw1.domains[0].questions[1].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="No"
+    )
+
+    fw2 = get_rob2_framework()
+    fw2.assessor = "Reviewer 2"
+    fw2.manuscript = "paper2.pdf"
+    fw2.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+    fw2.domains[0].questions[1].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    # Save frameworks to temporary JSON files
+    json1 = tmp_path / "framework1.json"
+    json2 = tmp_path / "framework2.json"
+    fw1.save(json1)
+    fw2.save(json2)
+
+    # Use explicit output path to ensure we can test it
+    output_path = tmp_path / "test_comparison.png"
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.app, ["compare", str(json1), str(json2), "--output", str(output_path)]
+    )
+
+    assert result.exit_code == 0
+    assert "Comparison Results:" in result.stdout
+    assert "Overall Agreement:" in result.stdout
+    assert "D1.Q1.1" in result.stdout
+    assert "D1.Q1.2" in result.stdout
+    # Explicit output file should be created
+    assert output_path.exists()
+
+
+def test_cli_compare_default_output(monkeypatch):
+    """Test the compare command with default output path."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.frameworks.rob2 import get_rob2_framework
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
+
+    # Create two test framework files
+    fw1 = get_rob2_framework()
+    fw1.assessor = "Reviewer 1"
+    fw1.manuscript = "paper1.pdf"
+    fw1.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    fw2 = get_rob2_framework()
+    fw2.assessor = "Reviewer 2"
+    fw2.manuscript = "paper2.pdf"
+    fw2.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="No"
+    )
+
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        # Save frameworks to JSON files in isolated filesystem
+        fw1.save(Path("framework1.json"))
+        fw2.save(Path("framework2.json"))
+
+        result = runner.invoke(
+            cli.app, ["compare", "framework1.json", "framework2.json"]
+        )
+
+        assert result.exit_code == 0
+        assert "Comparison Results:" in result.stdout
+        assert "Overall Agreement:" in result.stdout
+        # Default output file should be created in current directory
+        assert Path("comparison_plot.png").exists()
+
+
+def test_cli_compare_custom_output(tmp_path, monkeypatch):
+    """Test the compare command with custom output path."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.frameworks.rob2 import get_rob2_framework
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
+
+    # Create two test framework files
+    fw1 = get_rob2_framework()
+    fw1.assessor = "Assessor A"
+    fw1.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    fw2 = get_rob2_framework()
+    fw2.assessor = "Assessor B"
+    fw2.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="No"
+    )
+
+    # Save frameworks to temporary JSON files
+    json1 = tmp_path / "framework1.json"
+    json2 = tmp_path / "framework2.json"
+    fw1.save(json1)
+    fw2.save(json2)
+
+    custom_output = tmp_path / "my_comparison.png"
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.app, ["compare", str(json1), str(json2), "--output", str(custom_output)]
+    )
+
+    assert result.exit_code == 0
+    assert custom_output.exists()
+    assert not (tmp_path / "comparison_plot.png").exists()
+
+
+def test_cli_compare_nonexistent_file(tmp_path):
+    """Test the compare command with non-existent files."""
+    from risk_of_bias import cli
+
+    nonexistent1 = tmp_path / "nonexistent1.json"
+    nonexistent2 = tmp_path / "nonexistent2.json"
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["compare", str(nonexistent1), str(nonexistent2)])
+
+    assert result.exit_code == 1  # custom error from CLI function
+
+
+def test_cli_compare_verbose_output(tmp_path, monkeypatch):
+    """Test the compare command with verbose output enabled."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.frameworks.rob2 import get_rob2_framework
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
+
+    # Create two test framework files
+    fw1 = get_rob2_framework()
+    fw1.assessor = "Reviewer 1"
+    fw1.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    fw2 = get_rob2_framework()
+    fw2.assessor = "Reviewer 2"
+    fw2.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    # Save frameworks to temporary JSON files
+    json1 = tmp_path / "framework1.json"
+    json2 = tmp_path / "framework2.json"
+    fw1.save(json1)
+    fw2.save(json2)
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["compare", str(json1), str(json2), "--verbose"])
+
+    assert result.exit_code == 0
+    assert "Loading first assessment:" in result.stdout
+    assert "Loading second assessment:" in result.stdout
+    assert "Comparing frameworks..." in result.stdout
+    assert "Generating comparison plot:" in result.stdout
+    assert "Plot saved successfully to:" in result.stdout
+
+
+def test_cli_compare_no_verbose(tmp_path, monkeypatch):
+    """Test the compare command with verbose output disabled."""
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    from risk_of_bias import cli
+    from risk_of_bias.frameworks.rob2 import get_rob2_framework
+    from risk_of_bias.types._response_types import \
+        ReasonedResponseWithEvidenceAndRawData
+
+    # Create two test framework files
+    fw1 = get_rob2_framework()
+    fw1.assessor = "Reviewer 1"
+    fw1.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    fw2 = get_rob2_framework()
+    fw2.assessor = "Reviewer 2"
+    fw2.domains[0].questions[0].response = ReasonedResponseWithEvidenceAndRawData(
+        evidence=[], reasoning="Test reasoning", response="Yes"
+    )
+
+    # Save frameworks to temporary JSON files
+    json1 = tmp_path / "framework1.json"
+    json2 = tmp_path / "framework2.json"
+    fw1.save(json1)
+    fw2.save(json2)
+
+    runner = CliRunner()
+    result = runner.invoke(cli.app, ["compare", str(json1), str(json2), "--no-verbose"])
+
+    assert result.exit_code == 0
+    # Should not contain verbose messages
+    assert "Loading first assessment:" not in result.stdout
+    assert "Loading second assessment:" not in result.stdout
+    # But should still contain the main results
+    assert "Comparison Results:" in result.stdout
+    assert "Overall Agreement:" in result.stdout

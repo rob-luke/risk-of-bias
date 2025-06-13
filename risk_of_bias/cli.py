@@ -3,6 +3,7 @@ from typing import List, Optional
 
 import typer
 
+from risk_of_bias.compare import compare_frameworks
 from risk_of_bias.config import settings
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
 from risk_of_bias.human import run_human_framework
@@ -11,6 +12,7 @@ from risk_of_bias.summary import export_summary
 from risk_of_bias.summary import print_summary
 from risk_of_bias.summary import summarise_frameworks
 from risk_of_bias.types._framework_types import Framework
+from risk_of_bias.visualisation import plot_assessor_agreement
 
 app = typer.Typer(help="Run risk of bias assessment", pretty_exceptions_enable=False)
 
@@ -197,6 +199,119 @@ def human(
     framework.export_to_html(output_html_path)
 
     return framework
+
+
+@app.command()
+def compare(
+    framework1: str = typer.Argument(
+        ...,
+        exists=True,
+        readable=True,
+        help="Path to the first JSON assessment file",
+    ),
+    framework2: str = typer.Argument(
+        ...,
+        exists=True,
+        readable=True,
+        help="Path to the second JSON assessment file",
+    ),
+    output: Optional[str] = typer.Option(
+        None,
+        help="Output path for the comparison plot (PNG)."
+        " If not specified, saves to comparison_plot.png",
+    ),
+    verbose: bool = typer.Option(True, help="Enable verbose output"),
+) -> None:
+    """
+    Compare two risk-of-bias assessments from JSON files.
+
+    Loads two completed risk-of-bias assessments and compares them,
+    displaying a comparison table in the terminal and generating
+    a visualization plot saved as a PNG file.
+
+    The comparison shows agreement between the two assessments
+    for each question in the framework.
+    """
+    framework1_path = Path(framework1)
+    framework2_path = Path(framework2)
+
+    if verbose:
+        typer.echo(f"Loading first assessment: {framework1_path}")
+
+    try:
+        fw1 = Framework.load(framework1_path)
+    except Exception as e:
+        typer.echo(f"Error loading first framework: {e}", err=True)
+        raise typer.Exit(1)
+
+    if verbose:
+        typer.echo(f"Loading second assessment: {framework2_path}")
+
+    try:
+        fw2 = Framework.load(framework2_path)
+    except Exception as e:
+        typer.echo(f"Error loading second framework: {e}", err=True)
+        raise typer.Exit(1)
+
+    if verbose:
+        typer.echo("Comparing frameworks...")
+
+    try:
+        comparison_df = compare_frameworks(fw1, fw2)
+    except Exception as e:
+        typer.echo(f"Error comparing frameworks: {e}", err=True)
+        raise typer.Exit(1)
+
+    # Print the comparison table
+    typer.echo("\nComparison Results:")
+    typer.echo("=" * 80)
+
+    # Display the table in a readable format
+    for _, row in comparison_df.iterrows():
+        assessor_cols = [
+            c
+            for c in comparison_df.columns
+            if c
+            not in {"domain_short", "question_short", "domain", "question", "agreement"}
+        ]
+        assessor1, assessor2 = assessor_cols[:2]
+
+        agreement_mark = "✓" if row["agreement"] else "✗"
+        typer.echo(
+            f"{row['domain_short']}.{row['question_short']}: "
+            f"{row[assessor1] or 'N/A'} vs {row[assessor2] or 'N/A'} "
+            f"[{agreement_mark}]"
+        )
+
+    # Calculate and display overall agreement
+    agreement_pct = comparison_df["agreement"].mean() * 100
+    typer.echo("=" * 80)
+    typer.echo(f"Overall Agreement: {agreement_pct:.1f}%")
+
+    # Generate and save the plot
+    if output is None:
+        output_path = Path("comparison_plot.png")
+    else:
+        output_path = Path(output)
+
+    if verbose:
+        typer.echo(f"Generating comparison plot: {output_path}")
+
+    try:
+        fig = plot_assessor_agreement(comparison_df)
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
+
+        if verbose:
+            typer.echo(f"Plot saved successfully to: {output_path}")
+
+    except Exception as e:
+        typer.echo(f"Error generating plot: {e}", err=True)
+        raise typer.Exit(1)
+    finally:
+        # Close the figure to free memory
+        import matplotlib.pyplot as plt
+
+        plt.close(fig)
 
 
 @app.command()
