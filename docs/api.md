@@ -133,5 +133,15 @@ This workflow supports the transition from individual study assessment to system
       show_root_full_path: true
       heading_level: 4
 
+### Comparing Assessors
+
+::: risk_of_bias.compare.compare_frameworks
+    handler: python
+    options:
+      show_root_heading: true
+      show_source: false
+      show_root_full_path: true
+      heading_level: 4
+
 
 
