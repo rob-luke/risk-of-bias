@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.1](https://github.com/rob-luke/risk-of-bias/compare/v0.16.0...v0.16.1) (2025-06-15)
+
+
+### Documentation
+
+* add API key instructions ([#87](https://github.com/rob-luke/risk-of-bias/issues/87)) ([021d793](https://github.com/rob-luke/risk-of-bias/commit/021d7936ba205a79ac2419584c62462aad2e0b99))
+
 ## [0.16.0](https://github.com/rob-luke/risk-of-bias/compare/v0.15.0...v0.16.0) (2025-06-13)
 
 
