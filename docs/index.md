@@ -28,6 +28,17 @@ You can install the program using the following pip command:
 pip install risk_of_bias[all]
 ```
 
+### AI Provider
+
+Risk of bias analysis relies on a large language model. Currently only the
+OpenAI API is supported. After creating an account on
+[OpenAI](https://platform.openai.com/), export your key before running any
+commands:
+
+```console
+export OPENAI_API_KEY="sk-..."
+```
+
 ### Command Line Interface
 
 The package comes with an easy to use command line interface (CLI) tool.

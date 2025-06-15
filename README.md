@@ -25,6 +25,17 @@ You can install the program using the following pip command:
 pip install risk_of_bias[all]
 ```
 
+### AI Provider
+
+An AI provider is required to perform analyses. The package currently supports
+the OpenAI API. Create an account at
+[OpenAI](https://platform.openai.com/) and set the API key as an environment
+variable before running any commands:
+
+```console
+export OPENAI_API_KEY="sk-..."
+```
+
 
 ### Command Line Interface
 
