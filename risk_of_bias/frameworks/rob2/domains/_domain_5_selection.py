@@ -54,13 +54,6 @@ q5_3 = Question(
     is_required=True,
 )
 
-q5_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=5.4,
-    is_required=True,
-)
-
 q5_o = Question(
     question=(
         "Optional Questions: What is the predicted direction of bias due to selection "
@@ -79,7 +72,7 @@ q5_o = Question(
 )
 
 domain_5_selection = Domain(
-    questions=[q5_1, q5_2, q5_3, q5_r, q5_o],
+    questions=[q5_1, q5_2, q5_3, q5_o],
     name="Selection of the reported result",
     index=5,
 )

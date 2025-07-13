@@ -83,13 +83,6 @@ q4_5 = Question(
     is_required=True,
 )
 
-q4_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=4.6,
-    is_required=True,
-)
-
 q4_o = Question(
     question=(
         "Optional Questions: What is the predicted direction "
@@ -108,7 +101,7 @@ q4_o = Question(
 )
 
 domain_4_measurement = Domain(
-    questions=[q4_1, q4_2, q4_3, q4_4, q4_5, q4_r, q4_o],
+    questions=[q4_1, q4_2, q4_3, q4_4, q4_5, q4_o],
     name="Measurement of the outcome",
     index=4,
 )

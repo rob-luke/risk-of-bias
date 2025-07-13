@@ -49,13 +49,6 @@ q1_3 = Question(
     is_required=True,
 )
 
-q_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=1.4,
-    is_required=True,
-)
-
 q_o = Question(
     question=(
         "Optional Question: What is the predicted direction of bias arising from "
@@ -74,7 +67,7 @@ q_o = Question(
 )
 
 domain_1_randomization = Domain(
-    questions=[q1_1, q1_2, q1_3, q_r, q_o],
+    questions=[q1_1, q1_2, q1_3, q_o],
     name="Bias arising from the randomization process.",
     index=1,
 )

@@ -123,13 +123,6 @@ q2_7 = Question(
     is_required=True,
 )
 
-q2_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=2.8,
-    is_required=True,
-)
-
 q2_o = Question(
     question=(
         "Optional Questions: What is the predicted direction of bias due to deviations "
@@ -148,7 +141,7 @@ q2_o = Question(
 )
 
 domain_2_deviations = Domain(
-    questions=[q2_1, q2_2, q2_3, q2_4, q2_5, q2_6, q2_7, q2_r, q2_o],
+    questions=[q2_1, q2_2, q2_3, q2_4, q2_5, q2_6, q2_7, q2_o],
     name="Deviations from intended interventions",
     index=2,
 )

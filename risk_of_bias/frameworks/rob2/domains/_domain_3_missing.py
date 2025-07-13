@@ -67,13 +67,6 @@ q3_4 = Question(
     is_required=True,
 )
 
-q3_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=3.5,
-    is_required=True,
-)
-
 q3_o = Question(
     question=(
         "Optional Questions: What is the predicted direction of bias due to "
@@ -92,7 +85,7 @@ q3_o = Question(
 )
 
 domain_3_missing = Domain(
-    questions=[q3_1, q3_2, q3_3, q3_4, q3_r, q3_o],
+    questions=[q3_1, q3_2, q3_3, q3_4, q3_o],
     name="Missing outcome data",
     index=3,
 )
