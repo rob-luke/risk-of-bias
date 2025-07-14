@@ -42,6 +42,39 @@ class Framework(BaseModel):
     manuscript: Optional[str] = None
     assessor: Optional[str] = None
 
+    @property
+    def judgement(self) -> str | None:
+        """Return the overall risk-of-bias judgement for this framework.
+
+        The overall judgement is derived from the judgements of all domains
+        except the ``Overall`` domain. If any domain judgement is ``None``
+        the overall judgement is also ``None``.
+
+        Returns
+        -------
+        str | None
+            One of ``"Low"``, ``"Some concerns"`` or ``"High```, or ``None`` if
+            any domain does not yet have a judgement.
+        """
+
+        ranking = {"low": 0, "some concerns": 1, "high": 2}
+        worst = -1
+        for domain in self.domains:
+            if domain.name.lower() == "overall":
+                continue
+            judgement = domain.judgement
+            if judgement is None:
+                return None
+            score = ranking.get(judgement.lower(), -1)
+            if score > worst:
+                worst = score
+
+        if worst == -1:
+            return None
+
+        inverse = {0: "Low", 1: "Some concerns", 2: "High"}
+        return inverse[worst]
+
     def __str__(self) -> str:
         """
         Provide a comprehensive human-readable representation of the Framework.
