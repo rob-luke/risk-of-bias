@@ -70,11 +70,12 @@ def summarise_frameworks(
     it creates a standardized view that facilitates pattern recognition and evidence
     synthesis across multiple studies.
 
-    The function specifically looks for "Risk-of-bias judgement" questions within each
-    domain, which represent the final assessment conclusions after considering all
-    signaling questions and evidence. This approach aligns with established risk-of-bias
-    assessment methodologies where detailed questioning leads to domain-level
-    judgements.
+    The function reads the :pyattr:`~risk_of_bias.types._domain_types.Domain.judgement`
+    property of each domain. This property dynamically computes the risk judgement
+    based on the domain's current question responses. If a framework does not
+    include a domain explicitly named ``"Overall"``, the returned summary will
+    include an ``"Overall"`` entry computed from the
+    :pyattr:`~risk_of_bias.types._framework_types.Framework.judgement` property.
 
     Key applications include:
     - Creating summary tables for systematic review publications
@@ -86,7 +87,8 @@ def summarise_frameworks(
     ----------
     frameworks : list[Framework]
         Completed framework assessments to summarise. These should contain
-        domain-level "Risk-of-bias judgement" responses.
+        domain-level judgements accessible via the
+        :pyattr:`~risk_of_bias.types._domain_types.Domain.judgement` property.
 
     Returns
     -------
@@ -108,12 +110,11 @@ def summarise_frameworks(
         manuscript = fw.manuscript or ""
         domain_results: dict[str, str | None] = {}
         for domain in fw.domains:
-            judgement = None
-            for question in domain.questions:
-                if question.question == "Risk-of-bias judgement" and question.response:
-                    judgement = question.response.response
-                    break
-            domain_results[domain.name] = judgement
+            domain_results[domain.name] = domain.judgement
+
+        if "Overall" not in domain_results or domain_results["Overall"] is None:
+            domain_results["Overall"] = fw.judgement
+
         summary[manuscript] = domain_results
     return summary
 

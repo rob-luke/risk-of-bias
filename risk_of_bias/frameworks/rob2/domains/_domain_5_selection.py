@@ -54,13 +54,6 @@ q5_3 = Question(
     is_required=True,
 )
 
-q5_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=5.4,
-    is_required=True,
-)
-
 q5_o = Question(
     question=(
         "Optional Questions: What is the predicted direction of bias due to selection "
@@ -78,8 +71,48 @@ q5_o = Question(
     is_required=False,
 )
 
+
+def _compute_judgement(domain: Domain) -> str | None:
+    """
+    Risk-of-bias algorithm for Domain 5 – selection of the reported result.
+    Diagram logic:
+
+        • If either Q5.2 or Q5.3 = Y/PY  → High risk
+        • If neither Y/PY but ≥1 NI      → Some concerns
+        • If both Q5.2 & Q5.3 = N/PN:
+              – Q5.1 = Y/PY              → Low risk
+              – Q5.1 = N/PN/NI           → Some concerns
+    """
+    q1 = (
+        domain.questions[0].response.response if domain.questions[0].response else None
+    )  # 5.1
+    q2 = (
+        domain.questions[1].response.response if domain.questions[1].response else None
+    )  # 5.2
+    q3 = (
+        domain.questions[2].response.response if domain.questions[2].response else None
+    )  # 5.3
+
+    if None in (q1, q2, q3):
+        return None  # incomplete
+
+    YES = {"Yes", "Probably Yes"}
+    NO = {"No", "Probably No"}
+
+    if q2 in YES or q3 in YES:
+        return "High"
+    if q2 in NO and q3 in NO:
+        if q1 in YES:
+            return "Low"
+        else:
+            return "Some concerns"
+    else:
+        return "Some concerns"
+
+
 domain_5_selection = Domain(
-    questions=[q5_1, q5_2, q5_3, q5_r, q5_o],
+    questions=[q5_1, q5_2, q5_3, q5_o],
     name="Selection of the reported result",
     index=5,
+    judgement_function=_compute_judgement,
 )

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from risk_of_bias.frameworks.rob2 import get_rob2_framework
+from risk_of_bias.types._domain_types import Domain
 from risk_of_bias.types._framework_types import Framework
 
 
@@ -53,3 +54,22 @@ def test_framework_str_includes_manuscript() -> None:
     framework.manuscript = "test_study.pdf"
     str_repr = str(framework)
     assert "Manuscript: test_study.pdf" in str_repr
+
+
+def test_framework_judgement_property() -> None:
+    domain1 = Domain(index=1, name="Random", judgement_function=lambda d: "Low")
+    domain2 = Domain(index=2, name="Deviation", judgement_function=lambda d: "High")
+    framework = Framework(name="T", domains=[domain1, domain2])
+
+    assert framework.judgement == "High"
+
+    domain2.judgement_function = None
+    assert framework.judgement is None
+
+    domain_overall = Domain(
+        index=3, name="Overall", judgement_function=lambda d: "High"
+    )
+    framework.domains.append(domain_overall)
+    domain1.judgement_function = lambda d: "Low"
+    domain2.judgement_function = lambda d: "Low"
+    assert framework.judgement == "Low"

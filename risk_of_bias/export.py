@@ -24,8 +24,13 @@ def export_framework_as_markdown(framework: Framework, path: Path) -> None:
     if framework.manuscript:
         lines.append(f"\n**Manuscript:** {framework.manuscript}")
 
+    if framework.judgement:
+        lines.append(f"\n**Overall Judgement:** {framework.judgement}")
+
     for domain in framework.domains:
         lines.append(f"\n## Domain {domain.index}: {domain.name}")
+        if domain.judgement:
+            lines.append(f"Judgement: **{domain.judgement}**\n")
 
         if not domain.questions:
             lines.append("No questions defined.")
@@ -69,8 +74,13 @@ def export_framework_as_html(framework: Framework, path: Path) -> None:
     if framework.manuscript:
         children.append(p[strong["Manuscript: "], framework.manuscript])
 
+    if framework.judgement:
+        children.append(p[strong["Overall Judgement: "], framework.judgement])
+
     for domain in framework.domains:
         children.append(h2[f"Domain {domain.index}: {domain.name}"])
+        if domain.judgement:
+            children.append(p["Judgement: ", strong[domain.judgement]])
 
         if not domain.questions:
             children.append(p["No questions defined."])

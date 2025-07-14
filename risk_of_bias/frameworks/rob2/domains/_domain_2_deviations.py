@@ -123,13 +123,6 @@ q2_7 = Question(
     is_required=True,
 )
 
-q2_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=2.8,
-    is_required=True,
-)
-
 q2_o = Question(
     question=(
         "Optional Questions: What is the predicted direction of bias due to deviations "
@@ -147,8 +140,77 @@ q2_o = Question(
     is_required=False,
 )
 
+
+def _compute_judgement(domain: Domain) -> str | None:
+    """
+    Compute the risk of bias judgement for the Domain using the algorithm
+    from the RoB 2.0 deviations domain flowchart.
+    """
+
+    # Answers for each question
+    q1 = (
+        domain.questions[0].response.response if domain.questions[0].response else None
+    )  # 2.1
+    q2 = (
+        domain.questions[1].response.response if domain.questions[1].response else None
+    )  # 2.2
+    q3 = (
+        domain.questions[2].response.response if domain.questions[2].response else None
+    )  # 2.3
+    q4 = (
+        domain.questions[3].response.response if domain.questions[3].response else None
+    )  # 2.4
+    q5 = (
+        domain.questions[4].response.response if domain.questions[4].response else None
+    )  # 2.5
+    q6 = (
+        domain.questions[5].response.response if domain.questions[5].response else None
+    )  # 2.6
+    q7 = (
+        domain.questions[6].response.response if domain.questions[6].response else None
+    )  # 2.7
+
+    YES = {"Yes", "Probably Yes"}
+    NO = {"No", "Probably No"}
+    NI = {"No Information"}
+
+    # Part 1
+    if q1 in NO and q2 in NO:
+        part1 = "Low"
+    else:
+        if q3 in NO:
+            part1 = "Low"
+        elif q3 in NI:
+            part1 = "Some concerns"
+        else:  # q3 in YES
+            if q4 in NO:
+                part1 = "Some concerns"
+            else:
+                if q5 in YES:
+                    part1 = "Some concerns"
+                else:
+                    part1 = "High"
+
+    # Part 2
+    if q6 in YES:
+        part2 = "Low"
+    else:
+        if q7 in NO:
+            part2 = "Some concerns"
+        else:
+            part2 = "High"
+
+    if part1 == "Low" and part2 == "Low":
+        return "Low"
+    elif part1 == "High" or part2 == "High":
+        return "High"
+    else:
+        return "Some concerns"
+
+
 domain_2_deviations = Domain(
-    questions=[q2_1, q2_2, q2_3, q2_4, q2_5, q2_6, q2_7, q2_r, q2_o],
+    questions=[q2_1, q2_2, q2_3, q2_4, q2_5, q2_6, q2_7, q2_o],
     name="Deviations from intended interventions",
     index=2,
+    judgement_function=_compute_judgement,
 )
