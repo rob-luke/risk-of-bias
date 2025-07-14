@@ -1,0 +1,3364 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://rob-luke.github.io/risk-of-bias/api/">
+      
+      
+        <link rel="prev" href="../frameworks/">
+      
+      
+        <link rel="next" href="../cli/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Details & API - Risk of Bias</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#type-definitions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Risk of Bias" class="md-header__button md-logo" aria-label="Risk of Bias" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Risk of Bias
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Details & API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/rob-luke/risk-of-bias" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Risk of Bias" class="md-nav__button md-logo" aria-label="Risk of Bias" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Risk of Bias
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/rob-luke/risk-of-bias" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frameworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frameworks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Details & API
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Details & API
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#type-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.judgement" class="md-nav__link">
+    <span class="md-ellipsis">
+      judgement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.__str__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __str__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.export_to_html" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_to_html
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.export_to_markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_to_markdown
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.load" class="md-nav__link">
+    <span class="md-ellipsis">
+      load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-built-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-built Frameworks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-built Frameworks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rob2-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoB2 Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoB2 Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.frameworks.get_rob2_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_rob2_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-a-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executing a framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.run_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.run_framework.run_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Entry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.human.run_human_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_human_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Domain.judgement" class="md-nav__link">
+    <span class="md-ellipsis">
+      judgement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.ReasonedResponseWithEvidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReasonedResponseWithEvidence
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-and-analysis-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary and Analysis Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary and Analysis Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-multiple-assessments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading Multiple Assessments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loading Multiple Assessments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.load_frameworks_from_directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_frameworks_from_directory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-assessment-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Assessment Summaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Assessment Summaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.summarise_frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      summarise_frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-for-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exporting for Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting for Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.export_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-assessors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparing Assessors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparing Assessors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.compare.compare_frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      compare_frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assessor-agreement-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assessor Agreement Plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessor Agreement Plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.visualisation.plot_assessor_agreement" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_assessor_agreement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Interface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Web Interface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mac_app/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    macOS Application
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Visualisation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reporting_and_reproducibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reporting & Reproducibility
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#type-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.judgement" class="md-nav__link">
+    <span class="md-ellipsis">
+      judgement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.__str__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __str__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.export_to_html" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_to_html
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.export_to_markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_to_markdown
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.load" class="md-nav__link">
+    <span class="md-ellipsis">
+      load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types._framework_types.Framework.save" class="md-nav__link">
+    <span class="md-ellipsis">
+      save
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-built-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-built Frameworks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-built Frameworks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rob2-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoB2 Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoB2 Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.frameworks.get_rob2_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_rob2_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-a-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executing a framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.run_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="run_framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.run_framework.run_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Entry
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.human.run_human_framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_human_framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Domain.judgement" class="md-nav__link">
+    <span class="md-ellipsis">
+      judgement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Question">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.Question" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.types.ReasonedResponseWithEvidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReasonedResponseWithEvidence
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-and-analysis-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary and Analysis Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary and Analysis Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-multiple-assessments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading Multiple Assessments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loading Multiple Assessments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.load_frameworks_from_directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_frameworks_from_directory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-assessment-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Assessment Summaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Assessment Summaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.summarise_frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      summarise_frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-for-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exporting for Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exporting for Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.summary.export_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      export_summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparing-assessors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparing Assessors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparing Assessors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.compare.compare_frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      compare_frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assessor-agreement-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assessor Agreement Plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assessor Agreement Plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risk_of_bias.visualisation.plot_assessor_agreement" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_assessor_agreement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Details & API</h1>
+
+<p>The API is comprised of a hierarchical set of types that mirror the structure of risk-of-bias assessment frameworks like RoB2. This design enables systematic evaluation of research manuscripts through structured questioning and evidence-based responses.</p>
+<ul>
+<li>
+<p><strong>Frameworks</strong> define the top-level assessment structure containing multiple evaluation domains. In the RoB2 context, a Framework represents the complete "Risk of Bias 2" tool for randomized trials. It organises five primary domains and exposes a <code>judgement</code> property that returns the overall score derived from those domains.</p>
+</li>
+<li>
+<p><strong>Domains</strong> represent specific categories of bias within a framework. Each domain focuses on a particular aspect of study methodology that could introduce bias. Domains expose a <code>judgement</code> property that computes the final risk rating from the answers provided. For RoB2 the five primary domains are: (1) bias from randomization process, (2) bias from deviations from intended interventions, (3) bias from missing outcome data, (4) bias in outcome measurement and (5) bias in selection of reported results. The "Overall" domain captures only the predicted direction of bias.</p>
+</li>
+<li>
+<p><strong>Questions</strong> are the specific signaling questions within each domain that guide the assessment process. These questions are designed to systematically evaluate potential sources of bias, with predefined allowed answers (typically "Yes", "Probably Yes", "Probably No", "No", "No Information", "Not Applicable"). But if the user requests no predefined answers (using None), then a string answer will be provided. Questions can be marked as required and are indexed for systematic processing.</p>
+</li>
+<li>
+<p><strong>Responses</strong> capture the AI model's assessment for each question, structured as <code>ReasonedResponseWithEvidence</code> objects that include:</p>
+</li>
+<li><code>evidence</code>: List of text excerpts from the manuscript that support the assessment</li>
+<li><code>reasoning</code>: The model's explanation of how the evidence leads to the conclusion</li>
+<li><code>response</code>: The selected answer from the allowed options, or a self selected string if None is provided for the allowed options.</li>
+</ul>
+<p>This hierarchical structure ensures that bias assessments are systematic, traceable, and evidence-based, following established methodological guidelines while leveraging AI capabilities for efficient manuscript analysis.</p>
+<h2 id="type-definitions">Type Definitions</h2>
+<h3 id="framework">Framework</h3>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="risk_of_bias.types._framework_types.Framework" class="doc doc-heading">
+            <code>risk_of_bias.types._framework_types.Framework</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>The top-level container for risk-of-bias assessment frameworks.</p>
+<p>A Framework represents a complete methodological assessment tool (e.g., RoB2)
+that systematically evaluates potential sources of bias in research studies.
+Frameworks organize the assessment process through a hierarchical structure:</p>
+<p>Framework → Domains → Questions → Responses</p>
+<p>The Framework serves as both a template (defining the assessment structure)
+and a container for results (storing responses after manuscript analysis).
+When a manuscript is analyzed, the AI model works through each question
+in sequence, populating the response fields with evidence-based assessments.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types._framework_types.Framework.domains">domains</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="risk_of_bias.types.Domain (risk_of_bias.types._domain_types.Domain)" href="#risk_of_bias.types.Domain">Domain</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The assessment domains that comprise this framework. Each domain
+focuses on a specific category of potential bias.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types._framework_types.Framework.name">name</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A descriptive name for the framework (e.g., "RoB2 Framework for
+Randomized Trials").</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types._framework_types.Framework.manuscript">manuscript</span></code></td>
+            <td>
+                  <code>(<span title="str">str</span>, <span title="optional">optional</span>)</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The filename (without path) of the manuscript being assessed.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types._framework_types.Framework.assessor">assessor</span></code></td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name or identifier of the person or system performing the assessment.
+This can be useful for tracking who completed the assessment, especially
+in collaborative environments.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.judgement" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">judgement</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the overall risk-of-bias judgement for the framework.</p>
+<p>The judgement corresponds to the highest (worst) domain judgement
+across all domains except any explicitly named "Overall". If any
+domain judgement is missing, <code>None</code> is returned.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>"Low", "Some concerns", or "High" when all domain judgements are
+available, otherwise <code>None</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.__str__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__str__</span><span class="p">()</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Provide a comprehensive human-readable representation of the Framework.</p>
+<p>This method creates a structured text representation that displays the complete
+assessment framework hierarchy, making it easy to review the framework structure
+and any completed assessments. The output format is designed for readability
+and debugging purposes.</p>
+<p>The string representation includes:
+- Framework name and overview
+- Each domain with its index and name
+- All questions within each domain with their indices and text
+- Allowed answer options for each question (if defined)
+- Response details for answered questions, including:
+  - The selected response
+  - The reasoning behind the assessment
+  - Supporting evidence excerpts from the manuscript
+- Clear indication of unanswered questions</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A multi-line string representation of the framework showing:
+- Framework structure (domains and questions)
+- Assessment progress (which questions have been answered)
+- Complete response details for answered questions</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">framework</span> <span class="o">=</span> <span class="n">Framework</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;RoB2 Framework&quot;</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">framework</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">Framework: RoB2 Framework</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">Domain 1: Randomization Process</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">  Question 1.1: Was the allocation sequence random? ([&#39;Yes&#39;, &#39;Probably Yes&#39;,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">  ...])</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">    Response: Yes</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">      Reasoning: The study clearly describes using computer-generated</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="go">      randomization</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">        Evidence: &quot;Participants were randomized using a computer-generated</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="go">        sequence&quot;</span>
+</span></code></pre></div>
+
+
+<details class="note" open>
+  <summary>Notes</summary>
+  <p>This method is particularly useful for:</p>
+<ul>
+<li>Reviewing framework structure during development</li>
+<li>Debugging assessment workflows</li>
+<li>Generating human-readable reports of completed assessments</li>
+<li>Understanding the hierarchical organization of bias assessment questions</li>
+</ul>
+</details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.export_to_html" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">export_to_html</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Export the framework as an HTML document.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination file for the HTML representation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.export_to_markdown" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">export_to_markdown</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Export the framework as a Markdown document.</p>
+<p>This method creates a structured Markdown representation of the framework
+and its assessment results, suitable for documentation, reporting, or
+sharing with stakeholders.</p>
+<p>The generated Markdown includes:
+- Framework name as the main heading
+- Each domain as a section with its index and name
+- Questions within each domain with their indices and text
+- Allowed answer options for each question
+- Response details for answered questions, including:
+  - The selected response
+  - The reasoning behind the assessment
+  - Supporting evidence excerpts from the manuscript</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination file for the Markdown representation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">framework</span> <span class="o">=</span> <span class="n">Framework</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;RoB2 Framework&quot;</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">framework</span><span class="o">.</span><span class="n">export_to_markdown</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;assessment_report.md&quot;</span><span class="p">))</span>
+</span></code></pre></div>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.load" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Load a framework from a JSON file at <code>path</code>.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The file to read from.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An instance populated with the data from the file.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.types._framework_types.Framework.save" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Save the framework as formatted JSON to <code>path</code>.</p>
+<p>This method excludes raw_data fields from the JSON output to keep
+the saved files clean and focused on assessment results.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Location to write the JSON representation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h4 id="pre-built-frameworks">Pre-built Frameworks</h4>
+<p>The package provides ready-to-use frameworks that implement established risk-of-bias assessment methodologies. These frameworks come pre-configured with all necessary domains, questions, and answer options, allowing you to immediately begin manuscript analysis without manual setup.</p>
+<h5 id="rob2-framework">RoB2 Framework</h5>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="risk_of_bias.frameworks.get_rob2_framework" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">frameworks</span><span class="o">.</span><span class="n">get_rob2_framework</span><span class="p">()</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Get the complete RoB2 (Risk of Bias 2) Framework for Randomized Trials.</p>
+<p>This function returns a fully configured RoB2 framework that implements the
+Cochrane Risk of Bias tool version 2.0 guidelines for systematic evaluation
+of bias in randomized controlled trials.</p>
+<p>The RoB2 framework is the gold standard for assessing risk of bias in
+randomized trials and is widely used in systematic reviews and meta-analyses.
+It provides a structured approach to evaluate five key domains where bias
+commonly occurs in clinical research and includes an additional domain for
+the overall risk of bias judgement.</p>
+
+
+<details class="framework-structure" open>
+  <summary>Framework Structure</summary>
+  <p>The framework contains five primary assessment domains, each with specific
+signaling questions designed to systematically evaluate potential sources of
+bias. A sixth domain captures the overall risk-of-bias judgement:</p>
+<p><strong>Domain 1: Bias arising from the randomization process</strong>
+    Evaluates the adequacy of the randomization sequence generation and
+    allocation concealment mechanisms.</p>
+<p><strong>Domain 2: Bias due to deviations from intended interventions</strong>
+    Assesses whether there were deviations from intended interventions
+    and whether the analysis was appropriate.</p>
+<p><strong>Domain 3: Bias due to missing outcome data</strong>
+    Examines whether outcome data was available for all participants
+    and whether missingness could depend on the true value.</p>
+<p><strong>Domain 4: Bias in measurement of the outcome</strong>
+    Evaluates whether the outcome measurement was appropriate and
+    whether measurement differed between intervention groups.</p>
+<p><strong>Domain 5: Bias in selection of the reported result</strong>
+    Assesses whether the reported result was selected from multiple
+    measurements or analyses of the data.</p>
+<p><strong>Domain 6: Overall risk of bias</strong>
+    Provides the overall judgement for the outcome, including the predicted
+    direction of bias.</p>
+</details>
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A configured Framework instance containing the five RoB2 bias domains
+plus the overall judgement domain, with their respective signaling
+questions and answer options.
+The framework is ready for immediate use with <code>run_framework()</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">risk_of_bias.frameworks.rob2</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_rob2_framework</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">risk_of_bias</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_framework</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">&gt;&gt;&gt;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the pre-configured framework</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">framework</span> <span class="o">=</span> <span class="n">get_rob2_framework</span><span class="p">()</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Framework: </span><span class="si">{</span><span class="n">framework</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of domains: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">framework</span><span class="o">.</span><span class="n">domains</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">&gt;&gt;&gt;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use with manuscript analysis</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">manuscript</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;manuscript.pdf&quot;</span><span class="p">)</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">run_framework</span><span class="p">(</span><span class="n">manuscript</span><span class="o">=</span><span class="n">manuscript</span><span class="p">,</span> <span class="n">framework</span><span class="o">=</span><span class="n">framework</span><span class="p">)</span>
+</span></code></pre></div>
+
+
+<details class="note" open>
+  <summary>Notes</summary>
+  <p>This framework follows the official RoB2 guidance and includes all
+standard signaling questions with the appropriate answer options:
+"Yes", "Probably Yes", "Probably No", "No", "No Information",
+"Not Applicable".</p>
+<p>The framework structure mirrors the official RoB2 tool to ensure
+consistency with established assessment practices in systematic
+review methodology.</p>
+</details>
+
+<details class="references" open>
+  <summary>References</summary>
+  <p>Sterne JAC, Savović J, Page MJ, et al. RoB 2: a revised tool for
+assessing risk of bias in randomised trials. BMJ 2019; 366: l4898.</p>
+</details>
+
+    </div>
+
+</div><h3 id="executing-a-framework">Executing a framework</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h4 id="risk_of_bias.run_framework" class="doc doc-heading">
+            <code>risk_of_bias.run_framework</code>
+
+
+</h4>
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h5 id="risk_of_bias.run_framework.run_framework" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">run_framework</span><span class="p">(</span><span class="n">manuscript</span><span class="p">,</span> <span class="n">framework</span><span class="o">=</span><span class="n">get_rob2_framework</span><span class="p">(),</span> <span class="n">model</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">fast_ai_model</span><span class="p">,</span> <span class="n">guidance_document</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform systematic risk-of-bias assessment on a research manuscript using AI.</p>
+<p>This function automates the process of evaluating potential sources of bias in
+research studies by systematically working through a structured assessment
+framework.
+It combines established methodological frameworks (like RoB2) with AI
+capabilities to provide evidence-based bias assessments.</p>
+
+
+<details class="the-assessment-process" open>
+  <summary>The Assessment Process</summary>
+  <p>The function implements a comprehensive workflow:</p>
+<ol>
+<li><strong>Framework Setup</strong>: Uses a pre-defined assessment framework containing
+   organized domains and signaling questions</li>
+<li><strong>Context Establishment</strong>: Sends system instructions to guide the AI model's
+   assessment approach</li>
+<li><strong>Guidance Integration</strong>: If provided, incorporates domain-specific guidance
+   document to calibrate AI responses and provide specialized assessment criteria</li>
+<li><strong>Document Processing</strong>: Converts the manuscript PDF to a format the AI can
+   analyze</li>
+<li><strong>Systematic Questioning</strong>: Sends all questions within a domain in a
+   single request, reducing the number of API calls while maintaining
+   conversation context</li>
+<li><strong>Evidence-Based Responses</strong>: For each domain the AI returns a list of
+   structured answers corresponding to each question. Each item includes:</li>
+<li>The chosen response from predefined options</li>
+<li>Detailed reasoning explaining the assessment</li>
+<li>Specific evidence excerpts from the manuscript</li>
+<li><strong>Result Integration</strong>: Stores all parsed responses back into the framework
+   structure for easy access and analysis</li>
+</ol>
+</details>
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>manuscript</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the research manuscript PDF file to analyze. The file must exist
+and be readable. Supported formats include standard academic PDFs.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>framework</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The assessment framework defining the structure of the bias evaluation.
+Defaults to the complete RoB2 framework for randomized controlled trials.
+Custom frameworks can be provided for specialized assessments.</p>
+              </div>
+            </td>
+            <td>
+                  <code>get_rob2_framework()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The OpenAI model identifier to use for assessment. Different models may
+provide varying levels of analysis depth and accuracy. The default is
+optimized for speed while maintaining quality.</p>
+              </div>
+            </td>
+            <td>
+                  <code>settings.fast_ai_model</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>guidance_document</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="pathlib.Path">Path</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional path to a PDF guidance document that provides domain-specific
+assessment criteria and AI calibration instructions. This feature enables:</p>
+<ul>
+<li><strong>Domain-specific expertise</strong>: Specialized interpretation criteria for
+  fields like pediatric studies, surgical interventions, or rare diseases</li>
+<li><strong>AI bias correction</strong>: Systematic adjustments when the AI consistently
+  misinterprets methodological aspects or shows patterns of being overly
+  lenient or conservative in specific assessment domains</li>
+<li><strong>Standardization</strong>: Consistent application of journal-specific guidelines
+  or institutional assessment standards across multiple manuscripts</li>
+<li><strong>Contextual clarification</strong>: Detailed explanations for ambiguous scenarios
+  that frequently arise in specialized research contexts</li>
+</ul>
+<p>The guidance document is presented to the AI before manuscript analysis,
+ensuring that your specified criteria and calibrations are consistently
+applied throughout the entire assessment process.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>verbose</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to print detailed progress information during assessment. When True,
+displays each question, response, reasoning, and evidence in real-time.
+Useful for debugging, monitoring progress, or understanding the assessment
+process in detail.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>temperature</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Sampling temperature passed to the OpenAI model. Higher values yield more
+diverse answers while lower values make outputs more deterministic. If a
+negative value is provided, the temperature parameter is omitted and the
+server default is used.</p>
+              </div>
+            </td>
+            <td>
+                  <code>settings.temperature</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>api_key</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>API key to use for OpenAI calls. If <code>None</code>, <code>OPENAI_API_KEY</code> from the
+environment will be used.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The original framework structure populated with AI-generated responses.
+Each question in the framework will contain a
+ReasonedResponseWithEvidenceAndRawData object with:</p>
+<ul>
+<li><strong>response</strong>: The selected answer from the allowed options</li>
+<li><strong>reasoning</strong>: Detailed explanation of the assessment logic</li>
+<li><strong>evidence</strong>: List of relevant text excerpts from the manuscript</li>
+<li><strong>raw_data</strong>: Complete raw response data from the AI model</li>
+</ul>
+<p>The populated framework maintains the hierarchical structure
+(Framework → Domains → Questions → Responses) for easy navigation
+and analysis of results. This complete data structure can be serialized
+to JSON format for persistence, caching, and data sharing workflows.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="manual-entry">Manual Entry</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.human.run_human_framework" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">human</span><span class="o">.</span><span class="n">run_human_framework</span><span class="p">(</span><span class="n">manuscript</span><span class="p">,</span> <span class="n">framework</span><span class="o">=</span><span class="n">get_rob2_framework</span><span class="p">(),</span> <span class="n">console</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Interactively complete a risk-of-bias framework.</p>
+<p>This function guides the user through each question in the framework using
+a Rich console. Users select or type responses and may provide optional
+reasoning and evidence. Required questions must be answered; optional
+questions can be skipped by pressing Enter. Reasoning and evidence prompts
+can also be skipped with Enter.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>manuscript</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the manuscript being assessed. Only the file name is stored in
+the resulting framework.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>framework</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Framework to populate with user responses.</p>
+              </div>
+            </td>
+            <td>
+                  <code>get_rob2_framework()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>console</code>
+            </td>
+            <td>
+                  <code><span title="rich.console.Console">Console</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Console instance for input and output. A new one is created if <code>None</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The provided framework populated with user responses.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="domain">Domain</h3>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="risk_of_bias.types.Domain" class="doc doc-heading">
+            <code>risk_of_bias.types.Domain</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A thematic grouping of related bias assessment questions within a framework.</p>
+<p>Domains represent the conceptual organization of bias assessment, where each
+domain focuses on a specific methodological aspect that could introduce bias
+into research findings. This organizational structure reflects how bias
+assessment experts think about and categorize different types of threats
+to study validity.</p>
+
+
+<details class="conceptual-foundation" open>
+  <summary>Conceptual Foundation</summary>
+  <p>The domain concept stems from decades of methodological research showing that
+bias in research studies tends to cluster around specific aspects of study
+design and conduct. Rather than having an unstructured list of questions,
+domains provide logical groupings that:</p>
+<ul>
+<li><strong>Guide Systematic Thinking</strong>: Help assessors consider all major categories
+  of potential bias systematically</li>
+<li><strong>Enable Targeted Assessment</strong>: Allow focus on specific methodological
+  concerns relevant to different study types</li>
+<li><strong>Support Hierarchical Analysis</strong>: Enable both domain-level and overall
+  framework-level bias judgments</li>
+<li><strong>Facilitate Communication</strong>: Provide a shared vocabulary for discussing
+  specific types of bias concerns</li>
+</ul>
+</details>
+
+<details class="assessment-workflow" open>
+  <summary>Assessment Workflow</summary>
+  <p>During assessment, domains are typically evaluated sequentially, with each
+domain's questions answered before moving to the next. This approach:</p>
+<ul>
+<li>Maintains focus on one type of bias at a time</li>
+<li>Allows for domain-specific reasoning and evidence gathering</li>
+<li>Enables partial assessments when time or information is limited</li>
+<li>Supports quality control by domain-expert reviewers</li>
+</ul>
+</details>
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Domain.questions">questions</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="risk_of_bias.types.Question (risk_of_bias.types._question_types.Question)" href="#risk_of_bias.types.Question">Question</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The signaling questions that comprise this domain's assessment. Questions
+are typically ordered from fundamental to more detailed aspects of the
+bias type being evaluated.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Domain.name">name</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A descriptive name for the domain that clearly indicates the type of bias
+being assessed (e.g., "Bias arising from the randomization process").</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Domain.index">index</span></code></td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The sequential position of this domain within the overall framework.
+Used for organizing assessment workflow and reporting results in a
+consistent order.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h5 id="risk_of_bias.types.Domain.judgement" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">judgement</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h5>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the risk-of-bias judgement for this domain.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="question">Question</h3>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="risk_of_bias.types.Question" class="doc doc-heading">
+            <code>risk_of_bias.types.Question</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>An individual signaling question that guides bias assessment within a domain.</p>
+<p>Questions are the fundamental building blocks of systematic bias assessment,
+designed to probe specific methodological aspects that could introduce bias
+into research findings. Each question represents a focused inquiry that helps
+assessors systematically evaluate study quality and potential threats to validity.</p>
+
+
+<details class="question-types-and-response-modes" open>
+  <summary>Question Types and Response Modes</summary>
+  <p>Questions can be configured for different types of assessment needs:</p>
+<p><strong>Structured Assessment (default)</strong>:
+When <code>allowed_answers</code> contains predefined options (like "Yes", "Probably Yes",
+"No", etc.), the AI must select from these specific choices. This approach:</p>
+<ul>
+<li>Ensures consistency across assessments</li>
+<li>Enables quantitative analysis and meta-analysis</li>
+<li>Follows established assessment frameworks like RoB2</li>
+<li>Facilitates automated processing and reporting</li>
+</ul>
+<p><strong>Free-Form Assessment</strong>:
+When <code>allowed_answers = None</code>, the AI can provide any string response of
+arbitrary length. This mode is valuable for:</p>
+<ul>
+<li>Exploratory questions requiring detailed explanations</li>
+<li>Capturing nuanced methodological details</li>
+<li>Gathering qualitative insights about study design</li>
+<li>Custom assessment criteria not covered by standard frameworks</li>
+<li>Collecting recommendations for study improvement</li>
+</ul>
+</details>
+
+<details class="assessment-context-and-evidence" open>
+  <summary>Assessment Context and Evidence</summary>
+  <p>Regardless of response mode, each question generates comprehensive assessment
+data including:</p>
+<ul>
+<li><strong>Response</strong>: The selected answer (structured) or free-form text</li>
+<li><strong>Reasoning</strong>: Detailed explanation of the assessment logic</li>
+<li><strong>Evidence</strong>: Specific text excerpts from the manuscript supporting the conclusion</li>
+</ul>
+<p>This evidence-based approach ensures that assessments are transparent,
+auditable, and grounded in the actual study documentation.</p>
+</details>
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Question.question">question</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The text of the signaling question presented to the AI assessor.
+Should be clear, specific, and answerable based on typical manuscript
+content. Well-designed questions avoid ambiguity and focus on
+observable methodological features.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Question.allowed_answers">allowed_answers</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Defines the response mode for this question:</p>
+<ul>
+<li><strong>List of strings</strong>: Restricts responses to predefined options,
+  ensuring standardized assessment (e.g., ["Yes", "No", "Unclear"])</li>
+<li><strong>None</strong>: Enables free-form text responses of any length,
+  allowing detailed explanations and custom insights</li>
+</ul>
+<p>The default provides standard bias assessment options commonly
+used in systematic review methodologies.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Question.index">index</span></code></td>
+            <td>
+                  <code>float, default=0.0</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The position of this question within its domain, determining assessment
+order. Float values allow for flexible question insertion (e.g., 1.5
+between questions 1 and 2) without renumbering entire sequences.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Question.is_required">is_required</span></code></td>
+            <td>
+                  <code>bool, default=False</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether this question must be answered for a complete assessment.
+Required questions typically address fundamental methodological
+features essential for bias evaluation, while optional questions
+may provide additional insights or apply only to specific study types.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.Question.response">response</span></code></td>
+            <td>
+                  <code>ReasonedResponseWithEvidenceAndRawData | None, default=None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AI-generated assessment response, populated during framework
+execution. Contains the structured response, reasoning, supporting
+evidence, and raw model output data.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="response">Response</h3>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h4 id="risk_of_bias.types.ReasonedResponseWithEvidence" class="doc doc-heading">
+            <code>risk_of_bias.types.ReasonedResponseWithEvidence</code>
+
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+        <p>A structured response container that captures comprehensive AI assessment data.</p>
+<p>This class represents the core output of the AI bias assessment process,
+combining three essential components that make automated assessment both
+reliable and transparent: the actual response, the reasoning behind it,
+and the supporting evidence from the manuscript.</p>
+
+
+<details class="the-transparency-imperative" open>
+  <summary>The Transparency Imperative</summary>
+  <p>Traditional bias assessment often involves subjective expert judgment that
+can be difficult to audit or reproduce. This structured response format
+addresses these limitations by making the assessment process transparent:</p>
+<ul>
+<li><strong>Explicit Reasoning</strong>: Every assessment includes detailed explanation
+  of the logic and criteria used to reach the conclusion</li>
+<li><strong>Evidence-Based</strong>: All conclusions are anchored to specific text
+  from the manuscript, enabling verification and quality control</li>
+<li><strong>Reproducible</strong>: The structured format allows for consistent review,
+  comparison, and potential re-evaluation of assessments</li>
+</ul>
+</details>
+
+<details class="multi-modal-assessment-support" open>
+  <summary>Multi-Modal Assessment Support</summary>
+  <p>The evidence component is designed to work with various types of
+supporting information:</p>
+<ul>
+<li><strong>Direct Quotes</strong>: Exact text excerpts from methodology sections</li>
+<li><strong>Paraphrased Content</strong>: Summarized information when direct quotes
+  would be too lengthy or fragmented</li>
+<li><strong>Multi-Source Evidence</strong>: Citations from different parts of the
+  manuscript that collectively support the assessment</li>
+<li><strong>Contextual Information</strong>: Background details that inform the
+  interpretation of methodological choices</li>
+</ul>
+</details>
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.ReasonedResponseWithEvidence.evidence">evidence</span></code></td>
+            <td>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A collection of text excerpts from the manuscript that support
+the assessment conclusion. Each item should be a meaningful
+piece of evidence that directly relates to the question being
+assessed. Evidence items are typically:</p>
+<ul>
+<li>Direct quotations from relevant manuscript sections</li>
+<li>Specific methodological details described by the authors</li>
+<li>Quantitative information (sample sizes, response rates, etc.)</li>
+<li>Procedural descriptions that inform bias assessment</li>
+</ul>
+<p>Multiple evidence items allow for comprehensive support of
+complex assessments that may depend on information scattered
+throughout the manuscript.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.ReasonedResponseWithEvidence.reasoning">reasoning</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A detailed explanation of the assessment logic connecting the
+evidence to the conclusion. This should include:</p>
+<ul>
+<li>Interpretation of the evidence in methodological context</li>
+<li>Application of relevant bias assessment criteria</li>
+<li>Consideration of alternative interpretations</li>
+<li>Explanation of how the evidence leads to the specific response</li>
+</ul>
+<p>High-quality reasoning demonstrates methodological sophistication
+and provides the rationale needed for assessment validation.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="risk_of_bias.types.ReasonedResponseWithEvidence.response">response</span></code></td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The actual assessment answer, either selected from predefined
+options (for structured questions) or provided as free-form text
+(for open-ended questions). This represents the final conclusion
+of the assessment process based on the evidence and reasoning.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="summary-and-analysis-functions">Summary and Analysis Functions</h2>
+<p>After completing individual risk-of-bias assessments using frameworks, researchers typically need to analyze results across multiple studies for systematic reviews, meta-analyses, or research synthesis. The summary functions provide essential tools for aggregating, visualizing, and exporting assessment results in formats compatible with established research workflows.</p>
+<p>These functions address three critical needs in evidence synthesis:</p>
+<ol>
+<li><strong>Batch Processing</strong>: Loading and processing multiple completed assessments from saved framework files</li>
+<li><strong>Data Aggregation</strong>: Extracting domain-level judgements across studies for comparative analysis  </li>
+<li><strong>Standardized Export</strong>: Creating outputs compatible with specialized visualization tools like RobVis</li>
+</ol>
+<p>This workflow supports the transition from individual study assessment to systematic evidence synthesis, enabling researchers to identify patterns of bias across study collections and generate publication-ready visualizations for systematic reviews.</p>
+<h3 id="loading-multiple-assessments">Loading Multiple Assessments</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.summary.load_frameworks_from_directory" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">load_frameworks_from_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Load multiple completed risk-of-bias assessments for batch analysis.</p>
+<p>This function enables systematic reviews and meta-analyses by batch-loading
+previously completed framework assessments from a directory. After conducting
+individual risk-of-bias assessments on multiple studies, researchers typically
+need to analyze patterns across their entire study collection. This function
+streamlines that process by automatically discovering and loading all completed
+assessments.</p>
+<p>The function is fault-tolerant, continuing to load valid frameworks even if
+some files are corrupted or incompatible. This robustness is essential when
+working with large collections of assessments that may have been created over
+time or by different researchers.</p>
+<p>Common use cases include:
+- Preparing data for systematic review summary tables
+- Generating cross-study bias pattern visualizations
+- Creating inputs for meta-analysis software
+- Quality assurance checks across assessment batches</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>directory</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span> | <span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Directory containing previously saved framework JSON files from completed
+risk-of-bias assessments.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of successfully loaded frameworks. Files that cannot be parsed
+(due to corruption, format changes, etc.) are silently ignored to
+ensure batch processing continues.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">frameworks</span> <span class="o">=</span> <span class="n">load_frameworks_from_directory</span><span class="p">(</span><span class="s2">&quot;./completed_assessments/&quot;</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">frameworks</span><span class="p">)</span><span class="si">}</span><span class="s2"> completed assessments&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+
+
+    </div>
+
+</div><h3 id="creating-assessment-summaries">Creating Assessment Summaries</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.summary.summarise_frameworks" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">summarise_frameworks</span><span class="p">(</span><span class="n">frameworks</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Extract domain-level risk judgements for comparative analysis across studies.</p>
+<p>This function transforms detailed framework assessments into a simplified summary
+format suitable for systematic review tables, meta-analysis inputs, and cross-study
+comparisons. By extracting only the final risk-of-bias judgements for each domain,
+it creates a standardized view that facilitates pattern recognition and evidence
+synthesis across multiple studies.</p>
+<p>The function reads the :pyattr:<code>~risk_of_bias.types._domain_types.Domain.judgement</code>
+property of each domain. This property dynamically computes the risk judgement
+based on the domain's current question responses. If a framework does not
+include a domain explicitly named <code>"Overall"</code>, the returned summary will
+include an <code>"Overall"</code> entry computed from the
+:pyattr:<code>~risk_of_bias.types._framework_types.Framework.judgement</code> property.</p>
+<p>Key applications include:
+- Creating summary tables for systematic review publications
+- Identifying studies with consistent bias patterns across domains
+- Preparing data for risk-of-bias visualization tools (e.g., RobVis)
+- Supporting meta-analysis decisions about study inclusion/weighting</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>frameworks</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Completed framework assessments to summarise. These should contain
+domain-level judgements accessible via the
+:pyattr:<code>~risk_of_bias.types._domain_types.Domain.judgement</code> property.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="dict">dict</span>[<span title="str">str</span>, <span title="dict">dict</span>[<span title="str">str</span>, <span title="str">str</span> | None]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Nested mapping structure where:
+- Outer keys: manuscript/study identifiers
+- Inner keys: domain names
+- Values: risk-of-bias judgements ("low", "some concerns", "high")
+  or None if no judgement was recorded</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="language-pycon highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">summarise_frameworks</span><span class="p">(</span><span class="n">loaded_frameworks</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;Smith2023&quot;</span><span class="p">][</span><span class="s2">&quot;Randomization Process&quot;</span><span class="p">])</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">&#39;low&#39;</span>
+</span></code></pre></div>
+
+
+    </div>
+
+</div><h3 id="exporting-for-visualization">Exporting for Visualization</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.summary.export_summary" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">export_summary</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Export risk-of-bias summary to a CSV file for analysis and visualization.</p>
+<p>This function saves the risk-of-bias assessment summary as a CSV (Comma-Separated
+Values) file, a widely-supported standard format that can be opened in spreadsheet
+applications like Excel, imported into statistical software like R or Python, or
+used with specialized risk-of-bias visualization tools.</p>
+<p>The exported CSV is specifically formatted to be compatible with RobVis, a popular
+R package and web application for creating publication-ready risk-of-bias
+visualizations. This ensures seamless interoperability between this tool and the
+broader risk-of-bias assessment ecosystem. The RobVis tool can generate traffic
+light plots and summary plots that are commonly used in systematic reviews and
+meta-analyses.</p>
+<p>The CSV structure includes:
+- A <code>Study</code> column containing manuscript/study identifiers
+- Domain columns (<code>D1</code>, <code>D2</code>, ..., <code>Dn</code>) for each risk-of-bias domain
+- An <code>Overall</code> column. If a domain named <code>Overall</code> exists in the
+  summary it will be used directly; otherwise the column represents the
+  highest (worst) risk rating across all domains</p>
+<p>Risk judgements are formatted according to RobVis conventions:
+- "Low" for low risk of bias
+- "Some concerns" for moderate risk of bias
+- "High" for high risk of bias</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>summary</code>
+            </td>
+            <td>
+                  <code><span title="typing.Mapping">Mapping</span>[<span title="str">str</span>, <span title="typing.Mapping">Mapping</span>[<span title="str">str</span>, <span title="str">str</span> | None]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Output from :func:<code>summarise_frameworks</code> containing the risk-of-bias
+assessments.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span> | <span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination file path for the CSV export. The file will be created or
+overwritten.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="note" open>
+  <summary>Notes</summary>
+  <p>The exported CSV can be directly uploaded to the RobVis web interface at
+https://www.riskofbias.info/welcome/robvis-visualization-tool or used with
+the RobVis R package for programmatic visualization generation.</p>
+</details>
+
+    </div>
+
+</div><h3 id="comparing-assessors">Comparing Assessors</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.compare.compare_frameworks" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">compare</span><span class="o">.</span><span class="n">compare_frameworks</span><span class="p">(</span><span class="n">fw1</span><span class="p">,</span> <span class="n">fw2</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Compare two completed risk-of-bias frameworks.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>fw1</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Completed risk-of-bias frameworks to compare. The domain and question
+structure must be identical between the two frameworks.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>fw2</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="risk_of_bias.types._framework_types.Framework" href="#risk_of_bias.types._framework_types.Framework">Framework</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Completed risk-of-bias frameworks to compare. The domain and question
+structure must be identical between the two frameworks.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Long-form table with <code>domain_short</code>, <code>question_short</code>, <code>domain</code>,
+<code>question</code> and one column per assessor containing their responses.
+If a question was unanswered, the value will be <code>None</code>. The final
+column <code>agreement</code> indicates if the assessors provided the same
+response.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="assessor-agreement-plot">Assessor Agreement Plot</h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="risk_of_bias.visualisation.plot_assessor_agreement" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">risk_of_bias</span><span class="o">.</span><span class="n">visualisation</span><span class="o">.</span><span class="n">plot_assessor_agreement</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents first">
+
+        <p>Visualise agreement between two assessors.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>df</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Table returned by :func:<code>compare_frameworks</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="matplotlib.figure.Figure">Figure</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Figure with scatter points for each assessor.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
