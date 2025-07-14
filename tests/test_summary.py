@@ -15,13 +15,8 @@ from risk_of_bias.types._response_types import ReasonedResponseWithEvidenceAndRa
 def test_load_frameworks_from_directory(tmp_path: Path) -> None:
     framework = get_rob2_framework()
     framework.manuscript = "paper1.pdf"
-    # add simple judgements
     for domain in framework.domains:
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[], reasoning="", response="Low"
-                )
+        domain.judgement_function = lambda _d: "Low"
 
     json_path = tmp_path / "paper1.json"
     framework.save(json_path)
@@ -35,11 +30,7 @@ def test_summarise_frameworks(tmp_path: Path) -> None:
     framework = get_rob2_framework()
     framework.manuscript = "paper1.pdf"
     for domain in framework.domains:
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[], reasoning="", response="High"
-                )
+        domain.judgement_function = lambda _d: "High"
 
     summary = summarise_frameworks([framework])
     assert "paper1.pdf" in summary
@@ -53,11 +44,7 @@ def test_print_summary_outputs_table() -> None:
     framework = get_rob2_framework()
     framework.manuscript = "study1.pdf"
     for domain in framework.domains:
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[], reasoning="", response="Low"
-                )
+        domain.judgement_function = lambda _d: "Low"
 
     summary = summarise_frameworks([framework])
     console = Console(width=80, record=True)
@@ -72,11 +59,7 @@ def test_export_summary_creates_csv(tmp_path: Path) -> None:
     framework = get_rob2_framework()
     framework.manuscript = "studyA.pdf"
     for domain in framework.domains:
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[], reasoning="", response="Low"
-                )
+        domain.judgement_function = lambda _d: "Low"
 
     summary = summarise_frameworks([framework])
     export_path = tmp_path / "summary.csv"
@@ -91,15 +74,10 @@ def test_export_summary_uses_overall_domain(tmp_path: Path) -> None:
     framework = get_rob2_framework()
     framework.manuscript = "studyB.pdf"
     for domain in framework.domains:
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                if domain.name == "Overall":
-                    response = "High"
-                else:
-                    response = "Low"
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[], reasoning="", response=response
-                )
+        if domain.name == "Overall":
+            domain.judgement_function = lambda _d: "High"
+        else:
+            domain.judgement_function = lambda _d: "Low"
 
     summary = summarise_frameworks([framework])
     export_path = tmp_path / "summary.csv"
@@ -120,14 +98,7 @@ def test_summarise_multiple_frameworks_independent_results(tmp_path: Path) -> No
     judgements1 = ["Low", "High", "Some Concerns", "Low", "High", "Low"]
 
     for i, domain in enumerate(framework1.domains):
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[],
-                    reasoning=f"Reasoning for study1 domain {i+1}",
-                    response=judgements1[i],
-                )
-                break
+        domain.judgement_function = lambda _d, j=judgements1[i]: j
 
     # Create second framework with different judgements
     framework2 = get_rob2_framework()
@@ -135,14 +106,7 @@ def test_summarise_multiple_frameworks_independent_results(tmp_path: Path) -> No
     judgements2 = ["High", "Low", "Low", "Some Concerns", "Low", "High"]
 
     for i, domain in enumerate(framework2.domains):
-        for question in domain.questions:
-            if question.question == "Risk-of-bias judgement":
-                question.response = ReasonedResponseWithEvidenceAndRawData(
-                    evidence=[],
-                    reasoning=f"Reasoning for study2 domain {i+1}",
-                    response=judgements2[i],
-                )
-                break
+        domain.judgement_function = lambda _d, j=judgements2[i]: j
 
     # Summarise both frameworks
     summary = summarise_frameworks([framework1, framework2])

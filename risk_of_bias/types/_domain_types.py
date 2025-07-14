@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import Callable, Optional
+
+from pydantic import BaseModel, Field
 
 from risk_of_bias.types._question_types import Question
 
@@ -57,3 +59,13 @@ class Domain(BaseModel):
     questions: list[Question] = []
     name: str = ""
     index: int = 0
+    judgement_function: Optional[Callable[["Domain"], str | None]] = Field(
+        default=None, exclude=True
+    )
+
+    @property
+    def judgement(self) -> str | None:
+        """Return the risk-of-bias judgement for this domain."""
+        if self.judgement_function is None:
+            return None
+        return self.judgement_function(self)
