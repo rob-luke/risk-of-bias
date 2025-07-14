@@ -187,3 +187,27 @@ def test_end_to_end_framework_with_manuscript_exports(tmp_path: Path) -> None:
 
     assert "**Manuscript:** end_to_end_test.pdf" in md_content
     assert "<strong>Manuscript: </strong>end_to_end_test.pdf" in html_content
+
+
+def test_markdown_export_includes_framework_judgement(tmp_path: Path) -> None:
+    domain1 = Domain(index=1, name="D1", judgement_function=lambda d: "Low")
+    domain2 = Domain(index=2, name="D2", judgement_function=lambda d: "High")
+    framework = Framework(name="Test", domains=[domain1, domain2])
+
+    export_path = tmp_path / "fw.md"
+    export_framework_as_markdown(framework, export_path)
+
+    content = export_path.read_text()
+    assert "**Overall Judgement:** High" in content
+
+
+def test_html_export_includes_framework_judgement(tmp_path: Path) -> None:
+    domain1 = Domain(index=1, name="D1", judgement_function=lambda d: "Low")
+    domain2 = Domain(index=2, name="D2", judgement_function=lambda d: "High")
+    framework = Framework(name="Test", domains=[domain1, domain2])
+
+    export_path = tmp_path / "fw.html"
+    export_framework_as_html(framework, export_path)
+
+    content = export_path.read_text()
+    assert "<strong>Overall Judgement: </strong>High" in content

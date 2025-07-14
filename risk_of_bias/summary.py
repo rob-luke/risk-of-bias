@@ -72,7 +72,10 @@ def summarise_frameworks(
 
     The function reads the :pyattr:`~risk_of_bias.types._domain_types.Domain.judgement`
     property of each domain. This property dynamically computes the risk judgement
-    based on the domain's current question responses.
+    based on the domain's current question responses. If a framework does not
+    include a domain explicitly named ``"Overall"``, the returned summary will
+    include an ``"Overall"`` entry computed from the
+    :pyattr:`~risk_of_bias.types._framework_types.Framework.judgement` property.
 
     Key applications include:
     - Creating summary tables for systematic review publications
@@ -108,6 +111,10 @@ def summarise_frameworks(
         domain_results: dict[str, str | None] = {}
         for domain in fw.domains:
             domain_results[domain.name] = domain.judgement
+
+        if "Overall" not in domain_results:
+            domain_results["Overall"] = fw.judgement
+
         summary[manuscript] = domain_results
     return summary
 
