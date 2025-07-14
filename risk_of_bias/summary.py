@@ -112,7 +112,7 @@ def summarise_frameworks(
         for domain in fw.domains:
             domain_results[domain.name] = domain.judgement
 
-        if "Overall" not in domain_results:
+        if "Overall" not in domain_results or domain_results["Overall"] is None:
             domain_results["Overall"] = fw.judgement
 
         summary[manuscript] = domain_results
