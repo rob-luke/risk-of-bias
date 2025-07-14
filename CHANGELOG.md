@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/rob-luke/risk-of-bias/compare/v0.16.1...v0.17.0) (2025-07-14)
+
+
+### Features
+
+* correct rob2 overall judgements ([#89](https://github.com/rob-luke/risk-of-bias/issues/89)) ([bfb08cb](https://github.com/rob-luke/risk-of-bias/commit/bfb08cb1ce0f5d86142e2f20f1fe471d3856c487))
+
 ## [0.16.1](https://github.com/rob-luke/risk-of-bias/compare/v0.16.0...v0.16.1) (2025-06-15)
 
 
