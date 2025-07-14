@@ -3,17 +3,9 @@ from risk_of_bias.types._question_types import Question
 
 
 def _compute_judgement(domain: Domain) -> str | None:
-    if domain.questions[0].response:
-        return domain.questions[0].response.response
+    # NEED TO IMPLEMENT THIS
     return None
 
-
-q6_r = Question(
-    question="Risk-of-bias judgement",
-    allowed_answers=["Low", "High", "Some Concerns"],
-    index=6.1,
-    is_required=True,
-)
 
 q6_o = Question(
     question="What is the overall predicted direction of bias for this outcome?",
