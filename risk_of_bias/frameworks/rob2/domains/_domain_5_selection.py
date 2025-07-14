@@ -98,24 +98,16 @@ def _compute_judgement(domain: Domain) -> str | None:
 
     YES = {"Yes", "Probably Yes"}
     NO = {"No", "Probably No"}
-    NI = {"No Information"}
 
-    # 1. Either Q5.2 or Q5.3 signals multiplicity ⇒ High risk
     if q2 in YES or q3 in YES:
-        return "High risk"
-
-    # 2. No Y/PY but at least one NI ⇒ Some concerns
-    if q2 in NI or q3 in NI:
-        return "Some concerns"
-
-    # 3. Both Q5.2 & Q5.3 are N/PN ⇒ assess Q5.1
+        return "High"
     if q2 in NO and q3 in NO:
         if q1 in YES:
-            return "Low risk"
-        elif q1 in NO or q1 in NI:
+            return "Low"
+        else:
             return "Some concerns"
-
-    return None  # should not be reached if all answers valid
+    else:
+        return "Some concerns"
 
 
 domain_5_selection = Domain(

@@ -108,38 +108,20 @@ def _compute_judgement(domain: Domain) -> str | None:
 
     YES = {"Yes", "Probably Yes"}
     NO = {"No", "Probably No"}
-    NI = {"No Information"}
-    YPYNI = YES | NI  # "Yes", "Probably Yes", "No Information"
 
-    # 3.1: Outcome data for all? (Y/PY) --> Low risk
     if q1 in YES:
-        return "Low risk"
-
-    # 3.1: Outcome data for all? (N/PN/NI) --> ask 3.2
-    if q1 in NO or q1 in NI:
-        # 3.2: Evidence result not biased? (Y/PY) --> Low risk
+        return "Low"
+    else:
         if q2 in YES:
-            return "Low risk"
-        # 3.2: (N/PN) --> ask 3.3
-        elif q2 in NO:
-            # 3.3: Missingness could depend on
-            # true value? (N/PN) --> Low risk
+            return "Low"
+        else:
             if q3 in NO:
-                return "Low risk"
-            # 3.3: (Y/PY/NI) --> ask 3.4
-            elif q3 in YPYNI:
-                # 3.4: Likely that missingness depended on true value?
+                return "Low"
+            else:
                 if q4 in NO:
                     return "Some concerns"
-                elif q4 in YPYNI:
-                    return "High risk"
                 else:
-                    return None
-            else:
-                return None
-        else:
-            return None
-    return None
+                    return "High"
 
 
 domain_3_missing = Domain(

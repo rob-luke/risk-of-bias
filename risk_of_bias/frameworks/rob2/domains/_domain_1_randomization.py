@@ -117,16 +117,37 @@ def _compute_judgement(domain: Domain) -> str | None:
     if None in (q1, q2, q3):
         return None
 
-    if q1 in {"No", "Probably No"}:
-        return "High"
-    if q2 in {"No", "Probably No"}:
-        return "High"
-    if q3 in {"Yes", "Probably Yes"}:
-        return "High"
+    YES = {"Yes", "Probably Yes"}
+    YESNI = {"Yes", "Probably Yes", "No Information"}
+    NO = {"No", "Probably No"}
+    NONI = {"No", "Probably No", "No Information"}
+    NI = {"No Information"}
 
-    if q1 in {"Yes", "Probably Yes"} and q2 in {"Yes", "Probably Yes"}:
-        return "Low"
-    return "Some concerns"
+    if q2 in NO:
+        return "High"
+    elif q2 in NI:
+        if q3 in YES:
+            return "High"
+        elif q3 in NO:
+            return "Some concerns"
+        elif q3 in NI:
+            return "Some concerns"
+        else:
+            return None
+    elif q2 in YES:
+        if q1 in NO:
+            return "Some concerns"
+        elif q1 in YESNI:
+            if q3 in NONI:
+                return "Low"
+            elif q3 in YES:
+                return "Some concerns"
+            else:
+                return None
+        else:
+            return None
+    else:
+        return None
 
 
 domain_1_randomization = Domain(

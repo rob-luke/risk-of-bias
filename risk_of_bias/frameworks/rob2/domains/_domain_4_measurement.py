@@ -126,43 +126,34 @@ def _compute_judgement(domain: Domain) -> str | None:
 
     YES = {"Yes", "Probably Yes"}
     NO = {"No", "Probably No"}
-    NI = {"No Information"}
-    YPY = YES
-    NPN = NO
-    YPYNI = YES | NI
-    NPNNI = NO | NI
 
-    # Q4.1: Was the method of measuring the outcome inappropriate?
-    if q1 in YPY:
-        return "High risk"
-
-    # Q4.2: Could measurement or ascertainment have differed between groups?
-    if q2 in YPY:
-        return "High risk"
-
-    # Q4.2: Could measurement or ascertainment have differed? NO/PN/NI
-    if q2 in NPNNI:
-        # Q4.3: Were outcome assessors aware?
-        if q3 in NPN:
-            return "Low risk"
-        elif q3 in YPYNI:
-            # Q4.4: Could assessment have been influenced?
-            if q4 in NPN:
-                return "Low risk"
-            elif q4 in YPYNI:
-                # Q4.5: Likely assessment was influenced?
-                if q5 in NPN:
-                    return "Some concerns"
-                elif q5 in YPYNI:
-                    return "High risk"
-                else:
-                    return None
-            else:
-                return None
-        else:
-            return None
+    if q1 in YES:
+        return "High"
     else:
-        return None
+        if q2 in YES:
+            return "High"
+        elif q2 in NO:
+            if q3 in NO:
+                return "Low"
+            else:
+                if q4 in NO:
+                    return "Low"
+                else:
+                    if q5 in NO:
+                        return "Some concerns"
+                    else:
+                        return "High"
+        else:  # q2 in NI
+            if q3 in NO:
+                return "Some concerns"
+            else:
+                if q4 in NO:
+                    return "Some concerns"
+                else:
+                    if q5 in NO:
+                        return "Some concerns"
+                    else:
+                        return "High"
 
 
 domain_4_measurement = Domain(

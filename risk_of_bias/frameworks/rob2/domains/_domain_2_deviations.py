@@ -170,69 +170,42 @@ def _compute_judgement(domain: Domain) -> str | None:
         domain.questions[6].response.response if domain.questions[6].response else None
     )  # 2.7
 
-    # Helper sets for easy logic
-    YES = {"Yes", "Probably Yes", "No Information"}
+    YES = {"Yes", "Probably Yes"}
     NO = {"No", "Probably No"}
-    NA = {"Not Applicable"}
+    NI = {"No Information"}
 
-    # --- PART 1: Questions 2.1–2.5 ---
-    # Default to None until path reached
-    part1 = None
-
-    # Pathway 1: Both participants and personnel *not aware* (N/PN)
+    # Part 1
     if q1 in NO and q2 in NO:
-        part1 = "Low risk"
-
-    # Pathway 2: Either participants or personnel aware (Y/PY/NI)
+        part1 = "Low"
     else:
-        # Must consider questions 2.3, 2.4, 2.5
         if q3 in NO:
-            part1 = "Low risk"
-        elif q3 in NA:
-            # Unlikely, but follow the flowchart—if not applicable, fall through
-            part1 = "Low risk"
-        elif q3 in YES:
+            part1 = "Low"
+        elif q3 in NI:
+            part1 = "Some concerns"
+        else:  # q3 in YES
             if q4 in NO:
                 part1 = "Some concerns"
-            elif q4 in YES:
+            else:
                 if q5 in YES:
                     part1 = "Some concerns"
-                elif q5 in NO:
-                    part1 = "High risk"
-                elif q5 in NA:
-                    part1 = "High risk"
                 else:
-                    return None  # Incomplete
-            elif q4 in NA:
-                part1 = "Some concerns"
-            else:
-                return None  # Incomplete
-        else:
-            return None  # Incomplete
+                    part1 = "High"
 
-    # --- PART 2: Questions 2.6 & 2.7 ---
-    part2 = None
+    # Part 2
     if q6 in YES:
-        part2 = "Low risk"
-    elif q6 in NO:
+        part2 = "Low"
+    else:
         if q7 in NO:
             part2 = "Some concerns"
-        elif q7 in YES or q7 in NA:
-            part2 = "High risk"
         else:
-            return None  # Incomplete
-    else:
-        return None  # Incomplete
+            part2 = "High"
 
-    # --- Combine parts as per criteria box in diagram ---
-    if part1 == "High risk" or part2 == "High risk":
-        return "High risk"
-    elif part1 == "Some concerns" or part2 == "Some concerns":
-        return "Some concerns"
-    elif part1 == "Low risk" and part2 == "Low risk":
-        return "Low risk"
+    if part1 == "Low" and part2 == "Low":
+        return "Low"
+    elif part1 == "High" or part2 == "High":
+        return "High"
     else:
-        return None  # Incomplete
+        return "Some concerns"
 
 
 domain_2_deviations = Domain(
