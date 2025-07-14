@@ -98,7 +98,7 @@ def test_summarise_multiple_frameworks_independent_results(tmp_path: Path) -> No
     judgements1 = ["Low", "High", "Some Concerns", "Low", "High", "Low"]
 
     for i, domain in enumerate(framework1.domains):
-        domain.judgement_function = lambda _d, j=judgements1[i]: j
+        domain.judgement_function = lambda _d, j=judgements1[i]: j  # type: ignore[misc]
 
     # Create second framework with different judgements
     framework2 = get_rob2_framework()
@@ -106,7 +106,7 @@ def test_summarise_multiple_frameworks_independent_results(tmp_path: Path) -> No
     judgements2 = ["High", "Low", "Low", "Some Concerns", "Low", "High"]
 
     for i, domain in enumerate(framework2.domains):
-        domain.judgement_function = lambda _d, j=judgements2[i]: j
+        domain.judgement_function = lambda _d, j=judgements2[i]: j  # type: ignore[misc]
 
     # Summarise both frameworks
     summary = summarise_frameworks([framework1, framework2])

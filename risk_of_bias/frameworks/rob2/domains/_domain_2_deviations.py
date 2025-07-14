@@ -140,8 +140,104 @@ q2_o = Question(
     is_required=False,
 )
 
+
+def _compute_judgement(domain: Domain) -> str | None:
+    """
+    Compute the risk of bias judgement for the Domain using the algorithm
+    from the RoB 2.0 deviations domain flowchart.
+    """
+
+    # Answers for each question
+    q1 = (
+        domain.questions[0].response.response if domain.questions[0].response else None
+    )  # 2.1
+    q2 = (
+        domain.questions[1].response.response if domain.questions[1].response else None
+    )  # 2.2
+    q3 = (
+        domain.questions[2].response.response if domain.questions[2].response else None
+    )  # 2.3
+    q4 = (
+        domain.questions[3].response.response if domain.questions[3].response else None
+    )  # 2.4
+    q5 = (
+        domain.questions[4].response.response if domain.questions[4].response else None
+    )  # 2.5
+    q6 = (
+        domain.questions[5].response.response if domain.questions[5].response else None
+    )  # 2.6
+    q7 = (
+        domain.questions[6].response.response if domain.questions[6].response else None
+    )  # 2.7
+
+    # Helper sets for easy logic
+    YES = {"Yes", "Probably Yes", "No Information"}
+    NO = {"No", "Probably No"}
+    NA = {"Not Applicable"}
+
+    # --- PART 1: Questions 2.1–2.5 ---
+    # Default to None until path reached
+    part1 = None
+
+    # Pathway 1: Both participants and personnel *not aware* (N/PN)
+    if q1 in NO and q2 in NO:
+        part1 = "Low risk"
+
+    # Pathway 2: Either participants or personnel aware (Y/PY/NI)
+    else:
+        # Must consider questions 2.3, 2.4, 2.5
+        if q3 in NO:
+            part1 = "Low risk"
+        elif q3 in NA:
+            # Unlikely, but follow the flowchart—if not applicable, fall through
+            part1 = "Low risk"
+        elif q3 in YES:
+            if q4 in NO:
+                part1 = "Some concerns"
+            elif q4 in YES:
+                if q5 in YES:
+                    part1 = "Some concerns"
+                elif q5 in NO:
+                    part1 = "High risk"
+                elif q5 in NA:
+                    part1 = "High risk"
+                else:
+                    return None  # Incomplete
+            elif q4 in NA:
+                part1 = "Some concerns"
+            else:
+                return None  # Incomplete
+        else:
+            return None  # Incomplete
+
+    # --- PART 2: Questions 2.6 & 2.7 ---
+    part2 = None
+    if q6 in YES:
+        part2 = "Low risk"
+    elif q6 in NO:
+        if q7 in NO:
+            part2 = "Some concerns"
+        elif q7 in YES or q7 in NA:
+            part2 = "High risk"
+        else:
+            return None  # Incomplete
+    else:
+        return None  # Incomplete
+
+    # --- Combine parts as per criteria box in diagram ---
+    if part1 == "High risk" or part2 == "High risk":
+        return "High risk"
+    elif part1 == "Some concerns" or part2 == "Some concerns":
+        return "Some concerns"
+    elif part1 == "Low risk" and part2 == "Low risk":
+        return "Low risk"
+    else:
+        return None  # Incomplete
+
+
 domain_2_deviations = Domain(
     questions=[q2_1, q2_2, q2_3, q2_4, q2_5, q2_6, q2_7, q2_o],
     name="Deviations from intended interventions",
     index=2,
+    judgement_function=_compute_judgement,
 )

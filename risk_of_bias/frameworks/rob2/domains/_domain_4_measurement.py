@@ -100,8 +100,74 @@ q4_o = Question(
     is_required=False,
 )
 
+
+def _compute_judgement(domain: Domain) -> str | None:
+    """
+    Compute the risk of bias judgement for the measurement of the outcome domain.
+    """
+    q1 = (
+        domain.questions[0].response.response if domain.questions[0].response else None
+    )  # 4.1
+    q2 = (
+        domain.questions[1].response.response if domain.questions[1].response else None
+    )  # 4.2
+    q3 = (
+        domain.questions[2].response.response if domain.questions[2].response else None
+    )  # 4.3
+    q4 = (
+        domain.questions[3].response.response if domain.questions[3].response else None
+    )  # 4.4
+    q5 = (
+        domain.questions[4].response.response if domain.questions[4].response else None
+    )  # 4.5
+
+    if None in (q1, q2, q3, q4, q5):
+        return None
+
+    YES = {"Yes", "Probably Yes"}
+    NO = {"No", "Probably No"}
+    NI = {"No Information"}
+    YPY = YES
+    NPN = NO
+    YPYNI = YES | NI
+    NPNNI = NO | NI
+
+    # Q4.1: Was the method of measuring the outcome inappropriate?
+    if q1 in YPY:
+        return "High risk"
+
+    # Q4.2: Could measurement or ascertainment have differed between groups?
+    if q2 in YPY:
+        return "High risk"
+
+    # Q4.2: Could measurement or ascertainment have differed? NO/PN/NI
+    if q2 in NPNNI:
+        # Q4.3: Were outcome assessors aware?
+        if q3 in NPN:
+            return "Low risk"
+        elif q3 in YPYNI:
+            # Q4.4: Could assessment have been influenced?
+            if q4 in NPN:
+                return "Low risk"
+            elif q4 in YPYNI:
+                # Q4.5: Likely assessment was influenced?
+                if q5 in NPN:
+                    return "Some concerns"
+                elif q5 in YPYNI:
+                    return "High risk"
+                else:
+                    return None
+            else:
+                return None
+        else:
+            return None
+    else:
+        return None
+
+
 domain_4_measurement = Domain(
     questions=[q4_1, q4_2, q4_3, q4_4, q4_5, q4_o],
     name="Measurement of the outcome",
     index=4,
+    judgement_function=_compute_judgement,
 )
